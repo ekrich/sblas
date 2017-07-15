@@ -9,7 +9,7 @@ import blasOps._
   * Documentation:
   * https://developer.apple.com/documentation/accelerate/blas?language=objc
   */
-@link("cblas")
+@link("blas")
 @extern
 object blas {
   /* this may vary between platforms */
@@ -33,24 +33,39 @@ object blas {
     * @param incY Stride within Y. For example, if incY is 7, every 7th element is used.
     * @return See description above.
     */
-  def cblas_sdsdot(N: CInt, alpha: CFloat, X: Ptr[CFloat],
-                   incX: CInt, Y: Ptr[CFloat], incY: CInt): CFloat = extern
+  def cblas_sdsdot(N: CInt,
+                   alpha: CFloat,
+                   X: Ptr[CFloat],
+                   incX: CInt,
+                   Y: Ptr[CFloat],
+                   incY: CInt): CFloat = extern
 
   /**
     * Computes the double-precision dot product of a pair of single-precision vectors.
     */
-  def cblas_dsdot(N: CInt, X: Ptr[CFloat], incX: CInt, Y: Ptr[CFloat],
+  def cblas_dsdot(N: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt,
+                  Y: Ptr[CFloat],
                   incY: CInt): CDouble = extern
+
   /**
     * Computes the dot product of two vectors (single-precision).
     */
-  def cblas_sdot(N: CInt, X: Ptr[CFloat], incX: CInt,
-                 Y: Ptr[CFloat], incY: CInt): CFloat = extern
+  def cblas_sdot(N: CInt,
+                 X: Ptr[CFloat],
+                 incX: CInt,
+                 Y: Ptr[CFloat],
+                 incY: CInt): CFloat = extern
+
   /**
     * Computes the dot product of two vectors (double-precision).
     */
-  def cblas_ddot(N: CInt, X: Ptr[CDouble], incX: CInt,
-                 Y: Ptr[CDouble], incY: CInt): CDouble = extern
+  def cblas_ddot(N: CInt,
+                 X: Ptr[CDouble],
+                 incX: CInt,
+                 Y: Ptr[CDouble],
+                 incY: CInt): CDouble = extern
 
   /*
    * Functions having prefixes Z and C only
@@ -61,8 +76,12 @@ object blas {
     *
     * @param dotu - The result vector.
     */
-  def cblas_cdotu_sub(N: CInt, X: Ptr[CFloatComplex], incX: CInt,
-                      Y: Ptr[CFloatComplex], incY: CInt, dotu: Ptr[CFloatComplex]): Unit = extern
+  def cblas_cdotu_sub(N: CInt,
+                      X: Ptr[CFloatComplex],
+                      incX: CInt,
+                      Y: Ptr[CFloatComplex],
+                      incY: CInt,
+                      dotu: Ptr[CFloatComplex]): Unit = extern
 
   /**
     * Calculates the dot product of the complex conjugate of a single-precision
@@ -70,16 +89,24 @@ object blas {
     *
     * @param dotc - The result vector. Computes conjg(X) * Y.
     */
-  def cblas_cdotc_sub(N: CInt, X: Ptr[CFloatComplex], incX: CInt,
-                      Y: Ptr[CFloatComplex], incY: CInt, dotc: Ptr[CFloatComplex]): Unit = extern
+  def cblas_cdotc_sub(N: CInt,
+                      X: Ptr[CFloatComplex],
+                      incX: CInt,
+                      Y: Ptr[CFloatComplex],
+                      incY: CInt,
+                      dotc: Ptr[CFloatComplex]): Unit = extern
 
   /**
     * Computes the dot product of two double-precision complex vectors.
     *
     * @param dotu - The result vector.
     */
-  def cblas_zdotu_sub(N: CInt, X: Ptr[CDoubleComplex], incX: CInt,
-                      Y: Ptr[CDoubleComplex], incY: CInt, dotu: Ptr[CDoubleComplex]): Unit = extern
+  def cblas_zdotu_sub(N: CInt,
+                      X: Ptr[CDoubleComplex],
+                      incX: CInt,
+                      Y: Ptr[CDoubleComplex],
+                      incY: CInt,
+                      dotu: Ptr[CDoubleComplex]): Unit = extern
 
   /**
     * Calculates the dot product of the complex conjugate of a double-precision
@@ -87,8 +114,35 @@ object blas {
     *
     * @param dotc - The result vector. Computes conjg(X) * Y.
     */
-  def cblas_zdotc_sub(N: CInt, X: Ptr[CDoubleComplex], incX: CInt,
-                      Y: Ptr[CDoubleComplex], incY: CInt, dotc: Ptr[CDoubleComplex]): Unit = extern
+  def cblas_zdotc_sub(N: CInt,
+                      X: Ptr[CDoubleComplex],
+                      incX: CInt,
+                      Y: Ptr[CDoubleComplex],
+                      incY: CInt,
+                      dotc: Ptr[CDoubleComplex]): Unit = extern
+
+  /*
+   * Functions having prefixes S D SC DZ
+   */
+  //Computes the L2 norm (Euclidian length) of a vector (single-precision).
+  //float  cblas_snrm2(const int N, const float *X, const int incX);
+  //Computes the sum of the absolute values of elements in a vector (single-precision).
+  //float  cblas_sasum(const int N, const float *X, const int incX);
+  //
+  //Computes the L2 norm (Euclidian length) of a vector (double-precision).
+  //double cblas_dnrm2(const int N, const double *X, const int incX);
+  //Computes the sum of the absolute values of elements in a vector (double-precision).
+  //double cblas_dasum(const int N, const double *X, const int incX);
+  //
+  //Computes the unitary norm of a vector (single-precision complex).
+  //float  cblas_scnrm2(const int N, const void *X, const int incX);
+  //Computes the sum of the absolute values of real and imaginary parts of elements in a vector (single-precision complex).
+  //float  cblas_scasum(const int N, const void *X, const int incX);
+  //
+  //Computes the unitary norm of a vector (double-precision complex).
+  //double cblas_dznrm2(const int N, const void *X, const int incX);
+  //Computes the sum of the absolute values of real and imaginary parts of elements in a vector (double-precision complex).
+  //double cblas_dzasum(const int N, const void *X, const int incX);
 
 }
 
@@ -118,17 +172,19 @@ object blasOps {
 
   // TODO: needed until Complex is added - from scalanative.native.complex
   import Nat._2
-  type CFloatComplex  = CArray[CFloat, _2]
+  type CFloatComplex = CArray[CFloat, _2]
   type CDoubleComplex = CArray[CDouble, _2]
 
-  def CFloatComplex(real: Float, imag: Float)(implicit z: Zone): Ptr[CFloatComplex] = {
+  def CFloatComplex(real: Float, imag: Float)(
+      implicit z: Zone): Ptr[CFloatComplex] = {
     val ptr = alloc[CFloatComplex]
     !ptr._1 = real
     !ptr._2 = imag
     ptr
   }
 
-  def CDoubleComplex(real: Double, imag: Double)(implicit z: Zone): Ptr[CDoubleComplex] = {
+  def CDoubleComplex(real: Double, imag: Double)(
+      implicit z: Zone): Ptr[CDoubleComplex] = {
     val ptr = alloc[CDoubleComplex]
     !ptr._1 = real
     !ptr._2 = imag
