@@ -4,7 +4,7 @@ lazy val commonSettings = Seq(
   organization := "org.ekrich",
   version := "0.1.0",
   scalaVersion := "2.11.11",
-  logLevel := Level.Info
+  logLevel := Level.Info // Debug
 )
 
 lazy val ml = project.in(file("."))
@@ -19,17 +19,14 @@ lazy val ml = project.in(file("."))
 lazy val blas = project.in(file("blas"))
   .settings(
     commonSettings,
-    name := "scala-native-blas",
-    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.4.8" % "test",
-    testFrameworks += new TestFramework("utest.runner.Framework")
+    name := "scala-native-blas"
   )
   .enablePlugins(ScalaNativePlugin)
 
 lazy val tests = project.in(file("unit-tests"))
   .settings(
     commonSettings,
-    mainClass := None,
-    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.4.8", // % "test",
+    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.4.8" % "test",
     testFrameworks += new TestFramework("utest.runner.Framework")
   )
   .enablePlugins(ScalaNativePlugin)

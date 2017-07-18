@@ -12,8 +12,8 @@ import blasOps._
 @link("blas")
 @extern
 object blas {
-  /* this may vary between platforms */
-  type CBLAS_INDEX = CSize // size_t
+  /* This may vary between platforms. CBLAS_INDEX in C */
+  type CblasIndex = CSize // size_t
 
   /*
    * ===========================================================================
@@ -124,25 +124,100 @@ object blas {
   /*
    * Functions having prefixes S D SC DZ
    */
-  //Computes the L2 norm (Euclidian length) of a vector (single-precision).
-  //float  cblas_snrm2(const int N, const float *X, const int incX);
-  //Computes the sum of the absolute values of elements in a vector (single-precision).
-  //float  cblas_sasum(const int N, const float *X, const int incX);
-  //
-  //Computes the L2 norm (Euclidian length) of a vector (double-precision).
-  //double cblas_dnrm2(const int N, const double *X, const int incX);
-  //Computes the sum of the absolute values of elements in a vector (double-precision).
-  //double cblas_dasum(const int N, const double *X, const int incX);
-  //
-  //Computes the unitary norm of a vector (single-precision complex).
-  //float  cblas_scnrm2(const int N, const void *X, const int incX);
-  //Computes the sum of the absolute values of real and imaginary parts of elements in a vector (single-precision complex).
-  //float  cblas_scasum(const int N, const void *X, const int incX);
-  //
-  //Computes the unitary norm of a vector (double-precision complex).
-  //double cblas_dznrm2(const int N, const void *X, const int incX);
-  //Computes the sum of the absolute values of real and imaginary parts of elements in a vector (double-precision complex).
-  //double cblas_dzasum(const int N, const void *X, const int incX);
+
+  /**
+    * Computes the L2 norm (Euclidian length) of a vector (single-precision).
+    */
+  def cblas_snrm2(N: CInt,
+                 X: Ptr[CFloat],
+                 incX: CInt): CFloat = extern
+
+  /**
+    * Computes the sum of the absolute values of elements in a vector (single-precision).
+    */
+  def cblas_sasum(N: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt): CFloat = extern
+
+  /**
+    * Computes the L2 norm (Euclidian length) of a vector (double-precision).
+    */
+  def cblas_dnrm2(N: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt): CDouble = extern
+
+  /**
+    * Computes the sum of the absolute values of elements in a vector (double-precision).
+    */
+  def cblas_dasum(N: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt): CDouble = extern
+
+  /**
+    * Computes the unitary norm of a vector (single-precision complex).
+    */
+  def cblas_scnrm2(N: CInt,
+                   X: Ptr[CFloatComplex],
+                   incX: CInt): CFloat = extern
+
+  /**
+    * Computes the sum of the absolute values of real and imaginary parts
+    * of elements in a vector (single-precision complex).
+    */
+  def cblas_scasum(N: CInt,
+                   X: Ptr[CFloatComplex],
+                   incX: CInt): CFloat = extern
+
+  /**
+    * Computes the unitary norm of a vector (double-precision complex).
+    */
+  def cblas_dznrm2(N: CInt,
+                      X: Ptr[CDoubleComplex],
+                      incX: CInt): CDouble = extern
+
+  /**
+    * Computes the sum of the absolute values of real and imaginary parts
+    * of elements in a vector (double-precision complex).
+    */
+  def cblas_dzasum(N: CInt,
+                   X: Ptr[CDoubleComplex],
+                   incX: CInt): CDouble = extern
+
+  /*
+   * Functions having standard 4 prefixes (S D C Z)
+   */
+
+  /**
+    * Returns the index of the element with the largest absolute value
+    * in a vector (single-precision).
+    */
+  def cblas_isamax(N: CInt,
+                   X: Ptr[CFloat],
+                   incX: CInt): CblasIndex = extern
+
+  /**
+    * Returns the index of the element with the largest absolute value
+    * in a vector (double-precision).
+    */
+  def cblas_idamax(N: CInt,
+                   X: Ptr[CDouble],
+                   incX: CInt): CblasIndex = extern
+
+  /**
+    * Returns the index of the element with the largest absolute value
+    * in a vector (single-precision complex).
+    */
+  def cblas_icamax(N: CInt,
+                   X: Ptr[CFloatComplex],
+                   incX: CInt): CblasIndex = extern
+
+  /**
+    * Returns the index of the element with the largest absolute value
+    * in a vector (double-precision complex).
+    */
+  def cblas_izamax(N: CInt,
+                   X: Ptr[CDoubleComplex],
+                   incX: CInt): CblasIndex = extern
 
 }
 
@@ -193,79 +268,7 @@ object blasOps {
   // TODO: end section
 
 }
-
-// entire header here.
-//#ifndef CBLAS_H
-//#define CBLAS_H
-//#include <stddef.h>
-//
-///*
-//* Enumerated and derived types
-//*/
-//#define CBLAS_INDEX size_t  /* this may vary between platforms */
-//
-//enum CBLAS_ORDER {CblasRowMajor=101, CblasColMajor=102};
-//enum CBLAS_TRANSPOSE {CblasNoTrans=111, CblasTrans=112, CblasConjTrans=113};
-//enum CBLAS_UPLO {CblasUpper=121, CblasLower=122};
-//enum CBLAS_DIAG {CblasNonUnit=131, CblasUnit=132};
-//enum CBLAS_SIDE {CblasLeft=141, CblasRight=142};
-//
-//#ifdef __cplusplus
-//extern "C" {
-//#endif
-//
-///*
-// * ===========================================================================
-// * Prototypes for level 1 BLAS functions (complex are recast as routines)
-// * ===========================================================================
-// */
-//float  cblas_sdsdot(const int N, const float alpha, const float *X,
-//const int incX, const float *Y, const int incY);
-//double cblas_dsdot(const int N, const float *X, const int incX, const float *Y,
-//const int incY);
-//float  cblas_sdot(const int N, const float  *X, const int incX,
-//const float  *Y, const int incY);
-//double cblas_ddot(const int N, const double *X, const int incX,
-//const double *Y, const int incY);
-//
-///*
-// * Functions having prefixes Z and C only
-// */
-//void   cblas_cdotu_sub(const int N, const void *X, const int incX,
-//const void *Y, const int incY, void *dotu);
-//void   cblas_cdotc_sub(const int N, const void *X, const int incX,
-//const void *Y, const int incY, void *dotc);
-//
-//void   cblas_zdotu_sub(const int N, const void *X, const int incX,
-//const void *Y, const int incY, void *dotu);
-//void   cblas_zdotc_sub(const int N, const void *X, const int incX,
-//const void *Y, const int incY, void *dotc);
-//
-//
-///*
-// * Functions having prefixes S D SC DZ
-// */
-//float  cblas_snrm2(const int N, const float *X, const int incX);
-//float  cblas_sasum(const int N, const float *X, const int incX);
-//
-//double cblas_dnrm2(const int N, const double *X, const int incX);
-//double cblas_dasum(const int N, const double *X, const int incX);
-//
-//float  cblas_scnrm2(const int N, const void *X, const int incX);
-//float  cblas_scasum(const int N, const void *X, const int incX);
-//
-//double cblas_dznrm2(const int N, const void *X, const int incX);
-//double cblas_dzasum(const int N, const void *X, const int incX);
-//
-//
-///*
-// * Functions having standard 4 prefixes (S D C Z)
-// */
-//CBLAS_INDEX cblas_isamax(const int N, const float  *X, const int incX);
-//CBLAS_INDEX cblas_idamax(const int N, const double *X, const int incX);
-//CBLAS_INDEX cblas_icamax(const int N, const void   *X, const int incX);
-//CBLAS_INDEX cblas_izamax(const int N, const void   *X, const int incX);
-//
+// Removing as I go
 ///*
 // * ===========================================================================
 // * Prototypes for level 1 BLAS routines
