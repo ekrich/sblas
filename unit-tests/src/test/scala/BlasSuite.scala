@@ -12,30 +12,30 @@ object BlasSuite extends TestSuite {
 
   val tests = this {
 
-    val N = 3
+    val N     = 3
     val alpha = 0
-    val incX = 1
-    val incY = 1
+    val incX  = 1
+    val incY  = 1
 
     def FloatArray(elems: Float*)(implicit z: Zone): Ptr[CFloat] = {
       val size = elems.size
-      val ptr = alloc[CFloat](size)
-      for (i <-  0 until size) ptr(i) = elems(i)
+      val ptr  = alloc[CFloat](size)
+      for (i <- 0 until size) ptr(i) = elems(i)
       ptr
     }
 
     def DoubleArray(elems: Double*)(implicit z: Zone): Ptr[CDouble] = {
       val size = elems.size
-      val ptr = alloc[CDouble](size)
-      for (i <-  0 until size) ptr(i) = elems(i)
+      val ptr  = alloc[CDouble](size)
+      for (i <- 0 until size) ptr(i) = elems(i)
       ptr
     }
 
-    def FloatComplexArray(elems: (Float, Float)*)
-                         (implicit z: Zone): Ptr[CFloatComplex] = {
+    def FloatComplexArray(elems: (Float, Float)*)(
+        implicit z: Zone): Ptr[CFloatComplex] = {
       val size = elems.size
-      val ptr = alloc[CFloatComplex](size)
-      var i = 0
+      val ptr  = alloc[CFloatComplex](size)
+      var i    = 0
       while (i < size) {
         val e = ptr + i
         !e._1 = elems(i)._1
@@ -46,7 +46,7 @@ object BlasSuite extends TestSuite {
     }
 
     def printFloatComplex(ptr: Ptr[CFloatComplex], size: Int): Unit = {
-      var i = 0
+      var i  = 0
       val lb = new ListBuffer[String]()
       while (i < size) {
         val e = ptr + i
@@ -56,11 +56,11 @@ object BlasSuite extends TestSuite {
       println(lb.mkString("{", ", ", "}"))
     }
 
-    def DoubleComplexArray(elems: (Double, Double)*)
-                         (implicit z: Zone): Ptr[CDoubleComplex] = {
+    def DoubleComplexArray(elems: (Double, Double)*)(
+        implicit z: Zone): Ptr[CDoubleComplex] = {
       val size = elems.size
-      val ptr = alloc[CDoubleComplex](size)
-      var i = 0
+      val ptr  = alloc[CDoubleComplex](size)
+      var i    = 0
       while (i < size) {
         val e = ptr + i
         !e._1 = elems(i)._1
@@ -82,46 +82,46 @@ object BlasSuite extends TestSuite {
 
     def dotufc(implicit z: Zone): Ptr[CFloatComplex] = FloatComplexArray(zfc)
 
-    def Xfc(implicit z: Zone): Ptr[CFloatComplex] = FloatComplexArray((1.0f, 1.0f), (1.0f, 1.0f), (1.0f, 1.0f))
+    def Xfc(implicit z: Zone): Ptr[CFloatComplex] =
+      FloatComplexArray((1.0f, 1.0f), (1.0f, 1.0f), (1.0f, 1.0f))
 
-    def Yfc(implicit z: Zone): Ptr[CFloatComplex] = FloatComplexArray((0.0f, 1.0f), (1.0f, 0.0f), (0.0f, 1.0f))
+    def Yfc(implicit z: Zone): Ptr[CFloatComplex] =
+      FloatComplexArray((0.0f, 1.0f), (1.0f, 0.0f), (0.0f, 1.0f))
 
     val zdc = (0.0, 0.0)
 
     def dotudc(implicit z: Zone): Ptr[CDoubleComplex] = DoubleComplexArray(zdc)
 
-    def Xdc(implicit z: Zone): Ptr[CDoubleComplex] = DoubleComplexArray((1.0, 1.0), (1.0, 1.0), (1.0, 1.0))
+    def Xdc(implicit z: Zone): Ptr[CDoubleComplex] =
+      DoubleComplexArray((1.0, 1.0), (1.0, 1.0), (1.0, 1.0))
 
-    def Ydc(implicit z: Zone): Ptr[CDoubleComplex] = DoubleComplexArray((0.0, 1.0), (1.0, 0.0), (0.0, 1.0))
+    def Ydc(implicit z: Zone): Ptr[CDoubleComplex] =
+      DoubleComplexArray((0.0, 1.0), (1.0, 0.0), (0.0, 1.0))
 
     'cblas_sdsdot {
       Zone { implicit z =>
-        val res = cblas_sdsdot(N, alpha, X,
-          incX, Y, incY)
+        val res = cblas_sdsdot(N, alpha, X, incX, Y, incY)
         assert(res == 3.0)
       }
     }
 
     'cblas_dsdot {
       Zone { implicit z =>
-        val res = cblas_dsdot(N, X,
-          incX, Y, incY)
+        val res = cblas_dsdot(N, X, incX, Y, incY)
         assert(res == 3.0)
       }
     }
 
     'cblas_sdot {
       Zone { implicit z =>
-        val res = cblas_sdot(N, X,
-          incX, Y, incY)
+        val res = cblas_sdot(N, X, incX, Y, incY)
         assert(res == 3.0)
       }
     }
 
     'cblas_ddot {
       Zone { implicit z =>
-        val res = cblas_ddot(N, Xd,
-          incX, Yd, incY)
+        val res = cblas_ddot(N, Xd, incX, Yd, incY)
         assert(res == 3.0)
       }
     }
@@ -129,9 +129,8 @@ object BlasSuite extends TestSuite {
     'cblas_cdotu_sub {
       Zone { implicit z =>
         val dotu = dotufc
-        cblas_cdotu_sub(N, Xfc, incX,
-          Yfc, incY, dotu)
-        printFloatComplex(dotu, 1)
+        cblas_cdotu_sub(N, Xfc, incX, Yfc, incY, dotu)
+        //printFloatComplex(dotu, 1)
         assert(!dotu._1 == -1.0)
         assert(!dotu._2 == 3.0)
       }
@@ -140,9 +139,8 @@ object BlasSuite extends TestSuite {
     'cblas_cdotc_sub {
       Zone { implicit z =>
         val dotc = dotufc
-        cblas_cdotc_sub(N, Xfc, incX,
-          Yfc, incY, dotc)
-        printFloatComplex(dotc, 1)
+        cblas_cdotc_sub(N, Xfc, incX, Yfc, incY, dotc)
+        //printFloatComplex(dotc, 1)
         assert(!dotc._1 == 3.0)
         assert(!dotc._2 == 1.0)
       }
@@ -151,8 +149,7 @@ object BlasSuite extends TestSuite {
     'cblas_zdotu_sub {
       Zone { implicit z =>
         val dotu = dotudc
-        cblas_zdotu_sub(N, Xdc, incX,
-          Ydc, incY, dotu)
+        cblas_zdotu_sub(N, Xdc, incX, Ydc, incY, dotu)
         assert(!dotu._1 == -1.0)
         assert(!dotu._2 == 3.0)
       }
@@ -161,11 +158,105 @@ object BlasSuite extends TestSuite {
     'cblas_zdotc_sub {
       Zone { implicit z =>
         val dotc = dotudc
-        cblas_zdotc_sub(N, Xdc, incX,
-          Ydc, incY, dotc)
+        cblas_zdotc_sub(N, Xdc, incX, Ydc, incY, dotc)
         assert(!dotc._1 == 3.0)
         assert(!dotc._2 == 1.0)
       }
     }
+
+    'cblas_snrm2 {
+      Zone { implicit z =>
+        val X   = FloatArray(1, 2, -2)
+        val res = cblas_snrm2(N, X, incX)
+        assert(res == 3.0)
+      }
+    }
+
+    'cblas_sasum {
+      Zone { implicit z =>
+        val X   = FloatArray(1, 2, -2)
+        val res = cblas_sasum(N, X, incX)
+        assert(res == 5.0)
+      }
+    }
+
+    'cblas_dnrm2 {
+      Zone { implicit z =>
+        val X   = DoubleArray(1, 2, -2)
+        val res = cblas_dnrm2(N, X, incX)
+        assert(res == 3.0)
+      }
+    }
+
+    'cblas_dasum {
+      Zone { implicit z =>
+        val X   = DoubleArray(1, 2, -2)
+        val res = cblas_dasum(N, X, incX)
+        assert(res == 5.0)
+      }
+    }
+
+    'cblas_scnrm2 {
+      Zone { implicit z =>
+        val X   = FloatComplexArray((1, 0), (0, -2), (2, 0))
+        val res = cblas_scnrm2(N, X, incX)
+        assert(res == 3.0)
+      }
+    }
+
+    'cblas_scasum {
+      Zone { implicit z =>
+        val X   = FloatComplexArray((1, 0), (0, -2), (2, 0))
+        val res = cblas_scasum(N, X, incX)
+        assert(res == 5.0)
+      }
+    }
+
+    'cblas_dznrm2 {
+      Zone { implicit z =>
+        val X   = DoubleComplexArray((1, 0), (0, -2), (2, 0))
+        val res = cblas_dznrm2(N, X, incX)
+        assert(res == 3.0)
+      }
+    }
+
+    'cblas_dzasum {
+      Zone { implicit z =>
+        val X   = DoubleComplexArray((1, 0), (1, -2), (2, 0))
+        val res = cblas_dzasum(N, X, incX)
+        assert(res == 6.0)
+      }
+    }
+
+    'cblas_isamax {
+      Zone { implicit z =>
+        val res = cblas_isamax(N, X, incX)
+        assert(res == 2)
+      }
+    }
+
+    'cblas_idamax {
+      Zone { implicit z =>
+        val res = cblas_idamax(N, Xd, incX)
+        assert(res == 2)
+      }
+    }
+
+    'cblas_icamax {
+      Zone { implicit z =>
+        val X   = FloatComplexArray((1.0f, 0.0f), (1.0f, 1.0f), (3.0f, -2.0f))
+        val res = cblas_icamax(N, X, incX)
+        assert(res == 2)
+      }
+    }
+
+    'cblas_izamax {
+      Zone { implicit z =>
+        val X   = DoubleComplexArray((1.0, 2.0), (2.0, 2.0), (3.0, 0.0))
+        val res = cblas_izamax(N, X, incX)
+        assert(res == 1)
+      }
+    }
+
   }
 }

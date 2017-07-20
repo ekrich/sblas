@@ -4,7 +4,8 @@ lazy val commonSettings = Seq(
   organization := "org.ekrich",
   version := "0.1.0",
   scalaVersion := "2.11.11",
-  logLevel := Level.Info // Debug
+  logLevel := Level.Info, // Info, Debug
+  nativeGC := "immix"
 )
 
 lazy val ml = project.in(file("."))
