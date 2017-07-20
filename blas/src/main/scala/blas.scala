@@ -9,7 +9,7 @@ import blasOps._
   * Documentation:
   * https://developer.apple.com/documentation/accelerate/blas?language=objc
   */
-@link("blas")
+@link("cblas")
 @extern
 object blas {
   /* This may vary between platforms. CBLAS_INDEX in C */

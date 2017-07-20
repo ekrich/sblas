@@ -13,7 +13,7 @@ sudo apt-get install -y -qq \
     clang++-3.8 \
     libgc-dev \
     libunwind8-dev \
-    liblapack-dev
+    libatlas-base-dev
 
 # Install re2
 # Starting from Ubuntu 16.04 LTS, it'll be available as http://packages.ubuntu.com/xenial/libre2-dev
