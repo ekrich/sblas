@@ -1,10 +1,11 @@
 package org.ekrich.ml
 package blas
 
-import scala.scalanative.native._
+import scalanative.native._
+import complex.{CFloatComplex, CDoubleComplex}
+import complexOps._
 import utest._
 import blas._
-import blasOps._
 
 import scala.collection.mutable.ListBuffer
 
@@ -37,9 +38,9 @@ object BlasSuite extends TestSuite {
       val ptr  = alloc[CFloatComplex](size)
       var i    = 0
       while (i < size) {
-        val e = ptr + i
-        !e._1 = elems(i)._1
-        !e._2 = elems(i)._2
+        val c = ptr + i
+        c.re = elems(i)._1
+        c.im = elems(i)._2
         i += 1
       }
       ptr
@@ -49,8 +50,8 @@ object BlasSuite extends TestSuite {
       var i  = 0
       val lb = new ListBuffer[String]()
       while (i < size) {
-        val e = ptr + i
-        lb += s"{${!e._1}, ${!e._2}}"
+        val c = ptr + i
+        lb += s"{${c.re}, ${c.im}}"
         i += 1
       }
       println(lb.mkString("{", ", ", "}"))
@@ -62,9 +63,9 @@ object BlasSuite extends TestSuite {
       val ptr  = alloc[CDoubleComplex](size)
       var i    = 0
       while (i < size) {
-        val e = ptr + i
-        !e._1 = elems(i)._1
-        !e._2 = elems(i)._2
+        val c = ptr + i
+        c.re = elems(i)._1
+        c.im = elems(i)._2
         i += 1
       }
       ptr

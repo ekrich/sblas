@@ -1,4 +1,4 @@
-
+import scalanative.sbtplugin.ScalaNativePluginInternal.nativeOptimizerReporter
 
 lazy val commonSettings = Seq(
   organization := "org.ekrich",
@@ -8,23 +8,28 @@ lazy val commonSettings = Seq(
   nativeGC := "immix"
 )
 
-lazy val ml = project.in(file("."))
-    .settings(
-      commonSettings,
-      name := "scala-native-ml"
-    )
-    .enablePlugins(ScalaNativePlugin)
-    .dependsOn(blas, tests)
-    .aggregate(blas)
-
-lazy val blas = project.in(file("blas"))
+lazy val ml = project
+  .in(file("."))
   .settings(
     commonSettings,
-    name := "scala-native-blas"
+    name := "scala-native-ml"
+  )
+  .enablePlugins(ScalaNativePlugin)
+  .dependsOn(blas, tests)
+  .aggregate(blas)
+
+lazy val blas = project
+  .in(file("blas"))
+  .settings(
+    commonSettings,
+    name := "scala-native-blas",
+    nativeOptimizerReporter := scala.scalanative.optimizer.Reporter
+      .toDirectory(file("/tmp"))
   )
   .enablePlugins(ScalaNativePlugin)
 
-lazy val tests = project.in(file("unit-tests"))
+lazy val tests = project
+  .in(file("unit-tests"))
   .settings(
     commonSettings,
     libraryDependencies += "com.lihaoyi" %%% "utest" % "0.4.8" % "test",

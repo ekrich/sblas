@@ -2,6 +2,7 @@ package org.ekrich.ml
 package blas
 
 import scalanative.native._
+import complex.{CFloatComplex, CDoubleComplex}
 import blasOps._
 
 /**
@@ -128,60 +129,46 @@ object blas {
   /**
     * Computes the L2 norm (Euclidian length) of a vector (single-precision).
     */
-  def cblas_snrm2(N: CInt,
-                 X: Ptr[CFloat],
-                 incX: CInt): CFloat = extern
+  def cblas_snrm2(N: CInt, X: Ptr[CFloat], incX: CInt): CFloat = extern
 
   /**
     * Computes the sum of the absolute values of elements in a vector (single-precision).
     */
-  def cblas_sasum(N: CInt,
-                  X: Ptr[CFloat],
-                  incX: CInt): CFloat = extern
+  def cblas_sasum(N: CInt, X: Ptr[CFloat], incX: CInt): CFloat = extern
 
   /**
     * Computes the L2 norm (Euclidian length) of a vector (double-precision).
     */
-  def cblas_dnrm2(N: CInt,
-                  X: Ptr[CDouble],
-                  incX: CInt): CDouble = extern
+  def cblas_dnrm2(N: CInt, X: Ptr[CDouble], incX: CInt): CDouble = extern
 
   /**
     * Computes the sum of the absolute values of elements in a vector (double-precision).
     */
-  def cblas_dasum(N: CInt,
-                  X: Ptr[CDouble],
-                  incX: CInt): CDouble = extern
+  def cblas_dasum(N: CInt, X: Ptr[CDouble], incX: CInt): CDouble = extern
 
   /**
     * Computes the unitary norm of a vector (single-precision complex).
     */
-  def cblas_scnrm2(N: CInt,
-                   X: Ptr[CFloatComplex],
-                   incX: CInt): CFloat = extern
+  def cblas_scnrm2(N: CInt, X: Ptr[CFloatComplex], incX: CInt): CFloat = extern
 
   /**
     * Computes the sum of the absolute values of real and imaginary parts
     * of elements in a vector (single-precision complex).
     */
-  def cblas_scasum(N: CInt,
-                   X: Ptr[CFloatComplex],
-                   incX: CInt): CFloat = extern
+  def cblas_scasum(N: CInt, X: Ptr[CFloatComplex], incX: CInt): CFloat = extern
 
   /**
     * Computes the unitary norm of a vector (double-precision complex).
     */
-  def cblas_dznrm2(N: CInt,
-                      X: Ptr[CDoubleComplex],
-                      incX: CInt): CDouble = extern
+  def cblas_dznrm2(N: CInt, X: Ptr[CDoubleComplex], incX: CInt): CDouble =
+    extern
 
   /**
     * Computes the sum of the absolute values of real and imaginary parts
     * of elements in a vector (double-precision complex).
     */
-  def cblas_dzasum(N: CInt,
-                   X: Ptr[CDoubleComplex],
-                   incX: CInt): CDouble = extern
+  def cblas_dzasum(N: CInt, X: Ptr[CDoubleComplex], incX: CInt): CDouble =
+    extern
 
   /*
    * Functions having standard 4 prefixes (S D C Z)
@@ -191,46 +178,38 @@ object blas {
     * Returns the index of the element with the largest absolute value
     * in a vector (single-precision).
     */
-  def cblas_isamax(N: CInt,
-                   X: Ptr[CFloat],
-                   incX: CInt): CblasIndex = extern
+  def cblas_isamax(N: CInt, X: Ptr[CFloat], incX: CInt): CblasIndex = extern
 
   /**
     * Returns the index of the element with the largest absolute value
     * in a vector (double-precision).
     */
-  def cblas_idamax(N: CInt,
-                   X: Ptr[CDouble],
-                   incX: CInt): CblasIndex = extern
+  def cblas_idamax(N: CInt, X: Ptr[CDouble], incX: CInt): CblasIndex = extern
 
   /**
     * Returns the index of the element with the largest absolute value
     * in a vector (single-precision complex).
     */
-  def cblas_icamax(N: CInt,
-                   X: Ptr[CFloatComplex],
-                   incX: CInt): CblasIndex = extern
+  def cblas_icamax(N: CInt, X: Ptr[CFloatComplex], incX: CInt): CblasIndex =
+    extern
 
   /**
     * Returns the index of the element with the largest absolute value
     * in a vector (double-precision complex).
     */
-  def cblas_izamax(N: CInt,
-                   X: Ptr[CDoubleComplex],
-                   incX: CInt): CblasIndex = extern
-
+  def cblas_izamax(N: CInt, X: Ptr[CDoubleComplex], incX: CInt): CblasIndex =
+    extern
 }
 
 object blasOps {
-
   //enums
   type CBLAS_ORDER = CInt
   final val CblasRowMajor: CBLAS_ORDER = 101
   final val CblasColMajor: CBLAS_ORDER = 102
 
   type CBLAS_TRANSPOSE = CInt
-  final val CblasNoTrans: CBLAS_TRANSPOSE = 111
-  final val CblasTrans: CBLAS_TRANSPOSE = 112
+  final val CblasNoTrans: CBLAS_TRANSPOSE   = 111
+  final val CblasTrans: CBLAS_TRANSPOSE     = 112
   final val CblasConjTrans: CBLAS_TRANSPOSE = 113
 
   type CBLAS_UPLO = CInt
@@ -239,34 +218,11 @@ object blasOps {
 
   type CBLAS_DIAG = CInt
   final val CblasNonUnit: CBLAS_DIAG = 131
-  final val CblasUnit: CBLAS_DIAG = 132
+  final val CblasUnit: CBLAS_DIAG    = 132
 
   type CBLAS_SIDE = CInt
-  final val CblasLeft: CBLAS_SIDE = 141
+  final val CblasLeft: CBLAS_SIDE  = 141
   final val CblasRight: CBLAS_SIDE = 142
-
-  // TODO: needed until Complex is added - from scalanative.native.complex
-  import Nat._2
-  type CFloatComplex = CArray[CFloat, _2]
-  type CDoubleComplex = CArray[CDouble, _2]
-
-  def CFloatComplex(real: Float, imag: Float)(
-      implicit z: Zone): Ptr[CFloatComplex] = {
-    val ptr = alloc[CFloatComplex]
-    !ptr._1 = real
-    !ptr._2 = imag
-    ptr
-  }
-
-  def CDoubleComplex(real: Double, imag: Double)(
-      implicit z: Zone): Ptr[CDoubleComplex] = {
-    val ptr = alloc[CDoubleComplex]
-    !ptr._1 = real
-    !ptr._2 = imag
-    ptr
-  }
-  // TODO: end section
-
 }
 // Removing as I go
 ///*
