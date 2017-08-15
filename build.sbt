@@ -4,8 +4,9 @@ lazy val commonSettings = Seq(
   organization := "org.ekrich",
   version := "0.1.0",
   scalaVersion := "2.11.11",
-  logLevel := Level.Info, // Info, Debug
-  nativeGC := "immix"
+  logLevel := Level.Debug, // Info, Debug
+  nativeGC := "immix",
+  nativeLinkingOptions := Seq("-flto=thin")
 )
 
 lazy val ml = project

@@ -22,7 +22,6 @@ object LapackTest extends App {
 //    println(str)
 //  }
 
-
   val mat = stackalloc[CArray[CFloat, Nat._3]](3)
 
   //mat.

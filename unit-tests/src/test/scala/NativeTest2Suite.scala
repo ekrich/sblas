@@ -8,7 +8,7 @@ object NativeTest2Suite extends TestSuite {
     val f = stackalloc[CFloat]
     !f = 1.0f
     val ff = !f
-    val d = 3.0
+    val d  = 3.0
 
     'test {
       // ok

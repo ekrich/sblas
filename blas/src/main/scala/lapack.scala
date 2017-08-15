@@ -4,20 +4,18 @@ package lapack
 import scalanative.native._
 
 /**
-  * http://www.netlib.org/lapack/#_lapack_version_3_7_1
-  * header files: lapacke.h, lapacke_config.h, lapacke_mangling.h, lapacke_utils.h
-  * http://www.netlib.org/lapack/lapacke.html (User Guide)
-  * From OSX man page.
-  * LAPACK follows FORTRAN calling conventions (even when called from C code).  Users must be aware that
-  * ALL arguments are passed by reference.  This includes all scalar arguments such as matrix dimensions
-  * and scale factors.  Additionally, please note that two-dimensional arrays such as matrices are stored
-  * in column-major order; this differs from how C programmers customarily lay out such arrays.
-  */
+ * http://www.netlib.org/lapack/#_lapack_version_3_7_1
+ * header files: lapacke.h, lapacke_config.h, lapacke_mangling.h, lapacke_utils.h
+ * http://www.netlib.org/lapack/lapacke.html (User Guide)
+ * From OSX man page.
+ * LAPACK follows FORTRAN calling conventions (even when called from C code).  Users must be aware that
+ * ALL arguments are passed by reference.  This includes all scalar arguments such as matrix dimensions
+ * and scale factors.  Additionally, please note that two-dimensional arrays such as matrices are stored
+ * in column-major order; this differs from how C programmers customarily lay out such arrays.
+ */
 @link("lapack")
 @extern
-object lapack {
-
-}
+object lapack {}
 ///* header file for clapack 3.2.1 */
 //
 //#ifndef __CLAPACK_H
