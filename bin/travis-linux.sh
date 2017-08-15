@@ -6,15 +6,6 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# Install LLVM/Clang, Boehm GC, libunwind
-sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
-sudo apt-get -qq update
-sudo apt-get install -y -qq \
-    clang++-4.0 \
-    libgc-dev \
-    libunwind8-dev \
-    libatlas-base-dev
-
 # Install re2
 # Starting from Ubuntu 16.04 LTS, it'll be available as http://packages.ubuntu.com/xenial/libre2-dev
 sudo apt-get install -y make

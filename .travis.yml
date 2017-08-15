@@ -9,7 +9,20 @@ matrix:
       dist: trusty
       jdk: oraclejdk8
       language: scala
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-4.0
+          packages:
+            - clang-4.0
+            - llvm-4.0-dev
+            - libgc-dev
+            - libunwind8-dev
+            - libatlas-base-dev
+      env:
+        - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
       before_install:
+        - eval "${MATRIX_EVAL}"
         - bash bin/travis-linux.sh
 
     - os: osx
@@ -18,8 +31,6 @@ matrix:
         - brew update
         - brew install sbt
         - brew install bdw-gc
-        - brew link bdw-gc
-        - brew install jq
         - brew install re2
 
 script:
