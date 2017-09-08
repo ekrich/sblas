@@ -18,7 +18,7 @@ lazy val commonSettings = Seq(
   organization := "org.ekrich",
   version := "0.1.0",
   scalaVersion := "2.11.11",
-  logLevel := Level.Info, // Info, Debug
+  logLevel := Level.Debug, // Info, Debug
 //  nativeLinkingOptions ++= Seq("-flto=thin") ++ ldOpt,
 //  nativeCompileOptions ++= Seq("-flto=thin") ++ compOpt,
   nativeGC := "immix",
