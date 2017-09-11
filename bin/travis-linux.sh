@@ -6,6 +6,9 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+# Remove libunwind pre-bundled with clang
+sudo find /usr -name "*libunwind*" -delete
+
 # Install re2
 # Starting from Ubuntu 16.04 LTS, it'll be available as http://packages.ubuntu.com/xenial/libre2-dev
 sudo apt-get install -y make

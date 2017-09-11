@@ -11,11 +11,8 @@ matrix:
       language: scala
       addons:
         apt:
-          sources:
-            - llvm-toolchain-trusty-3.9
           packages:
             - clang-3.9
-            - libunwind-setjmp0
             - libunwind8-dev
             - libatlas-base-dev
       env:
