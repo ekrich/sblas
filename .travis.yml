@@ -9,12 +9,6 @@ matrix:
       dist: trusty
       jdk: oraclejdk8
       language: scala
-      addons:
-        apt:
-          packages:
-            - clang-3.9
-            - libunwind8-dev
-            - libatlas-base-dev
       env:
         - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
       before_install:
