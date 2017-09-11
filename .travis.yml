@@ -12,7 +12,7 @@ matrix:
       addons:
         apt:
           sources:
-            - llvm-toolchain-trusty-3.9
+            - llvm-toolchain-trusty
           packages:
             - libunwind8-dev
             - libatlas-base-dev
