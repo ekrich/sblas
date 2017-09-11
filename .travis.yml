@@ -12,15 +12,12 @@ matrix:
       addons:
         apt:
           sources:
-            - llvm-toolchain-trusty-4.0
+            - llvm-toolchain-trusty
           packages:
-            - clang-4.0
-            - llvm-4.0-dev
-            - libgc-dev
             - libunwind8-dev
             - libatlas-base-dev
       env:
-        - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
+        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
       before_install:
         - eval "${MATRIX_EVAL}"
         - bash bin/travis-linux.sh
@@ -30,8 +27,11 @@ matrix:
       before_install:
         - brew update
         - brew install sbt
-        - brew install bdw-gc
         - brew install re2
 
 script:
-- sbt tests/test
+  - apt list --installed
+  - java -version
+  - if [ -n "$CLANG_FORMAT_PATH" ]; then bin/clangfmt --test; fi
+  - bin/scalafmt --test
+  - sbt tests/test

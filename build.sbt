@@ -4,14 +4,15 @@ import scalanative.sbtplugin.ScalaNativePluginInternal._
 // thin for parrallel compiling and linking
 // mac gets /usr/lib by default
 lazy val ldOpt = Option(sys props "os.name") match {
-  case Some("Linux")    => Seq("-fuse-ld=bfd") // gold failed - bfd works - but not with compile -flto
-  case _                => Seq.empty
+  case Some("Linux") =>
+    Seq("-fuse-ld=bfd") // gold failed - bfd works - but not with compile -flto
+  case _ => Seq.empty
 }
 
 // eventually will need different compile options
 lazy val compOpt = Option(sys props "os.name") match {
-  case Some("Linux")    => Seq.empty
-  case _                => Seq.empty
+  case Some("Linux") => Seq.empty
+  case _             => Seq.empty
 }
 
 lazy val commonSettings = Seq(
