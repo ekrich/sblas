@@ -31,7 +31,6 @@ matrix:
         - brew install re2
 
 script:
-  - apt list --installed
   - java -version
   - if [ -n "$CLANG_FORMAT_PATH" ]; then bin/clangfmt --test; fi
   - bin/scalafmt --test
