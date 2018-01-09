@@ -9,11 +9,12 @@ IFS=$'\n\t'
 # Remove libunwind pre-bundled with clang
 sudo find /usr -name "*libunwind*" -delete
 
-# Install clang, libunwind, and libatlas
-sudo apt-get install -y -qq \
-  clang-3.9 \
-  libunwind8-dev \
-  libatlas-base-dev
+# Use pre-bundled clang
+    export PATH=/usr/local/clang-5.0.0/bin:$PATH
+    export CXX=clang++
+
+    # Install Boehm GC and libunwind
+sudo apt-get install libgc-dev libunwind8-dev libatlas-base-dev
 
 # Install re2
 # Starting from Ubuntu 16.04 LTS, it'll be available as http://packages.ubuntu.com/xenial/libre2-dev

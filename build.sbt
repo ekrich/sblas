@@ -15,11 +15,15 @@ lazy val compOpt = Option(sys props "os.name") match {
   case _             => Seq.empty
 }
 
+//addCommandAlias("test", ";tests/test")
+
+crossSbtVersions := Vector("0.13.16", "1.0.4")
+
 lazy val commonSettings = Seq(
   organization := "org.ekrich",
   version := "0.1.0",
-  scalaVersion := "2.11.11",
-  logLevel := Level.Debug, // Info, Debug
+  scalaVersion := "2.11.12",
+  logLevel := Level.Info, // Info, Debug
 //  nativeLinkingOptions ++= Seq("-flto=thin") ++ ldOpt,
 //  nativeCompileOptions ++= Seq("-flto=thin") ++ compOpt,
   nativeGC := "immix",
@@ -51,7 +55,7 @@ lazy val tests = project
   .in(file("unit-tests"))
   .settings(
     commonSettings,
-    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.4.8" % "test",
+    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.5.3" % "test",
     testFrameworks += new TestFramework("utest.runner.Framework")
   )
   .enablePlugins(ScalaNativePlugin)
