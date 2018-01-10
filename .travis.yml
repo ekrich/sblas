@@ -9,10 +9,7 @@ matrix:
       dist: trusty
       jdk: oraclejdk8
       language: scala
-      env:
-        - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
       before_install:
-        - eval "${MATRIX_EVAL}"
         - bash bin/travis-linux.sh
 
     - os: osx
