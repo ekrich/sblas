@@ -1,8 +1,5 @@
 
-
 addCommandAlias("test", ";tests/test")
-
-crossSbtVersions := Vector("0.13.17", "1.0.4")
 
 lazy val commonSettings = Seq(
   organization := "org.ekrich",
@@ -36,7 +33,7 @@ lazy val tests = project
   .in(file("unit-tests"))
   .settings(
     commonSettings,
-    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.5.3" % "test",
+    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.3" % "test",
     testFrameworks += new TestFramework("utest.runner.Framework")
   )
   .enablePlugins(ScalaNativePlugin)
