@@ -1,4 +1,3 @@
-
 addCommandAlias("test", ";tests/test")
 
 lazy val commonSettings = Seq(
