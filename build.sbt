@@ -32,7 +32,7 @@ lazy val tests = project
   .in(file("unit-tests"))
   .settings(
     commonSettings,
-    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.3" % "test",
+    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.3" % Test,
     testFrameworks += new TestFramework("utest.runner.Framework")
   )
   .enablePlugins(ScalaNativePlugin)

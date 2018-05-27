@@ -7,7 +7,7 @@ import blasOps._
 
 /**
  * http://www.netlib.org/blas/#_cblas (for header file)
- * Documentation:
+ * Documentation Reference:
  * https://developer.apple.com/documentation/accelerate/blas?language=objc
  */
 @link("cblas")
@@ -199,6 +199,288 @@ object blas {
    */
   def cblas_izamax(N: CInt, X: Ptr[CDoubleComplex], incX: CInt): CblasIndex =
     extern
+
+  /*
+   * ===========================================================================
+   * Prototypes for level 1 BLAS routines
+   * ===========================================================================
+   */
+
+  /*
+   * Routines with standard 4 prefixes (s, d, c, z)
+   */
+
+  /**
+   * Exchanges the elements of two vectors (single precision).
+   *
+   * Parameters for the following functions:
+   *
+   * @param N The number of elements in the vectors.
+   * @param X Vector X.
+   * @param incX Stride within X. For example, if incX is 7, every 7th element is used.
+   * @param Y Vector Y.
+   * @param incY Stride within Y. For example, if incY is 7, every 7th element is used.
+   *
+   * @return See description above.
+   */
+  def cblas_sswap(N: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt,
+                  Y: Ptr[CFloat],
+                  incY: CInt): Unit = extern
+
+  /**
+   * Copies a vector to another vector (single-precision).
+   */
+  def cblas_scopy(N: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt,
+                  Y: Ptr[CFloat],
+                  incY: CInt): Unit = extern
+
+  /**
+   * Computes a constant times a vector plus a vector (single-precision).
+   *
+   * @param alpha The initial value to add to the dot product.
+   */
+  def cblas_saxpy(N: CInt,
+                  alpha: CFloat,
+                  X: Ptr[CFloat],
+                  incX: CInt,
+                  Y: Ptr[CFloat],
+                  incY: CInt): Unit = extern
+
+  /**
+   * Exchanges the elements of two vectors (double precision).
+   */
+  def cblas_dswap(N: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt,
+                  Y: Ptr[CDouble],
+                  incY: CInt): Unit = extern
+
+  /**
+   * Copies a vector to another vector (double-precision).
+   */
+  def cblas_dcopy(N: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt,
+                  Y: Ptr[CDouble],
+                  incY: CInt): Unit = extern
+
+  /**
+   * Computes a constant times a vector plus a vector (double-precision).
+   */
+  def cblas_daxpy(N: CInt,
+                  alpha: CDouble,
+                  X: Ptr[CDouble],
+                  incX: CInt,
+                  Y: Ptr[CDouble],
+                  incY: CInt): Unit = extern
+
+  /**
+   * Exchanges the elements of two vectors (single-precision complex).
+   */
+  def cblas_cswap(N: CInt,
+                  X: Ptr[CFloatComplex],
+                  incX: CInt,
+                  Y: Ptr[CFloatComplex],
+                  incY: CInt): Unit = extern
+
+  /**
+   * Copies a vector to another vector (single-precision complex).
+   */
+  def cblas_ccopy(N: CInt,
+                  X: Ptr[CFloatComplex],
+                  incX: CInt,
+                  Y: Ptr[CFloatComplex],
+                  incY: CInt): Unit = extern
+
+  /**
+   * Computes a constant times a vector plus a vector (single-precision complex).
+   */
+  def cblas_caxpy(N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  X: Ptr[CFloatComplex],
+                  incX: CInt,
+                  Y: Ptr[CFloatComplex],
+                  incY: CInt): Unit = extern
+
+  /**
+   * Exchanges the elements of two vectors (double-precision complex).
+   */
+  def cblas_zswap(N: CInt,
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt,
+                  Y: Ptr[CDoubleComplex],
+                  incY: CInt): Unit = extern
+
+  /**
+   * Copies a vector to another vector (double-precision complex).
+   */
+  def cblas_zcopy(N: CInt,
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt,
+                  Y: Ptr[CDoubleComplex],
+                  incY: CInt): Unit = extern
+
+  /**
+   * Computes a constant times a vector plus a vector (double-precision complex).
+   */
+  def cblas_zaxpy(N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt,
+                  Y: Ptr[CDoubleComplex],
+                  incY: CInt): Unit = extern
+
+  /*
+   * Routines with S and D prefix only
+   */
+
+  /**
+   * Constructs a Givens rotation matrix.
+   *
+   * @param a Single-precision value a. Overwritten on return with result r.
+   * @param b Single-precision value b. Overwritten on return with result z (zero).
+   * @param c Unused on entry. Overwritten on return with the value cos(θ).
+   * @param s Unused on entry. Overwritten on return with the value sin(θ).
+   */
+  def cblas_srotg(a: Ptr[CFloat],
+                  b: Ptr[CFloat],
+                  c: Ptr[CFloat],
+                  s: Ptr[CFloat]): Unit = extern
+
+  /**
+   * Generates a modified Givens rotation matrix.
+   *
+   * @param d1 Scaling factor D1.
+   * @param d2 Scaling factor D2.
+   * @param b1 Scaling factor B1.
+   * @param b2 Scaling factor B2.
+   * @param P  A 5-element vector:
+   *           P[0] Flag value that defines the form of matrix H.
+   *           -2.0: matrix H contains the identity matrix.
+   *           -1.0: matrix H is identical to matrix SH (defined by the remaining values in the vector).
+   *            0.0: H[1,2] and H[2,1] are obtained from matrix SH. The remaining values are both 1.0.
+   *            1.0: H[1,1] and H[2,2] are obtained from matrix SH. H[1,2] is 1.0. H[2,1] is -1.0.
+   *           P[1] Contains SH[1,1].
+   *           P[2] Contains SH[2,1].
+   *           P[3] Contains SH[1,2].
+   *           P[4] Contains SH[2,2].
+   */
+  def cblas_srotmg(d1: Ptr[CFloat],
+                   d2: Ptr[CFloat],
+                   b1: Ptr[CFloat],
+                   b2: CFloat,
+                   P: Ptr[CFloat]): Unit = extern
+
+  /**
+   * Applies a Givens rotation matrix to a pair of vectors.
+   */
+  def cblas_srot(N: CInt,
+                 X: Ptr[CFloat],
+                 incX: CInt,
+                 Y: Ptr[CFloat],
+                 incY: CInt,
+                 c: CFloat,
+                 s: CFloat): Unit = extern
+
+  /**
+   * Applies a modified Givens transformation (single precision).
+   */
+  def cblas_srotm(N: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt,
+                  Y: Ptr[CFloat],
+                  incY: CInt,
+                  P: Ptr[CFloat]): Unit = extern
+
+  /**
+   * Constructs a Givens rotation matrix.
+   */
+  def cblas_drotg(a: Ptr[CDouble],
+                  b: Ptr[CDouble],
+                  c: Ptr[CDouble],
+                  s: Ptr[CDouble]): Unit = extern
+
+  /**
+   * Generates a modified Givens rotation matrix.
+   */
+  def cblas_drotmg(d1: Ptr[CDouble],
+                   d2: Ptr[CDouble],
+                   b1: Ptr[CDouble],
+                   b2: CDouble,
+                   P: Ptr[CDouble]): Unit = extern
+
+  /**
+   * Applies a Givens rotation matrix to a pair of vectors.
+   */
+  def cblas_drot(N: CInt,
+                 X: Ptr[CDouble],
+                 incX: CInt,
+                 Y: Ptr[CDouble],
+                 incY: CInt,
+                 c: CDouble,
+                 s: CDouble): Unit = extern
+
+  /**
+   * Applies a modified Givens transformation (single precision).
+   */
+  def cblas_drotm(N: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt,
+                  Y: Ptr[CDouble],
+                  incY: CInt,
+                  P: Ptr[CDouble]): Unit = extern
+
+  /*
+   * Routines with S D C Z CS and ZD prefixes
+   */
+
+  /**
+   * Multiplies each element of a vector by a constant (single-precision).
+   */
+  def cblas_sscal(N: CInt, alpha: CFloat, X: Ptr[CFloat], incX: CInt): Unit =
+    extern
+
+  /**
+   * Multiplies each element of a vector by a constant (double-precision).
+   */
+  def cblas_dscal(N: CInt, alpha: CDouble, X: Ptr[CDouble], incX: CInt): Unit =
+    extern
+
+  /**
+   * Multiplies each element of a vector by a constant (single-precision complex).
+   */
+  def cblas_cscal(N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  X: Ptr[CFloatComplex],
+                  incX: CInt): Unit = extern
+
+  /**
+   * Multiplies each element of a vector by a constant (double-precision complex).
+   */
+  def cblas_zscal(N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt): Unit = extern
+
+  /**
+   * Multiplies each element of a vector by a constant (single-precision complex).
+   */
+  def cblas_csscal(N: CInt,
+                   alpha: CFloat,
+                   X: Ptr[CFloatComplex],
+                   incX: CInt): Unit = extern
+
+  /**
+   * Multiplies each element of a vector by a constant (double-precision complex).
+   */
+  def cblas_zdscal(N: CInt,
+                   alpha: CDouble,
+                   X: Ptr[CDoubleComplex],
+                   incX: CInt): Unit = extern
 }
 
 object blasOps {
@@ -225,73 +507,7 @@ object blasOps {
   final val CblasRight: CBLAS_SIDE = 142
 }
 // Removing as I go
-///*
-// * ===========================================================================
-// * Prototypes for level 1 BLAS routines
-// * ===========================================================================
-// */
-//
-///*
-// * Routines with standard 4 prefixes (s, d, c, z)
-// */
-//void cblas_sswap(const int N, float *X, const int incX,
-//float *Y, const int incY);
-//void cblas_scopy(const int N, const float *X, const int incX,
-//float *Y, const int incY);
-//void cblas_saxpy(const int N, const float alpha, const float *X,
-//const int incX, float *Y, const int incY);
-//
-//void cblas_dswap(const int N, double *X, const int incX,
-//double *Y, const int incY);
-//void cblas_dcopy(const int N, const double *X, const int incX,
-//double *Y, const int incY);
-//void cblas_daxpy(const int N, const double alpha, const double *X,
-//const int incX, double *Y, const int incY);
-//
-//void cblas_cswap(const int N, void *X, const int incX,
-//void *Y, const int incY);
-//void cblas_ccopy(const int N, const void *X, const int incX,
-//void *Y, const int incY);
-//void cblas_caxpy(const int N, const void *alpha, const void *X,
-//const int incX, void *Y, const int incY);
-//
-//void cblas_zswap(const int N, void *X, const int incX,
-//void *Y, const int incY);
-//void cblas_zcopy(const int N, const void *X, const int incX,
-//void *Y, const int incY);
-//void cblas_zaxpy(const int N, const void *alpha, const void *X,
-//const int incX, void *Y, const int incY);
-//
-//
-///*
-// * Routines with S and D prefix only
-// */
-//void cblas_srotg(float *a, float *b, float *c, float *s);
-//void cblas_srotmg(float *d1, float *d2, float *b1, const float b2, float *P);
-//void cblas_srot(const int N, float *X, const int incX,
-//float *Y, const int incY, const float c, const float s);
-//void cblas_srotm(const int N, float *X, const int incX,
-//float *Y, const int incY, const float *P);
-//
-//void cblas_drotg(double *a, double *b, double *c, double *s);
-//void cblas_drotmg(double *d1, double *d2, double *b1, const double b2, double *P);
-//void cblas_drot(const int N, double *X, const int incX,
-//double *Y, const int incY, const double c, const double  s);
-//void cblas_drotm(const int N, double *X, const int incX,
-//double *Y, const int incY, const double *P);
-//
-//
-///*
-// * Routines with S D C Z CS and ZD prefixes
-// */
-//void cblas_sscal(const int N, const float alpha, float *X, const int incX);
-//void cblas_dscal(const int N, const double alpha, double *X, const int incX);
-//void cblas_cscal(const int N, const void *alpha, void *X, const int incX);
-//void cblas_zscal(const int N, const void *alpha, void *X, const int incX);
-//void cblas_csscal(const int N, const float alpha, void *X, const int incX);
-//void cblas_zdscal(const int N, const double alpha, void *X, const int incX);
-//
-//
+
 ///*
 // * ===========================================================================
 // * Prototypes for level 2 BLAS
