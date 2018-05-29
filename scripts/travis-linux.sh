@@ -6,6 +6,9 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+# Per https://github.com/scala-native/scala-native/pull/1240/
+sudo apt-get update
+
 # Remove libunwind pre-bundled with clang
 sudo find /usr -name "*libunwind*" -delete
 
