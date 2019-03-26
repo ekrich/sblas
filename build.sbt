@@ -10,11 +10,10 @@ lazy val commonSettings = Seq(
 //  nativeMode := "release"
 )
 
-lazy val ml = project
+lazy val sblas = project
   .in(file("."))
   .settings(
-    commonSettings,
-    name := "scala-native-ml"
+    commonSettings
   )
   .enablePlugins(ScalaNativePlugin)
   .dependsOn(blas, tests)
@@ -23,8 +22,7 @@ lazy val ml = project
 lazy val blas = project
   .in(file("blas"))
   .settings(
-    commonSettings,
-    name := "scala-native-blas"
+    commonSettings
   )
   .enablePlugins(ScalaNativePlugin)
 
@@ -32,7 +30,7 @@ lazy val tests = project
   .in(file("unit-tests"))
   .settings(
     commonSettings,
-    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.3" % Test,
+    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.6" % Test,
     testFrameworks += new TestFramework("utest.runner.Framework")
   )
   .enablePlugins(ScalaNativePlugin)

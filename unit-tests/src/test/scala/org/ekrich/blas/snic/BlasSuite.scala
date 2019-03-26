@@ -1,13 +1,12 @@
-package org.ekrich.ml
-package blas
+package org.ekrich.blas.snic
 
-import scalanative.native._
-import complex.{CFloatComplex, CDoubleComplex}
-import complexOps._
+import org.ekrich.blas.snic.blas._
 import utest._
-import blas._
 
 import scala.collection.mutable.ListBuffer
+import scala.scalanative.native.complex.{CDoubleComplex, CFloatComplex}
+import scala.scalanative.native.complexOps._
+import scala.scalanative.native.{CDouble, CFloat, Ptr, Zone, alloc}
 
 object BlasSuite extends TestSuite {
 

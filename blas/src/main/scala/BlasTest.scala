@@ -2,7 +2,7 @@ package org.ekrich.ml
 package blas
 
 import scalanative.native._
-import blas._
+import org.ekrich.blas.snic.blas._
 
 object BlasTest extends App {
   println("Starting blas test...")

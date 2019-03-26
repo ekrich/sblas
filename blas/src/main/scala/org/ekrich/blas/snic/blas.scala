@@ -1,9 +1,7 @@
-package org.ekrich.ml
-package blas
+package org.ekrich.blas.snic
 
-import scalanative.native._
-import complex.{CFloatComplex, CDoubleComplex}
-import blasOps._
+import scala.scalanative.native._
+import scala.scalanative.native.complex.{CDoubleComplex, CFloatComplex}
 
 /**
  * http://www.netlib.org/blas/#_cblas (for header file)
