@@ -22,9 +22,9 @@ object StructTest extends App {
 
   val mat: Ptr[Vec] = stackalloc[Vec](3) // allocate c struct on stack
 
-  val r1 = mat + 0
+  val r1           = mat + 0
   val r2: Ptr[Vec] = mat + 1
-  val r3 = mat + 2
+  val r3           = mat + 2
   !(r1._1 + 0) = 1.0f
   !r1._2 = 3.0f
   !r1._3 = 5.0f
