@@ -60,8 +60,6 @@ before_install:
   - bash scripts/travis-os-setup.sh
   - git fetch --tags
 
-before_test:
-  -
 #matrix:
 #  include:
 #    - os: linux

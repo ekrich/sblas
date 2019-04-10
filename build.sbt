@@ -1,8 +1,23 @@
 addCommandAlias("test", ";tests/test")
 
+inThisBuild(
+  List(
+    description := "BLAS interface for Scala Native",
+    organization := "org.ekrich",
+    homepage := Some(url("https://github.com/ekrich/sblas")),
+    licenses := List(
+      "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+    developers := List(
+      Developer(
+        id = "ekrich",
+        name = "Eric K Richardson",
+        email = "ekrichardson@gmail.com",
+        url = url("http://github.ekrich.org/")
+      )
+    )
+  ))
+
 lazy val commonSettings = Seq(
-  organization := "org.ekrich",
-  version := "0.1.0",
   scalaVersion := "2.11.12",
   logLevel := Level.Info, // Info, Debug
   nativeGC := "immix",
@@ -13,9 +28,12 @@ lazy val commonSettings = Seq(
 lazy val sblas = project
   .in(file("."))
   .settings(
-    commonSettings
+    skip in publish := true,
+    doc / aggregate := false,
+    doc := (blas / Compile / doc).value,
+    packageDoc / aggregate := false,
+    packageDoc := (blas / Compile / packageDoc).value
   )
-  .enablePlugins(ScalaNativePlugin)
   .dependsOn(blas, tests)
   .aggregate(blas)
 
@@ -29,6 +47,7 @@ lazy val blas = project
 lazy val tests = project
   .in(file("unit-tests"))
   .settings(
+    skip in publish := true,
     commonSettings,
     libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.6" % Test,
     testFrameworks += new TestFramework("utest.runner.Framework")

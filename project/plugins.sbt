@@ -1,4 +1,5 @@
 //resolvers += Resolver.sonatypeRepo("snapshots")
 
-// Current releases 0.3.7 - 0.3.8-SNAPSHOT
+// Current release 0.3.8
 addSbtPlugin("org.scala-native" % "sbt-scala-native" % "0.3.8")
+addSbtPlugin("com.geirsson" % "sbt-ci-release" % "1.2.6")
