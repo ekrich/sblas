@@ -3,24 +3,76 @@ sudo: required
 scala:
   - "2.11.12"
 
-matrix:
+os:
+  - linux
+    dist: trusty
+    jdk: oraclejdk8
+    language: scala
+    before_install:
+      - bash scripts/travis-linux.sh
+
+  - osx
+    osx_image: xcode8
+    before_install:
+      - brew update
+      - brew install sbt
+      - brew install re2
+
+stages:
+  - name: test
+  - name: release
+    if: (branch = master AND type = push) OR (tag IS present)
+
+jobs:
   include:
-    - os: linux
-      dist: trusty
-      jdk: oraclejdk8
-      language: scala
-      before_install:
-        - bash scripts/travis-linux.sh
+    - stage: test # default if no stage is specified
+    - env: TEST="scalafmt"
+      script:
+        - java -version
+        - if [ -n "$CLANG_FORMAT_PATH" ]; then scripts/clangfmt --test; fi
+        - scripts/scalafmt --test
+    - env: TEST="test"
+      script: sbt tests/test doc
+    - stage: release
+      script: sbt ci-release
 
-    - os: osx
-      osx_image: xcode8
-      before_install:
-        - brew update
-        - brew install sbt
-        - brew install re2
+cache:
+  directories:
+    - $HOME/.sbt/1.0/dependency
+    - $HOME/.sbt/boot/scala*
+    - $HOME/.sbt/launchers
+    - $HOME/.ivy2/cache
+    - $HOME/.coursier
 
-script:
-  - java -version
-  - if [ -n "$CLANG_FORMAT_PATH" ]; then scripts/clangfmt --test; fi
-  - scripts/scalafmt --test
-  - sbt tests/test
+before_cache:
+  - du -h -d 1 $HOME/.ivy2/cache
+  - du -h -d 2 $HOME/.sbt/
+  - find $HOME/.sbt -name "*.lock" -type f -delete
+  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -type f -delete
+  - rm -rf $HOME/.ivy2/local
+
+before_install:
+  - git fetch --tags
+
+
+#matrix:
+#  include:
+#    - os: linux
+#      dist: trusty
+#      jdk: oraclejdk8
+#      language: scala
+#      before_install:
+#        - bash scripts/travis-linux.sh
+#
+#    - os: osx
+#      osx_image: xcode8
+#      before_install:
+#        - brew update
+#        - brew install sbt
+#        - brew install re2
+#
+#script:
+#  - java -version
+#  - if [ -n "$CLANG_FORMAT_PATH" ]; then scripts/clangfmt --test; fi
+#  - scripts/scalafmt --test
+#  - sbt tests/test
