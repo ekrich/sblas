@@ -3,20 +3,25 @@ sudo: required
 scala:
   - "2.11.12"
 
-os:
-  - linux
-    dist: trusty
-    jdk: oraclejdk8
-    language: scala
-    before_install:
-      - bash scripts/travis-linux.sh
+matrix:
+  include:
+    - os: linux
+    - os: osx
 
-  - osx
-    osx_image: xcode8
-    before_install:
-      - brew update
-      - brew install sbt
-      - brew install re2
+#os:
+#  - linux
+#    dist: trusty
+#    jdk: oraclejdk8
+#    language: scala
+#    before_install:
+#      - bash scripts/travis-linux.sh
+#
+#  - osx
+#    osx_image: xcode8
+#    before_install:
+#      - brew update
+#      - brew install sbt
+#      - brew install re2
 
 stages:
   - name: test
@@ -52,9 +57,11 @@ before_cache:
   - rm -rf $HOME/.ivy2/local
 
 before_install:
+  - bash scripts/travis-os-setup.sh
   - git fetch --tags
 
-
+before_test:
+  -
 #matrix:
 #  include:
 #    - os: linux
