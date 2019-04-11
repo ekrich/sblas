@@ -12,11 +12,9 @@ matrix:
   include:
     - os: linux
       dist: trusty
-      install: ./scripts/travis-os-setup.sh
 
     - os: osx
       osx_image: xcode9.3
-      install: ./scripts/travis-os-setup.sh
 
 stages:
   - name: test
@@ -29,6 +27,7 @@ jobs:
     - env: TEST="scalafmt"
       script: ./scripts/checkfmts.sh
     - env: TEST="test"
+      before_install: ./scripts/travis-os-setup.sh
       script: sbt test doc
     - stage: release
       script: sbt ci-release
