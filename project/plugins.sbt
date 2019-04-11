@@ -2,4 +2,4 @@
 
 // Current release 0.3.8
 addSbtPlugin("org.scala-native" % "sbt-scala-native" % "0.3.8")
-addSbtPlugin("com.geirsson" % "sbt-ci-release" % "1.2.6")
+addSbtPlugin("com.geirsson"     % "sbt-ci-release"   % "1.2.6")
