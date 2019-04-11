@@ -10,7 +10,7 @@ matrix:
       jdk: oraclejdk8
       language: scala
       before_install:
-        - bash scripts/travis-linux.sh
+        - bash scripts/travis-os-setup.sh
 
     - os: osx
       osx_image: xcode8
