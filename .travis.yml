@@ -15,9 +15,7 @@ matrix:
     - os: osx
       osx_image: xcode8
       before_install:
-        - brew update
-        - brew install sbt
-        - brew install re2
+        - bash scripts/travis-os-setup.sh
 
 script:
   - java -version
