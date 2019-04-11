@@ -10,15 +10,13 @@ matrix:
       jdk: oraclejdk8
       language: scala
       before_install:
-        - bash scripts/travis-os-setup.sh
+        - scripts/travis-os-setup.sh
 
     - os: osx
       osx_image: xcode9.3
       before_install:
-        - bash scripts/travis-os-setup.sh
+        - scripts/travis-os-setup.sh
 
 script:
-  - java -version
-  - if [ -n "$CLANG_FORMAT_PATH" ]; then scripts/clangfmt --test; fi
-  - scripts/scalafmt --test
+  - scripts/checkfmts.sh
   - sbt tests/test
