@@ -12,11 +12,11 @@ matrix:
   include:
     - os: linux
       dist: trusty
+      install: ./scripts/travis-os-setup.sh
 
     - os: osx
       osx_image: xcode9.3
-
-install: ./scripts/travis-os-setup.sh
+      install: ./scripts/travis-os-setup.sh
 
 stages:
   - name: test
