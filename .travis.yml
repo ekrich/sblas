@@ -2,9 +2,6 @@ sudo: required
 
 language: scala
 
-jdk:
-  - openjdk8
-
 scala:
   - "2.11.12"
 
@@ -30,6 +27,7 @@ jobs:
     - env: TEST="linux"
       os: linux
       dist: trusty
+      jdk: openjdk8
       before_install: ./scripts/travis-os-setup.sh
       script: sbt test doc
     - env: TEST="macos"
