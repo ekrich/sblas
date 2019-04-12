@@ -8,7 +8,7 @@ IFS=$'\n\t'
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     brew update
-    sudo rm /usr/local/bin/sbt
+    #sudo rm /usr/local/bin/sbt
     brew install sbt
     brew install re2
 else
