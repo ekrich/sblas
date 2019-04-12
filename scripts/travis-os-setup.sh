@@ -7,9 +7,9 @@ set -euo pipefail
 IFS=$'\n\t'
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-    brew update
+    #brew update
     #sudo rm /usr/local/bin/sbt
-    brew install sbt
+    #brew install sbt
     brew install re2
 else
     # Per https://github.com/scala-native/scala-native/pull/1240/
