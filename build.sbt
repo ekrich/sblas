@@ -1,5 +1,10 @@
 addCommandAlias("test", ";tests/test")
 
+lazy val prevVersion = "0.1.0"
+lazy val nextVersion = "0.1.0"
+
+lazy val scala211 = "2.11.12"
+
 inThisBuild(
   List(
     description := "BLAS interface for Scala Native",
@@ -14,11 +19,22 @@ inThisBuild(
         email = "ekrichardson@gmail.com",
         url = url("http://github.ekrich.org/")
       )
-    )
+    ),
+    version := dynverGitDescribeOutput.value.mkVersion(versionFmt, ""),
+    dynver := sbtdynver.DynVer
+      .getGitDescribeOutput(new java.util.Date)
+      .mkVersion(versionFmt, "")
   ))
 
+// stable snapshot is not great for publish local
+def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
+  val tag = out.ref.dropV.value
+  if (out.isCleanAfterTag) tag
+  else nextVersion + "-SNAPSHOT"
+}
+
 lazy val commonSettings = Seq(
-  scalaVersion := "2.11.12",
+  scalaVersion := scala211,
   logLevel := Level.Info, // Info, Debug
   nativeGC := "immix",
   nativeLinkStubs := true
