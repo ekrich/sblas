@@ -16,12 +16,7 @@ scala:
 #    - os: osx
 #      osx_image: xcode9.3
 
-env:
-  - TEST=linux
-  - TEST=macos
-
 stages:
-  - name: check
   - name: test
   - name: release
     if: (branch = master AND type = push) OR (tag IS present)
@@ -29,7 +24,6 @@ stages:
 jobs:
   include:
     # stage="test" if no stage is specified
-    - stage: check
     - env: TEST="scalafmt"
       script: ./scripts/checkfmts.sh
     # - env: TEST="test"
