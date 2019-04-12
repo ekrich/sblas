@@ -1,12 +1,28 @@
+/** Copyright 2017-2019 Eric K Richardson
+  *
+  * Licensed under the Apache License, Version 2.0 (the "License");
+  * you may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at
+  *
+  * http://www.apache.org/licenses/LICENSE-2.0
+  *
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
+  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  */
+
 package org.ekrich.blas.snic
 
 import scala.scalanative.native._
 import scala.scalanative.native.complex.{CDoubleComplex, CFloatComplex}
 
 /**
- * http://www.netlib.org/blas/#_cblas (for header file)
+ * [[http://www.netlib.org/blas/#_cblas]] (for header file)
  * Documentation Reference:
- * https://developer.apple.com/documentation/accelerate/blas?language=objc
+ * [[https://developer.apple.com/documentation/accelerate/blas?language=objc]]
+  * REFERENCE BLAS Version 3.8.0
  */
 @link("cblas")
 @extern
@@ -481,7 +497,10 @@ object blas {
                    incX: CInt): Unit = extern
 }
 
-object blasOps {
+/**
+  * Used for level 2 and 3 BLAS
+  */
+object blasEnums {
   //enums
   type CBLAS_ORDER = CInt
   final val CblasRowMajor: CBLAS_ORDER = 101
