@@ -11,7 +11,6 @@ matrix:
       dist: trusty
 
     - os: osx
-      osx_image: xcode9.3
 
 stages:
   - name: test
@@ -34,27 +33,6 @@ jobs:
       script: sbt test doc
     - stage: release
       script: sbt ci-release
-
-
-#jobs:
-#  include:
-#    # stage="test" if no stage is specified
-#    - env: TEST="scalafmt"
-#      script: ./scripts/checkfmts.sh
-#    # - env: TEST="test"
-#    - env: TEST="linux"
-#      os: linux
-#      dist: trusty
-#      jdk: openjdk8
-#      before_install: ./scripts/travis-os-setup.sh
-#      script: sbt test doc
-#    - env: TEST="osx"
-#      os: osx
-#      osx_image: xcode9.3
-#      before_install: ./scripts/travis-os-setup.sh
-#      script: sbt test doc
-#    - stage: release
-#      script: sbt ci-release
 
 cache:
   directories:
