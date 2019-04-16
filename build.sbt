@@ -3,6 +3,8 @@ lazy val nextVersion = "0.1.0"
 
 lazy val scala211 = "2.11.12"
 
+scalaVersion := scala211
+
 inThisBuild(
   List(
     description := "BLAS interface for Scala Native",
