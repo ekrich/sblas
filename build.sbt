@@ -1,5 +1,3 @@
-addCommandAlias("test", ";tests/test")
-
 lazy val prevVersion = "0.1.0"
 lazy val nextVersion = "0.1.0"
 
@@ -34,6 +32,8 @@ def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
 }
 
 lazy val commonSettings = Seq(
+  libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.6" % Test,
+  testFrameworks += new TestFramework("utest.runner.Framework"),
   scalaVersion := scala211,
   logLevel := Level.Info, // Info, Debug
   nativeGC := "immix",
@@ -44,13 +44,12 @@ lazy val commonSettings = Seq(
 lazy val sblas = project
   .in(file("."))
   .settings(
-    skip in publish := true,
+    publish / skip := true,
     doc / aggregate := false,
     doc := (blas / Compile / doc).value,
     packageDoc / aggregate := false,
     packageDoc := (blas / Compile / packageDoc).value
   )
-  .dependsOn(blas, tests)
   .aggregate(blas)
 
 lazy val blas = project
@@ -59,14 +58,3 @@ lazy val blas = project
     commonSettings
   )
   .enablePlugins(ScalaNativePlugin)
-
-lazy val tests = project
-  .in(file("unit-tests"))
-  .settings(
-    skip in publish := true,
-    commonSettings,
-    libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.6" % Test,
-    testFrameworks += new TestFramework("utest.runner.Framework")
-  )
-  .enablePlugins(ScalaNativePlugin)
-  .dependsOn(blas)
