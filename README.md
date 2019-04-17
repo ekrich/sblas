@@ -1,3 +1,49 @@
-Math for Scala Native - very early stages.
+# Scala Native BLAS - sblas
+[![Build Status](https://travis-ci.org/ekrich/sblas.svg?branch=master)](https://travis-ci.org/ekrich/sblas)
 
-For Linux/Ubuntu  need liblapack-dev (gives blas) libatlas-base-dev (gives cblas?)
+This library implements BLAS (Basic Linear Algebra Subsystems) in the form
+of CBLAS for the Scala Native platform. Scala Native is a unique platform that
+marries the high level language of Scala but compiles to native code with a
+lightweight managed runtime which includes a state of the art garbage collector.
+The combination allows for great programming and the ability to use high
+performance C language libraries like CBLAS.
+
+Scala Native uses the Scala compiler to produce
+[NIR](https://scala-native.readthedocs.io/en/latest/contrib/nir.html)
+(Native Intermediate Representation)] that is optimized and then
+converted to [LLVM IR](http://llvm.org/). Finally LLVM code is optimized
+and compiled by [Clang](http://clang.llvm.org/) to produce a native executable.
+
+## Getting started
+[![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.3_2.11)
+
+Follow the [Getting Started](https://scala-native.readthedocs.io/en/latest/user/setup.html)
+instructions for Scala Native if you are not already setup.
+
+Add the following dependency in your `sbt` build file.
+```scala
+libraryDependencies += "org.ekrich" %%% "sblas" % "x.y.z"
+```
+
+To use in `sbt`, replace `x.y.z` with the version from Maven Central badge above.
+All available versions can be seen at the [Maven Repository](https://mvnrepository.com/artifact/org.ekrich/sblas).
+
+For Linux/Ubuntu you need to install `libatlas-base-dev` for CBLAS support.
+
+```
+$ sudo apt-get install libatlas-base-dev
+```
+For macOS, CBLAS is pre-installed.
+
+There may be other options that supply BLAS for your platform as well. In general we
+are needing `libcblas` to be available on the system.
+
+## Usage and Help
+[![Scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_2.11.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_2.11)
+[![Join chat https://gitter.im/ekrich/sblas](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ekrich/sblas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+Need some documentation links
+
+## Versions
+
+Release [0.1.0](https://github.com/ekrich/sblas/releases/tag/v0.1.0) - (2019-04-20)<br/>
