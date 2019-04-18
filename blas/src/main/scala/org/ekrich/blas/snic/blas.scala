@@ -34,7 +34,7 @@ object blas {
    */
 
   /**
-   * Computes the dot product of two single-precision vectors plus
+   * Dot product of two single-precision vectors plus
    * an initial single-precision value.
    *
    * @param N The number of elements in the vectors.
@@ -53,7 +53,7 @@ object blas {
                    incY: CInt): CFloat = extern
 
   /**
-   * Computes the double-precision dot product of a pair of single-precision vectors.
+   * Double-precision dot product of a pair of single-precision vectors.
    */
   def cblas_dsdot(N: CInt,
                   X: Ptr[CFloat],
@@ -62,7 +62,7 @@ object blas {
                   incY: CInt): CDouble = extern
 
   /**
-   * Computes the dot product of two vectors (single-precision).
+   * Dot product of two vectors (single-precision).
    */
   def cblas_sdot(N: CInt,
                  X: Ptr[CFloat],
@@ -71,7 +71,7 @@ object blas {
                  incY: CInt): CFloat = extern
 
   /**
-   * Computes the dot product of two vectors (double-precision).
+   * Dot product of two vectors (double-precision).
    */
   def cblas_ddot(N: CInt,
                  X: Ptr[CDouble],
@@ -84,7 +84,7 @@ object blas {
    */
 
   /**
-   * Computes the dot product of two single-precision complex vectors.
+   * Dot product of two single-precision complex vectors.
    *
    * @param dotu - The result vector.
    */
@@ -96,7 +96,7 @@ object blas {
                       dotu: Ptr[CFloatComplex]): Unit = extern
 
   /**
-   * Calculates the dot product of the complex conjugate of a single-precision
+   * Dot product of the complex conjugate of a single-precision
    * complex vector with a second single-precision complex vector.
    *
    * @param dotc - The result vector. Computes conjg(X) * Y.
@@ -109,7 +109,7 @@ object blas {
                       dotc: Ptr[CFloatComplex]): Unit = extern
 
   /**
-   * Computes the dot product of two double-precision complex vectors.
+   * Dot product of two double-precision complex vectors.
    *
    * @param dotu - The result vector.
    */
@@ -121,7 +121,7 @@ object blas {
                       dotu: Ptr[CDoubleComplex]): Unit = extern
 
   /**
-   * Calculates the dot product of the complex conjugate of a double-precision
+   * Dot product of the complex conjugate of a double-precision
    * complex vector with a second double-precision complex vector.
    *
    * @param dotc - The result vector. Computes conjg(X) * Y.
@@ -138,44 +138,44 @@ object blas {
    */
 
   /**
-   * Computes the L2 norm (Euclidian length) of a vector (single-precision).
+   * L2 norm (Euclidian length) of a vector (single-precision).
    */
   def cblas_snrm2(N: CInt, X: Ptr[CFloat], incX: CInt): CFloat = extern
 
   /**
-   * Computes the sum of the absolute values of elements in a vector (single-precision).
+   * Sum of the absolute values of elements in a vector (single-precision).
    */
   def cblas_sasum(N: CInt, X: Ptr[CFloat], incX: CInt): CFloat = extern
 
   /**
-   * Computes the L2 norm (Euclidian length) of a vector (double-precision).
+   * L2 norm (Euclidian length) of a vector (double-precision).
    */
   def cblas_dnrm2(N: CInt, X: Ptr[CDouble], incX: CInt): CDouble = extern
 
   /**
-   * Computes the sum of the absolute values of elements in a vector (double-precision).
+   * Sum of the absolute values of elements in a vector (double-precision).
    */
   def cblas_dasum(N: CInt, X: Ptr[CDouble], incX: CInt): CDouble = extern
 
   /**
-   * Computes the unitary norm of a vector (single-precision complex).
+   * Unitary norm of a vector (single-precision complex).
    */
   def cblas_scnrm2(N: CInt, X: Ptr[CFloatComplex], incX: CInt): CFloat = extern
 
   /**
-   * Computes the sum of the absolute values of real and imaginary parts
+   * Sum of the absolute values of real and imaginary parts
    * of elements in a vector (single-precision complex).
    */
   def cblas_scasum(N: CInt, X: Ptr[CFloatComplex], incX: CInt): CFloat = extern
 
   /**
-   * Computes the unitary norm of a vector (double-precision complex).
+   * Unitary norm of a vector (double-precision complex).
    */
   def cblas_dznrm2(N: CInt, X: Ptr[CDoubleComplex], incX: CInt): CDouble =
     extern
 
   /**
-   * Computes the sum of the absolute values of real and imaginary parts
+   * Sum of the absolute values of real and imaginary parts
    * of elements in a vector (double-precision complex).
    */
   def cblas_dzasum(N: CInt, X: Ptr[CDoubleComplex], incX: CInt): CDouble =
@@ -186,26 +186,26 @@ object blas {
    */
 
   /**
-   * Returns the index of the element with the largest absolute value
+   * @return Index of the element with the largest absolute value
    * in a vector (single-precision).
    */
   def cblas_isamax(N: CInt, X: Ptr[CFloat], incX: CInt): CblasIndex = extern
 
   /**
-   * Returns the index of the element with the largest absolute value
+   * @return Index of the element with the largest absolute value
    * in a vector (double-precision).
    */
   def cblas_idamax(N: CInt, X: Ptr[CDouble], incX: CInt): CblasIndex = extern
 
   /**
-   * Returns the index of the element with the largest absolute value
+   * @return Index of the element with the largest absolute value
    * in a vector (single-precision complex).
    */
   def cblas_icamax(N: CInt, X: Ptr[CFloatComplex], incX: CInt): CblasIndex =
     extern
 
   /**
-   * Returns the index of the element with the largest absolute value
+   * @return Index of the element with the largest absolute value
    * in a vector (double-precision complex).
    */
   def cblas_izamax(N: CInt, X: Ptr[CDoubleComplex], incX: CInt): CblasIndex =
@@ -250,7 +250,7 @@ object blas {
                   incY: CInt): Unit = extern
 
   /**
-   * Computes a constant times a vector plus a vector (single-precision).
+   * A constant times a vector plus a vector (single-precision).
    *
    * @param alpha The initial value to add to the dot product.
    */
@@ -308,7 +308,7 @@ object blas {
                   incY: CInt): Unit = extern
 
   /**
-   * Computes a constant times a vector plus a vector (single-precision complex).
+   * A constant times a vector plus a vector (single-precision complex).
    */
   def cblas_caxpy(N: CInt,
                   alpha: Ptr[CFloatComplex],
@@ -336,7 +336,7 @@ object blas {
                   incY: CInt): Unit = extern
 
   /**
-   * Computes a constant times a vector plus a vector (double-precision complex).
+   * A constant times a vector plus a vector (double-precision complex).
    */
   def cblas_zaxpy(N: CInt,
                   alpha: Ptr[CDoubleComplex],

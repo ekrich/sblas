@@ -34,11 +34,10 @@ def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
 }
 
 lazy val commonSettings = Seq(
-  libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.6" % Test,
+  libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.7" % Test,
   testFrameworks += new TestFramework("utest.runner.Framework"),
   scalaVersion := scala211,
   logLevel := Level.Info, // Info, Debug
-  nativeGC := "immix",
   nativeLinkStubs := true
 //  nativeMode := "release"
 )

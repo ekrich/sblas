@@ -28,21 +28,39 @@ libraryDependencies += "org.ekrich" %%% "sblas" % "x.y.z"
 To use in `sbt`, replace `x.y.z` with the version from Maven Central badge above.
 All available versions can be seen at the [Maven Repository](https://mvnrepository.com/artifact/org.ekrich/sblas).
 
-For Linux/Ubuntu you need to install `libatlas-base-dev` for CBLAS support.
+For Linux/Ubuntu you need to install [ATLAS](http://math-atlas.sourceforge.net/) for CBLAS
+support.
 
 ```
 $ sudo apt-get install libatlas-base-dev
 ```
-For macOS, CBLAS is pre-installed.
+For macOS, CBLAS is pre-installed as part of the [Accelerate Framework](https://developer.apple.com/documentation/accelerate).
 
 There may be other options that supply BLAS for your platform as well. In general we
 are needing `libcblas` to be available on the system.
 
 ## Usage and Help
-[![Scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_2.11.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_2.11)
+[![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.3_2.11.svg)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.3_2.11)
 [![Join chat https://gitter.im/ekrich/sblas](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ekrich/sblas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Need some documentation links
+The Scaladoc above will hopefully improve with time. Some useful links are as follows which are also in the LICENSE.md file:
+
+Wikipedia Website:
+- https://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms
+
+BLAS Website:
+- http://www.netlib.org/blas/#_documentation
+- http://www.netlib.org/blas/#_blas_routines
+
+Apple Website:
+- https://developer.apple.com/documentation/accelerate/blas?language=objc
+
+Intel Website:
+- https://software.intel.com/en-us/mkl-developer-reference-c-blas-routines
+- https://software.intel.com/en-us/mkl-developer-reference-c-naming-conventions-for-blas-routines
+
+IBM Website:
+- https://www.ibm.com/support/knowledgecenter/en/SSFHY8_6.1/reference/am5gr_apa.html
 
 ## Versions
 
