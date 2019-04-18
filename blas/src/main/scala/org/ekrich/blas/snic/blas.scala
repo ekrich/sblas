@@ -18,10 +18,8 @@ import scala.scalanative.native._
 import scala.scalanative.native.complex.{CDoubleComplex, CFloatComplex}
 
 /**
- * [[http://www.netlib.org/blas/#_cblas]] (for header file)
- * Documentation Reference:
- * [[https://developer.apple.com/documentation/accelerate/blas?language=objc]]
- * REFERENCE BLAS Version 3.8.0
+ * Scala Native extern C interface to CBLAS Version 3.8.0
+ *
  */
 @link("cblas")
 @extern

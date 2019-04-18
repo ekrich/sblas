@@ -39,3 +39,27 @@ routine to provide support.
 Please reference the following for information and history about the
 project: http://www.netlib.org/blas/
 
+
+### License notice for Documentation
+
+The documentation comes from multiple sources as listed below. There are many
+operating systems and vendors that supply BLAS/CBLAS so the list includes ones
+that have been referenced for understanding, documentation, and creating tests.
+
+Wikipedia Website:
+- https://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms
+
+BLAS Website:
+- http://www.netlib.org/blas/#_documentation
+- http://www.netlib.org/blas/#_blas_routines
+
+Apple Website:
+- https://developer.apple.com/documentation/accelerate/blas?language=objc
+
+Intel Website:
+- https://software.intel.com/en-us/mkl-developer-reference-c-blas-routines
+- https://software.intel.com/en-us/mkl-developer-reference-c-naming-conventions-for-blas-routines
+
+IBM Website:
+- https://www.ibm.com/support/knowledgecenter/en/SSFHY8_6.1/reference/am5gr_apa.html
+
