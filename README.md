@@ -65,4 +65,4 @@ IBM Website:
 
 ## Versions
 
-Release [0.1.0](https://github.com/ekrich/sblas/releases/tag/v0.1.0) - (2019-04-20)<br/>
+Release [0.1.0](https://github.com/ekrich/sblas/releases/tag/v0.1.0) - (2019-04-19)<br/>
