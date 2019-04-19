@@ -18,6 +18,35 @@ import scala.scalanative.native._
 import scala.scalanative.native.complex.{CDoubleComplex, CFloatComplex}
 
 /**
+ * Used for Level 2 and 3 BLAS
+ */
+object blasEnums {
+  //enums
+  type CBLAS_ORDER = CInt
+  final val CblasRowMajor: CBLAS_ORDER = 101
+  final val CblasColMajor: CBLAS_ORDER = 102
+
+  type CBLAS_TRANSPOSE = CInt
+  final val CblasNoTrans: CBLAS_TRANSPOSE   = 111
+  final val CblasTrans: CBLAS_TRANSPOSE     = 112
+  final val CblasConjTrans: CBLAS_TRANSPOSE = 113
+
+  type CBLAS_UPLO = CInt
+  final val CblasUpper: CBLAS_UPLO = 121
+  final val CblasLower: CBLAS_UPLO = 122
+
+  type CBLAS_DIAG = CInt
+  final val CblasNonUnit: CBLAS_DIAG = 131
+  final val CblasUnit: CBLAS_DIAG    = 132
+
+  type CBLAS_SIDE = CInt
+  final val CblasLeft: CBLAS_SIDE  = 141
+  final val CblasRight: CBLAS_SIDE = 142
+}
+
+import blasEnums._
+
+/**
  * Scala Native extern C interface to CBLAS Version 3.8.0
  *
  */
@@ -492,471 +521,1162 @@ object blas {
                    alpha: CDouble,
                    X: Ptr[CDoubleComplex],
                    incX: CInt): Unit = extern
+  /*
+   * ===========================================================================
+   * Prototypes for level 2 BLAS
+   * ===========================================================================
+   */
+
+  /*
+   * Routines with standard 4 prefixes (S, D, C, Z)
+   */
+
+  def cblas_sgemv(order: CBLAS_ORDER,
+                  TransA: CBLAS_TRANSPOSE,
+                  M: CInt,
+                  N: CInt,
+                  alpha: CFloat,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt,
+                  beta: CFloat,
+                  Y: Ptr[CFloat],
+                  incY: CInt): Unit = extern
+
+  def cblas_sgbmv(order: CBLAS_ORDER,
+                  TransA: CBLAS_TRANSPOSE,
+                  M: CInt,
+                  N: CInt,
+                  KL: CInt,
+                  KU: CInt,
+                  alpha: CFloat,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt,
+                  beta: CFloat,
+                  Y: Ptr[CFloat],
+                  incY: CInt): Unit = extern
+
+  def cblas_strmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt): Unit = extern
+
+  def cblas_stbmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  K: CInt,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt): Unit = extern
+
+  def cblas_stpmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  Ap: Ptr[CFloat],
+                  X: Ptr[CFloat],
+                  incX: CInt): Unit = extern
+
+  def cblas_strsv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt): Unit = extern
+
+  def cblas_stbsv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  K: CInt,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt): Unit = extern
+
+  def cblas_stpsv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  Ap: Ptr[CFloat],
+                  X: Ptr[CFloat],
+                  incX: CInt): Unit = extern
+
+  def cblas_dgemv(order: CBLAS_ORDER,
+                  TransA: CBLAS_TRANSPOSE,
+                  M: CInt,
+                  N: CInt,
+                  alpha: CDouble,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt,
+                  beta: CDouble,
+                  Y: Ptr[CDouble],
+                  incY: CInt): Unit = extern
+
+  def cblas_dgbmv(order: CBLAS_ORDER,
+                  TransA: CBLAS_TRANSPOSE,
+                  M: CInt,
+                  N: CInt,
+                  KL: CInt,
+                  KU: CInt,
+                  alpha: CDouble,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt,
+                  beta: CDouble,
+                  Y: Ptr[CDouble],
+                  incY: CInt): Unit = extern
+
+  def cblas_dtrmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt): Unit = extern
+
+  def cblas_dtbmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  K: CInt,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt): Unit = extern
+
+  def cblas_dtpmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  Ap: Ptr[CDouble],
+                  X: Ptr[CDouble],
+                  incX: CInt): Unit = extern
+
+  def cblas_dtrsv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt): Unit = extern
+
+  def cblas_dtbsv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  K: CInt,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt): Unit = extern
+
+  def cblas_dtpsv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  Ap: Ptr[CDouble],
+                  X: Ptr[CDouble],
+                  incX: CInt): Unit = extern
+
+  def cblas_cgemv(order: CBLAS_ORDER,
+                  TransA: CBLAS_TRANSPOSE,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  X: Ptr[CFloatComplex],
+                  incX: CInt,
+                  beta: Ptr[CFloatComplex],
+                  Y: Ptr[CFloatComplex],
+                  incY: CInt): Unit = extern
+
+  def cblas_cgbmv(order: CBLAS_ORDER,
+                  TransA: CBLAS_TRANSPOSE,
+                  M: CInt,
+                  N: CInt,
+                  KL: CInt,
+                  KU: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  X: Ptr[CFloatComplex],
+                  incX: CInt,
+                  beta: Ptr[CFloatComplex],
+                  Y: Ptr[CFloatComplex],
+                  incY: CInt): Unit = extern
+
+  def cblas_ctrmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  X: Ptr[CFloatComplex],
+                  incX: CInt): Unit = extern
+
+  def cblas_ctbmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  K: CInt,
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  X: Ptr[CFloatComplex],
+                  incX: CInt): Unit = extern
+
+  def cblas_ctpmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  Ap: Ptr[CFloatComplex],
+                  X: Ptr[CFloatComplex],
+                  incX: CInt): Unit = extern
+
+  def cblas_ctrsv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  X: Ptr[CFloatComplex],
+                  incX: CInt): Unit = extern
+
+  def cblas_ctbsv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  K: CInt,
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  X: Ptr[CFloatComplex],
+                  incX: CInt): Unit = extern
+
+  def cblas_ctpsv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  Ap: Ptr[CFloatComplex],
+                  X: Ptr[CFloatComplex],
+                  incX: CInt): Unit = extern
+
+  def cblas_zgemv(order: CBLAS_ORDER,
+                  TransA: CBLAS_TRANSPOSE,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt,
+                  beta: Ptr[CDoubleComplex],
+                  Y: Ptr[CDoubleComplex],
+                  incY: CInt): Unit = extern
+
+  def cblas_zgbmv(order: CBLAS_ORDER,
+                  TransA: CBLAS_TRANSPOSE,
+                  M: CInt,
+                  N: CInt,
+                  KL: CInt,
+                  KU: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt,
+                  beta: Ptr[CDoubleComplex],
+                  Y: Ptr[CDoubleComplex],
+                  incY: CInt): Unit = extern
+
+  def cblas_ztrmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt): Unit = extern
+
+  def cblas_ztbmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  K: CInt,
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt): Unit = extern
+
+  def cblas_ztpmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  Ap: Ptr[CDoubleComplex],
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt): Unit = extern
+
+  def cblas_ztrsv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt): Unit = extern
+
+  def cblas_ztbsv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  K: CInt,
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt): Unit = extern
+
+  def cblas_ztpsv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  N: CInt,
+                  Ap: Ptr[CDoubleComplex],
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt): Unit = extern
+  /*
+   * Routines with S and D prefixes only
+   */
+
+  def cblas_ssymv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: CFloat,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt,
+                  beta: CFloat,
+                  Y: Ptr[CFloat],
+                  incY: CInt): Unit = extern
+
+  def cblas_ssbmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  K: CInt,
+                  alpha: CFloat,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  X: Ptr[CFloat],
+                  incX: CInt,
+                  beta: CFloat,
+                  Y: Ptr[CFloat],
+                  incY: CInt): Unit = extern
+
+  def cblas_sspmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: CFloat,
+                  Ap: Ptr[CFloat],
+                  X: Ptr[CFloat],
+                  incX: CInt,
+                  beta: CFloat,
+                  Y: Ptr[CFloat],
+                  incY: CInt): Unit = extern
+
+  def cblas_sger(order: CBLAS_ORDER,
+                 M: CInt,
+                 N: CInt,
+                 alpha: CFloat,
+                 X: Ptr[CFloat],
+                 incX: CInt,
+                 Y: Ptr[CFloat],
+                 incY: CInt,
+                 A: Ptr[CFloat],
+                 lda: CInt): Unit = extern
+
+  def cblas_ssyr(order: CBLAS_ORDER,
+                 Uplo: CBLAS_UPLO,
+                 N: CInt,
+                 alpha: CFloat,
+                 X: Ptr[CFloat],
+                 incX: CInt,
+                 A: Ptr[CFloat],
+                 lda: CInt): Unit = extern
+
+  def cblas_sspr(order: CBLAS_ORDER,
+                 Uplo: CBLAS_UPLO,
+                 N: CInt,
+                 alpha: CFloat,
+                 X: Ptr[CFloat],
+                 incX: CInt,
+                 Ap: Ptr[CFloat]): Unit = extern
+
+  def cblas_ssyr2(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: CFloat,
+                  X: Ptr[CFloat],
+                  incX: CInt,
+                  Y: Ptr[CFloat],
+                  incY: CInt,
+                  A: Ptr[CFloat],
+                  lda: CInt): Unit = extern
+
+  def cblas_sspr2(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: CFloat,
+                  X: Ptr[CFloat],
+                  incX: CInt,
+                  Y: Ptr[CFloat],
+                  incY: CInt,
+                  A: Ptr[CFloat]): Unit = extern
+
+  def cblas_dsymv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: CDouble,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt,
+                  beta: CDouble,
+                  Y: Ptr[CDouble],
+                  incY: CInt): Unit = extern
+
+  def cblas_dsbmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  K: CInt,
+                  alpha: CDouble,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  X: Ptr[CDouble],
+                  incX: CInt,
+                  beta: CDouble,
+                  Y: Ptr[CDouble],
+                  incY: CInt): Unit = extern
+
+  def cblas_dspmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: CDouble,
+                  Ap: Ptr[CDouble],
+                  X: Ptr[CDouble],
+                  incX: CInt,
+                  beta: CDouble,
+                  Y: Ptr[CDouble],
+                  incY: CInt): Unit = extern
+
+  def cblas_dger(order: CBLAS_ORDER,
+                 M: CInt,
+                 N: CInt,
+                 alpha: CDouble,
+                 X: Ptr[CDouble],
+                 incX: CInt,
+                 Y: Ptr[CDouble],
+                 incY: CInt,
+                 A: Ptr[CDouble],
+                 lda: CInt): Unit = extern
+
+  def cblas_dsyr(order: CBLAS_ORDER,
+                 Uplo: CBLAS_UPLO,
+                 N: CInt,
+                 alpha: CDouble,
+                 X: Ptr[CDouble],
+                 incX: CInt,
+                 A: Ptr[CDouble],
+                 lda: CInt): Unit = extern
+
+  def cblas_dspr(order: CBLAS_ORDER,
+                 Uplo: CBLAS_UPLO,
+                 N: CInt,
+                 alpha: CDouble,
+                 X: Ptr[CDouble],
+                 incX: CInt,
+                 Ap: Ptr[CDouble]): Unit = extern
+
+  def cblas_dsyr2(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: CDouble,
+                  X: Ptr[CDouble],
+                  incX: CInt,
+                  Y: Ptr[CDouble],
+                  incY: CInt,
+                  A: Ptr[CDouble],
+                  lda: CInt): Unit = extern
+
+  def cblas_dspr2(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: CDouble,
+                  X: Ptr[CDouble],
+                  incX: CInt,
+                  Y: Ptr[CDouble],
+                  incY: CInt,
+                  A: Ptr[CDouble]): Unit = extern
+
+  /*
+   * Routines with C and Z prefixes only
+   */
+
+  def cblas_chemv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  X: Ptr[CFloatComplex],
+                  incX: CInt,
+                  beta: Ptr[CFloatComplex],
+                  Y: Ptr[CFloatComplex],
+                  incY: CInt): Unit = extern
+
+  def cblas_chbmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  K: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  X: Ptr[CFloatComplex],
+                  incX: CInt,
+                  beta: Ptr[CFloatComplex],
+                  Y: Ptr[CFloatComplex],
+                  incY: CInt): Unit = extern
+
+  def cblas_chpmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  Ap: Ptr[CFloatComplex],
+                  X: Ptr[CFloatComplex],
+                  incX: CInt,
+                  beta: Ptr[CFloatComplex],
+                  Y: Ptr[CFloatComplex],
+                  incY: CInt): Unit = extern
+
+  def cblas_cgeru(order: CBLAS_ORDER,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  X: Ptr[CFloatComplex],
+                  incX: CInt,
+                  Y: Ptr[CFloatComplex],
+                  incY: CInt,
+                  A: Ptr[CFloatComplex],
+                  lda: CInt): Unit = extern
+
+  def cblas_cgerc(order: CBLAS_ORDER,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  X: Ptr[CFloatComplex],
+                  incX: CInt,
+                  Y: Ptr[CFloatComplex],
+                  incY: CInt,
+                  A: Ptr[CFloatComplex],
+                  lda: CInt): Unit = extern
+
+  def cblas_cher(order: CBLAS_ORDER,
+                 Uplo: CBLAS_UPLO,
+                 N: CInt,
+                 alpha: CFloat,
+                 X: Ptr[CFloatComplex],
+                 incX: CInt,
+                 A: Ptr[CFloatComplex],
+                 lda: CInt): Unit = extern
+
+  def cblas_chpr(order: CBLAS_ORDER,
+                 Uplo: CBLAS_UPLO,
+                 N: CInt,
+                 alpha: CFloat,
+                 X: Ptr[CFloatComplex],
+                 incX: CInt,
+                 A: Ptr[CFloatComplex]): Unit = extern
+
+  def cblas_cher2(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  X: Ptr[CFloatComplex],
+                  incX: CInt,
+                  Y: Ptr[CFloatComplex],
+                  incY: CInt,
+                  A: Ptr[CFloatComplex],
+                  lda: CInt): Unit = extern
+
+  def cblas_chpr2(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  X: Ptr[CFloatComplex],
+                  incX: CInt,
+                  Y: Ptr[CFloatComplex],
+                  incY: CInt,
+                  Ap: Ptr[CFloatComplex]): Unit = extern
+
+  def cblas_zhemv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt,
+                  beta: Ptr[CDoubleComplex],
+                  Y: Ptr[CDoubleComplex],
+                  incY: CInt): Unit = extern
+
+  def cblas_zhbmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  K: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt,
+                  beta: Ptr[CDoubleComplex],
+                  Y: Ptr[CDoubleComplex],
+                  incY: CInt): Unit = extern
+
+  def cblas_zhpmv(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  Ap: Ptr[CDoubleComplex],
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt,
+                  beta: Ptr[CDoubleComplex],
+                  Y: Ptr[CDoubleComplex],
+                  incY: CInt): Unit = extern
+
+  def cblas_zgeru(order: CBLAS_ORDER,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt,
+                  Y: Ptr[CDoubleComplex],
+                  incY: CInt,
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt): Unit = extern
+
+  def cblas_zgerc(order: CBLAS_ORDER,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt,
+                  Y: Ptr[CDoubleComplex],
+                  incY: CInt,
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt): Unit = extern
+
+  def cblas_zher(order: CBLAS_ORDER,
+                 Uplo: CBLAS_UPLO,
+                 N: CInt,
+                 alpha: CDouble,
+                 X: Ptr[CDoubleComplex],
+                 incX: CInt,
+                 A: Ptr[CDoubleComplex],
+                 lda: CInt): Unit = extern
+
+  def cblas_zhpr(order: CBLAS_ORDER,
+                 Uplo: CBLAS_UPLO,
+                 N: CInt,
+                 alpha: CDouble,
+                 X: Ptr[CDoubleComplex],
+                 incX: CInt,
+                 A: Ptr[CDoubleComplex]): Unit = extern
+
+  def cblas_zher2(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt,
+                  Y: Ptr[CDoubleComplex],
+                  incY: CInt,
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt): Unit = extern
+
+  def cblas_zhpr2(order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  X: Ptr[CDoubleComplex],
+                  incX: CInt,
+                  Y: Ptr[CDoubleComplex],
+                  incY: CInt,
+                  Ap: Ptr[CDoubleComplex]): Unit = extern
+
+  /*
+   * ===========================================================================
+   * Prototypes for level 3 BLAS
+   * ===========================================================================
+   */
+
+  /*
+   * Routines with standard 4 prefixes (S, D, C, Z)
+   */
+
+  def cblas_sgemm(Order: CBLAS_ORDER,
+                  TransA: CBLAS_TRANSPOSE,
+                  TransB: CBLAS_TRANSPOSE,
+                  M: CInt,
+                  N: CInt,
+                  K: CInt,
+                  alpha: CFloat,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  B: Ptr[CFloat],
+                  ldb: CInt,
+                  beta: CFloat,
+                  C: Ptr[CFloat],
+                  ldc: CInt): Unit = extern
+
+  def cblas_ssymm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  M: CInt,
+                  N: CInt,
+                  alpha: CFloat,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  B: Ptr[CFloat],
+                  ldb: CInt,
+                  beta: CFloat,
+                  C: Ptr[CFloat],
+                  ldc: CInt): Unit = extern
+
+  def cblas_ssyrk(Order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  Trans: CBLAS_TRANSPOSE,
+                  N: CInt,
+                  K: CInt,
+                  alpha: CFloat,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  beta: CFloat,
+                  C: Ptr[CFloat],
+                  ldc: CInt): Unit = extern
+
+  def cblas_ssyr2k(Order: CBLAS_ORDER,
+                   Uplo: CBLAS_UPLO,
+                   Trans: CBLAS_TRANSPOSE,
+                   N: CInt,
+                   K: CInt,
+                   alpha: CFloat,
+                   A: Ptr[CFloat],
+                   lda: CInt,
+                   B: Ptr[CFloat],
+                   ldb: CInt,
+                   beta: CFloat,
+                   C: Ptr[CFloat],
+                   ldc: CInt): Unit = extern
+
+  def cblas_strmm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  M: CInt,
+                  N: CInt,
+                  alpha: CFloat,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  B: Ptr[CFloat],
+                  ldb: CInt): Unit = extern
+
+  def cblas_strsm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  M: CInt,
+                  N: CInt,
+                  alpha: CFloat,
+                  A: Ptr[CFloat],
+                  lda: CInt,
+                  B: Ptr[CFloat],
+                  ldb: CInt): Unit = extern
+
+  def cblas_dgemm(Order: CBLAS_ORDER,
+                  TransA: CBLAS_TRANSPOSE,
+                  TransB: CBLAS_TRANSPOSE,
+                  M: CInt,
+                  N: CInt,
+                  K: CInt,
+                  alpha: CDouble,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  B: Ptr[CDouble],
+                  ldb: CInt,
+                  beta: CDouble,
+                  C: Ptr[CDouble],
+                  ldc: CInt): Unit = extern
+
+  def cblas_dsymm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  M: CInt,
+                  N: CInt,
+                  alpha: CDouble,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  B: Ptr[CDouble],
+                  ldb: CInt,
+                  beta: CDouble,
+                  C: Ptr[CDouble],
+                  ldc: CInt): Unit = extern
+
+  def cblas_dsyrk(Order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  Trans: CBLAS_TRANSPOSE,
+                  N: CInt,
+                  K: CInt,
+                  alpha: CDouble,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  beta: CDouble,
+                  C: Ptr[CDouble],
+                  ldc: CInt): Unit = extern
+
+  def cblas_dsyr2k(Order: CBLAS_ORDER,
+                   Uplo: CBLAS_UPLO,
+                   Trans: CBLAS_TRANSPOSE,
+                   N: CInt,
+                   K: CInt,
+                   alpha: CDouble,
+                   A: Ptr[CDouble],
+                   lda: CInt,
+                   B: Ptr[CDouble],
+                   ldb: CInt,
+                   beta: CDouble,
+                   C: Ptr[CDouble],
+                   ldc: CInt): Unit = extern
+
+  def cblas_dtrmm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  M: CInt,
+                  N: CInt,
+                  alpha: CDouble,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  B: Ptr[CDouble],
+                  ldb: CInt): Unit = extern
+
+  def cblas_dtrsm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  M: CInt,
+                  N: CInt,
+                  alpha: CDouble,
+                  A: Ptr[CDouble],
+                  lda: CInt,
+                  B: Ptr[CDouble],
+                  ldb: CInt): Unit = extern
+
+  def cblas_cgemm(Order: CBLAS_ORDER,
+                  TransA: CBLAS_TRANSPOSE,
+                  TransB: CBLAS_TRANSPOSE,
+                  M: CInt,
+                  N: CInt,
+                  K: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  B: Ptr[CFloatComplex],
+                  ldb: CInt,
+                  beta: Ptr[CFloatComplex],
+                  C: Ptr[CFloatComplex],
+                  ldc: CInt): Unit = extern
+
+  def cblas_csymm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  B: Ptr[CFloatComplex],
+                  ldb: CInt,
+                  beta: Ptr[CFloatComplex],
+                  C: Ptr[CFloatComplex],
+                  ldc: CInt): Unit = extern
+
+  def cblas_csyrk(Order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  Trans: CBLAS_TRANSPOSE,
+                  N: CInt,
+                  K: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  beta: Ptr[CFloatComplex],
+                  C: Ptr[CFloatComplex],
+                  ldc: CInt): Unit = extern
+
+  def cblas_csyr2k(Order: CBLAS_ORDER,
+                   Uplo: CBLAS_UPLO,
+                   Trans: CBLAS_TRANSPOSE,
+                   N: CInt,
+                   K: CInt,
+                   alpha: Ptr[CFloatComplex],
+                   A: Ptr[CFloatComplex],
+                   lda: CInt,
+                   B: Ptr[CFloatComplex],
+                   ldb: CInt,
+                   beta: Ptr[CFloatComplex],
+                   C: Ptr[CFloatComplex],
+                   ldc: CInt): Unit = extern
+
+  def cblas_ctrmm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  B: Ptr[CFloatComplex],
+                  ldb: CInt): Unit = extern
+
+  def cblas_ctrsm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  B: Ptr[CFloatComplex],
+                  ldb: CInt): Unit = extern
+
+  def cblas_zgemm(Order: CBLAS_ORDER,
+                  TransA: CBLAS_TRANSPOSE,
+                  TransB: CBLAS_TRANSPOSE,
+                  M: CInt,
+                  N: CInt,
+                  K: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  B: Ptr[CDoubleComplex],
+                  ldb: CInt,
+                  beta: Ptr[CDoubleComplex],
+                  C: Ptr[CDoubleComplex],
+                  ldc: CInt): Unit = extern
+
+  def cblas_zsymm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  B: Ptr[CDoubleComplex],
+                  ldb: CInt,
+                  beta: Ptr[CDoubleComplex],
+                  C: Ptr[CDoubleComplex],
+                  ldc: CInt): Unit = extern
+
+  def cblas_zsyrk(Order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  Trans: CBLAS_TRANSPOSE,
+                  N: CInt,
+                  K: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  beta: Ptr[CDoubleComplex],
+                  C: Ptr[CDoubleComplex],
+                  ldc: CInt): Unit = extern
+
+  def cblas_zsyr2k(Order: CBLAS_ORDER,
+                   Uplo: CBLAS_UPLO,
+                   Trans: CBLAS_TRANSPOSE,
+                   N: CInt,
+                   K: CInt,
+                   alpha: Ptr[CDoubleComplex],
+                   A: Ptr[CDoubleComplex],
+                   lda: CInt,
+                   B: Ptr[CDoubleComplex],
+                   ldb: CInt,
+                   beta: Ptr[CDoubleComplex],
+                   C: Ptr[CDoubleComplex],
+                   ldc: CInt): Unit = extern
+
+  def cblas_ztrmm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  B: Ptr[CDoubleComplex],
+                  ldb: CInt): Unit = extern
+
+  def cblas_ztrsm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  TransA: CBLAS_TRANSPOSE,
+                  Diag: CBLAS_DIAG,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  B: Ptr[CDoubleComplex],
+                  ldb: CInt): Unit = extern
+
+  /*
+   * Routines with prefixes C and Z only
+   */
+
+  def cblas_chemm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CFloatComplex],
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  B: Ptr[CFloatComplex],
+                  ldb: CInt,
+                  beta: Ptr[CFloatComplex],
+                  C: Ptr[CFloatComplex],
+                  ldc: CInt): Unit = extern
+
+  def cblas_cherk(Order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  Trans: CBLAS_TRANSPOSE,
+                  N: CInt,
+                  K: CInt,
+                  alpha: CFloat,
+                  A: Ptr[CFloatComplex],
+                  lda: CInt,
+                  beta: CFloat,
+                  C: Ptr[CFloatComplex],
+                  ldc: CInt): Unit = extern
+
+  def cblas_cher2k(Order: CBLAS_ORDER,
+                   Uplo: CBLAS_UPLO,
+                   Trans: CBLAS_TRANSPOSE,
+                   N: CInt,
+                   K: CInt,
+                   alpha: Ptr[CFloatComplex],
+                   A: Ptr[CFloatComplex],
+                   lda: CInt,
+                   B: Ptr[CFloatComplex],
+                   ldb: CInt,
+                   beta: CFloat,
+                   C: Ptr[CFloatComplex],
+                   ldc: CInt): Unit = extern
+
+  def cblas_zhemm(Order: CBLAS_ORDER,
+                  Side: CBLAS_SIDE,
+                  Uplo: CBLAS_UPLO,
+                  M: CInt,
+                  N: CInt,
+                  alpha: Ptr[CDoubleComplex],
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  B: Ptr[CDoubleComplex],
+                  ldb: CInt,
+                  beta: Ptr[CDoubleComplex],
+                  C: Ptr[CDoubleComplex],
+                  ldc: CInt): Unit = extern
+
+  def cblas_zherk(Order: CBLAS_ORDER,
+                  Uplo: CBLAS_UPLO,
+                  Trans: CBLAS_TRANSPOSE,
+                  N: CInt,
+                  K: CInt,
+                  alpha: CDouble,
+                  A: Ptr[CDoubleComplex],
+                  lda: CInt,
+                  beta: CDouble,
+                  C: Ptr[CDoubleComplex],
+                  ldc: CInt): Unit = extern
+
+  def cblas_zher2k(Order: CBLAS_ORDER,
+                   Uplo: CBLAS_UPLO,
+                   Trans: CBLAS_TRANSPOSE,
+                   N: CInt,
+                   K: CInt,
+                   alpha: Ptr[CDoubleComplex],
+                   A: Ptr[CDoubleComplex],
+                   lda: CInt,
+                   B: Ptr[CDoubleComplex],
+                   ldb: CInt,
+                   beta: CDouble,
+                   C: Ptr[CDoubleComplex],
+                   ldc: CInt): Unit = extern
+
+  /**
+   * The error handler for the LAPACK routines.
+   * It is called by an LAPACK routine if an input parameter has an
+   * invalid value.  A message is printed and execution stops.
+   */
+  def cblas_xerbla(p: CInt,
+                   rout: CString,
+                   form: CString,
+                   varArgs: CVararg*): Unit = extern
 }
-
-/**
- * Used for level 2 and 3 BLAS
- */
-object blasEnums {
-  //enums
-  type CBLAS_ORDER = CInt
-  final val CblasRowMajor: CBLAS_ORDER = 101
-  final val CblasColMajor: CBLAS_ORDER = 102
-
-  type CBLAS_TRANSPOSE = CInt
-  final val CblasNoTrans: CBLAS_TRANSPOSE   = 111
-  final val CblasTrans: CBLAS_TRANSPOSE     = 112
-  final val CblasConjTrans: CBLAS_TRANSPOSE = 113
-
-  type CBLAS_UPLO = CInt
-  final val CblasUpper: CBLAS_UPLO = 121
-  final val CblasLower: CBLAS_UPLO = 122
-
-  type CBLAS_DIAG = CInt
-  final val CblasNonUnit: CBLAS_DIAG = 131
-  final val CblasUnit: CBLAS_DIAG    = 132
-
-  type CBLAS_SIDE = CInt
-  final val CblasLeft: CBLAS_SIDE  = 141
-  final val CblasRight: CBLAS_SIDE = 142
-}
-// Removing as I go
-
-///*
-// * ===========================================================================
-// * Prototypes for level 2 BLAS
-// * ===========================================================================
-// */
-//
-///*
-// * Routines with standard 4 prefixes (S, D, C, Z)
-// */
-//void cblas_sgemv(const enum CBLAS_ORDER order,
-//const enum CBLAS_TRANSPOSE TransA, const int M, const int N,
-//const float alpha, const float *A, const int lda,
-//const float *X, const int incX, const float beta,
-//float *Y, const int incY);
-//void cblas_sgbmv(const enum CBLAS_ORDER order,
-//const enum CBLAS_TRANSPOSE TransA, const int M, const int N,
-//const int KL, const int KU, const float alpha,
-//const float *A, const int lda, const float *X,
-//const int incX, const float beta, float *Y, const int incY);
-//void cblas_strmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const float *A, const int lda,
-//float *X, const int incX);
-//void cblas_stbmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const int K, const float *A, const int lda,
-//float *X, const int incX);
-//void cblas_stpmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const float *Ap, float *X, const int incX);
-//void cblas_strsv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const float *A, const int lda, float *X,
-//const int incX);
-//void cblas_stbsv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const int K, const float *A, const int lda,
-//float *X, const int incX);
-//void cblas_stpsv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const float *Ap, float *X, const int incX);
-//
-//void cblas_dgemv(const enum CBLAS_ORDER order,
-//const enum CBLAS_TRANSPOSE TransA, const int M, const int N,
-//const double alpha, const double *A, const int lda,
-//const double *X, const int incX, const double beta,
-//double *Y, const int incY);
-//void cblas_dgbmv(const enum CBLAS_ORDER order,
-//const enum CBLAS_TRANSPOSE TransA, const int M, const int N,
-//const int KL, const int KU, const double alpha,
-//const double *A, const int lda, const double *X,
-//const int incX, const double beta, double *Y, const int incY);
-//void cblas_dtrmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const double *A, const int lda,
-//double *X, const int incX);
-//void cblas_dtbmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const int K, const double *A, const int lda,
-//double *X, const int incX);
-//void cblas_dtpmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const double *Ap, double *X, const int incX);
-//void cblas_dtrsv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const double *A, const int lda, double *X,
-//const int incX);
-//void cblas_dtbsv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const int K, const double *A, const int lda,
-//double *X, const int incX);
-//void cblas_dtpsv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const double *Ap, double *X, const int incX);
-//
-//void cblas_cgemv(const enum CBLAS_ORDER order,
-//const enum CBLAS_TRANSPOSE TransA, const int M, const int N,
-//const void *alpha, const void *A, const int lda,
-//const void *X, const int incX, const void *beta,
-//void *Y, const int incY);
-//void cblas_cgbmv(const enum CBLAS_ORDER order,
-//const enum CBLAS_TRANSPOSE TransA, const int M, const int N,
-//const int KL, const int KU, const void *alpha,
-//const void *A, const int lda, const void *X,
-//const int incX, const void *beta, void *Y, const int incY);
-//void cblas_ctrmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const void *A, const int lda,
-//void *X, const int incX);
-//void cblas_ctbmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const int K, const void *A, const int lda,
-//void *X, const int incX);
-//void cblas_ctpmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const void *Ap, void *X, const int incX);
-//void cblas_ctrsv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const void *A, const int lda, void *X,
-//const int incX);
-//void cblas_ctbsv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const int K, const void *A, const int lda,
-//void *X, const int incX);
-//void cblas_ctpsv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const void *Ap, void *X, const int incX);
-//
-//void cblas_zgemv(const enum CBLAS_ORDER order,
-//const enum CBLAS_TRANSPOSE TransA, const int M, const int N,
-//const void *alpha, const void *A, const int lda,
-//const void *X, const int incX, const void *beta,
-//void *Y, const int incY);
-//void cblas_zgbmv(const enum CBLAS_ORDER order,
-//const enum CBLAS_TRANSPOSE TransA, const int M, const int N,
-//const int KL, const int KU, const void *alpha,
-//const void *A, const int lda, const void *X,
-//const int incX, const void *beta, void *Y, const int incY);
-//void cblas_ztrmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const void *A, const int lda,
-//void *X, const int incX);
-//void cblas_ztbmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const int K, const void *A, const int lda,
-//void *X, const int incX);
-//void cblas_ztpmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const void *Ap, void *X, const int incX);
-//void cblas_ztrsv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const void *A, const int lda, void *X,
-//const int incX);
-//void cblas_ztbsv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const int K, const void *A, const int lda,
-//void *X, const int incX);
-//void cblas_ztpsv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE TransA, const enum CBLAS_DIAG Diag,
-//const int N, const void *Ap, void *X, const int incX);
-//
-//
-///*
-// * Routines with S and D prefixes only
-// */
-//void cblas_ssymv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const float alpha, const float *A,
-//const int lda, const float *X, const int incX,
-//const float beta, float *Y, const int incY);
-//void cblas_ssbmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const int K, const float alpha, const float *A,
-//const int lda, const float *X, const int incX,
-//const float beta, float *Y, const int incY);
-//void cblas_sspmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const float alpha, const float *Ap,
-//const float *X, const int incX,
-//const float beta, float *Y, const int incY);
-//void cblas_sger(const enum CBLAS_ORDER order, const int M, const int N,
-//const float alpha, const float *X, const int incX,
-//const float *Y, const int incY, float *A, const int lda);
-//void cblas_ssyr(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const float alpha, const float *X,
-//const int incX, float *A, const int lda);
-//void cblas_sspr(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const float alpha, const float *X,
-//const int incX, float *Ap);
-//void cblas_ssyr2(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const float alpha, const float *X,
-//const int incX, const float *Y, const int incY, float *A,
-//const int lda);
-//void cblas_sspr2(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const float alpha, const float *X,
-//const int incX, const float *Y, const int incY, float *A);
-//
-//void cblas_dsymv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const double alpha, const double *A,
-//const int lda, const double *X, const int incX,
-//const double beta, double *Y, const int incY);
-//void cblas_dsbmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const int K, const double alpha, const double *A,
-//const int lda, const double *X, const int incX,
-//const double beta, double *Y, const int incY);
-//void cblas_dspmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const double alpha, const double *Ap,
-//const double *X, const int incX,
-//const double beta, double *Y, const int incY);
-//void cblas_dger(const enum CBLAS_ORDER order, const int M, const int N,
-//const double alpha, const double *X, const int incX,
-//const double *Y, const int incY, double *A, const int lda);
-//void cblas_dsyr(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const double alpha, const double *X,
-//const int incX, double *A, const int lda);
-//void cblas_dspr(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const double alpha, const double *X,
-//const int incX, double *Ap);
-//void cblas_dsyr2(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const double alpha, const double *X,
-//const int incX, const double *Y, const int incY, double *A,
-//const int lda);
-//void cblas_dspr2(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const double alpha, const double *X,
-//const int incX, const double *Y, const int incY, double *A);
-//
-//
-///*
-// * Routines with C and Z prefixes only
-// */
-//void cblas_chemv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const void *alpha, const void *A,
-//const int lda, const void *X, const int incX,
-//const void *beta, void *Y, const int incY);
-//void cblas_chbmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const int K, const void *alpha, const void *A,
-//const int lda, const void *X, const int incX,
-//const void *beta, void *Y, const int incY);
-//void cblas_chpmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const void *alpha, const void *Ap,
-//const void *X, const int incX,
-//const void *beta, void *Y, const int incY);
-//void cblas_cgeru(const enum CBLAS_ORDER order, const int M, const int N,
-//const void *alpha, const void *X, const int incX,
-//const void *Y, const int incY, void *A, const int lda);
-//void cblas_cgerc(const enum CBLAS_ORDER order, const int M, const int N,
-//const void *alpha, const void *X, const int incX,
-//const void *Y, const int incY, void *A, const int lda);
-//void cblas_cher(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const float alpha, const void *X, const int incX,
-//void *A, const int lda);
-//void cblas_chpr(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const float alpha, const void *X,
-//const int incX, void *A);
-//void cblas_cher2(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo, const int N,
-//const void *alpha, const void *X, const int incX,
-//const void *Y, const int incY, void *A, const int lda);
-//void cblas_chpr2(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo, const int N,
-//const void *alpha, const void *X, const int incX,
-//const void *Y, const int incY, void *Ap);
-//
-//void cblas_zhemv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const void *alpha, const void *A,
-//const int lda, const void *X, const int incX,
-//const void *beta, void *Y, const int incY);
-//void cblas_zhbmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const int K, const void *alpha, const void *A,
-//const int lda, const void *X, const int incX,
-//const void *beta, void *Y, const int incY);
-//void cblas_zhpmv(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const void *alpha, const void *Ap,
-//const void *X, const int incX,
-//const void *beta, void *Y, const int incY);
-//void cblas_zgeru(const enum CBLAS_ORDER order, const int M, const int N,
-//const void *alpha, const void *X, const int incX,
-//const void *Y, const int incY, void *A, const int lda);
-//void cblas_zgerc(const enum CBLAS_ORDER order, const int M, const int N,
-//const void *alpha, const void *X, const int incX,
-//const void *Y, const int incY, void *A, const int lda);
-//void cblas_zher(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const double alpha, const void *X, const int incX,
-//void *A, const int lda);
-//void cblas_zhpr(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo,
-//const int N, const double alpha, const void *X,
-//const int incX, void *A);
-//void cblas_zher2(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo, const int N,
-//const void *alpha, const void *X, const int incX,
-//const void *Y, const int incY, void *A, const int lda);
-//void cblas_zhpr2(const enum CBLAS_ORDER order, const enum CBLAS_UPLO Uplo, const int N,
-//const void *alpha, const void *X, const int incX,
-//const void *Y, const int incY, void *Ap);
-//
-///*
-// * ===========================================================================
-// * Prototypes for level 3 BLAS
-// * ===========================================================================
-// */
-//
-///*
-// * Routines with standard 4 prefixes (S, D, C, Z)
-// */
-//void cblas_sgemm(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA,
-//const enum CBLAS_TRANSPOSE TransB, const int M, const int N,
-//const int K, const float alpha, const float *A,
-//const int lda, const float *B, const int ldb,
-//const float beta, float *C, const int ldc);
-//void cblas_ssymm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const int M, const int N,
-//const float alpha, const float *A, const int lda,
-//const float *B, const int ldb, const float beta,
-//float *C, const int ldc);
-//void cblas_ssyrk(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE Trans, const int N, const int K,
-//const float alpha, const float *A, const int lda,
-//const float beta, float *C, const int ldc);
-//void cblas_ssyr2k(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE Trans, const int N, const int K,
-//const float alpha, const float *A, const int lda,
-//const float *B, const int ldb, const float beta,
-//float *C, const int ldc);
-//void cblas_strmm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const enum CBLAS_TRANSPOSE TransA,
-//const enum CBLAS_DIAG Diag, const int M, const int N,
-//const float alpha, const float *A, const int lda,
-//float *B, const int ldb);
-//void cblas_strsm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const enum CBLAS_TRANSPOSE TransA,
-//const enum CBLAS_DIAG Diag, const int M, const int N,
-//const float alpha, const float *A, const int lda,
-//float *B, const int ldb);
-//
-//void cblas_dgemm(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA,
-//const enum CBLAS_TRANSPOSE TransB, const int M, const int N,
-//const int K, const double alpha, const double *A,
-//const int lda, const double *B, const int ldb,
-//const double beta, double *C, const int ldc);
-//void cblas_dsymm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const int M, const int N,
-//const double alpha, const double *A, const int lda,
-//const double *B, const int ldb, const double beta,
-//double *C, const int ldc);
-//void cblas_dsyrk(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE Trans, const int N, const int K,
-//const double alpha, const double *A, const int lda,
-//const double beta, double *C, const int ldc);
-//void cblas_dsyr2k(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE Trans, const int N, const int K,
-//const double alpha, const double *A, const int lda,
-//const double *B, const int ldb, const double beta,
-//double *C, const int ldc);
-//void cblas_dtrmm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const enum CBLAS_TRANSPOSE TransA,
-//const enum CBLAS_DIAG Diag, const int M, const int N,
-//const double alpha, const double *A, const int lda,
-//double *B, const int ldb);
-//void cblas_dtrsm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const enum CBLAS_TRANSPOSE TransA,
-//const enum CBLAS_DIAG Diag, const int M, const int N,
-//const double alpha, const double *A, const int lda,
-//double *B, const int ldb);
-//
-//void cblas_cgemm(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA,
-//const enum CBLAS_TRANSPOSE TransB, const int M, const int N,
-//const int K, const void *alpha, const void *A,
-//const int lda, const void *B, const int ldb,
-//const void *beta, void *C, const int ldc);
-//void cblas_csymm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const int M, const int N,
-//const void *alpha, const void *A, const int lda,
-//const void *B, const int ldb, const void *beta,
-//void *C, const int ldc);
-//void cblas_csyrk(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE Trans, const int N, const int K,
-//const void *alpha, const void *A, const int lda,
-//const void *beta, void *C, const int ldc);
-//void cblas_csyr2k(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE Trans, const int N, const int K,
-//const void *alpha, const void *A, const int lda,
-//const void *B, const int ldb, const void *beta,
-//void *C, const int ldc);
-//void cblas_ctrmm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const enum CBLAS_TRANSPOSE TransA,
-//const enum CBLAS_DIAG Diag, const int M, const int N,
-//const void *alpha, const void *A, const int lda,
-//void *B, const int ldb);
-//void cblas_ctrsm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const enum CBLAS_TRANSPOSE TransA,
-//const enum CBLAS_DIAG Diag, const int M, const int N,
-//const void *alpha, const void *A, const int lda,
-//void *B, const int ldb);
-//
-//void cblas_zgemm(const enum CBLAS_ORDER Order, const enum CBLAS_TRANSPOSE TransA,
-//const enum CBLAS_TRANSPOSE TransB, const int M, const int N,
-//const int K, const void *alpha, const void *A,
-//const int lda, const void *B, const int ldb,
-//const void *beta, void *C, const int ldc);
-//void cblas_zsymm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const int M, const int N,
-//const void *alpha, const void *A, const int lda,
-//const void *B, const int ldb, const void *beta,
-//void *C, const int ldc);
-//void cblas_zsyrk(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE Trans, const int N, const int K,
-//const void *alpha, const void *A, const int lda,
-//const void *beta, void *C, const int ldc);
-//void cblas_zsyr2k(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE Trans, const int N, const int K,
-//const void *alpha, const void *A, const int lda,
-//const void *B, const int ldb, const void *beta,
-//void *C, const int ldc);
-//void cblas_ztrmm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const enum CBLAS_TRANSPOSE TransA,
-//const enum CBLAS_DIAG Diag, const int M, const int N,
-//const void *alpha, const void *A, const int lda,
-//void *B, const int ldb);
-//void cblas_ztrsm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const enum CBLAS_TRANSPOSE TransA,
-//const enum CBLAS_DIAG Diag, const int M, const int N,
-//const void *alpha, const void *A, const int lda,
-//void *B, const int ldb);
-//
-//
-///*
-// * Routines with prefixes C and Z only
-// */
-//void cblas_chemm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const int M, const int N,
-//const void *alpha, const void *A, const int lda,
-//const void *B, const int ldb, const void *beta,
-//void *C, const int ldc);
-//void cblas_cherk(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE Trans, const int N, const int K,
-//const float alpha, const void *A, const int lda,
-//const float beta, void *C, const int ldc);
-//void cblas_cher2k(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE Trans, const int N, const int K,
-//const void *alpha, const void *A, const int lda,
-//const void *B, const int ldb, const float beta,
-//void *C, const int ldc);
-//
-//void cblas_zhemm(const enum CBLAS_ORDER Order, const enum CBLAS_SIDE Side,
-//const enum CBLAS_UPLO Uplo, const int M, const int N,
-//const void *alpha, const void *A, const int lda,
-//const void *B, const int ldb, const void *beta,
-//void *C, const int ldc);
-//void cblas_zherk(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE Trans, const int N, const int K,
-//const double alpha, const void *A, const int lda,
-//const double beta, void *C, const int ldc);
-//void cblas_zher2k(const enum CBLAS_ORDER Order, const enum CBLAS_UPLO Uplo,
-//const enum CBLAS_TRANSPOSE Trans, const int N, const int K,
-//const void *alpha, const void *A, const int lda,
-//const void *B, const int ldb, const double beta,
-//void *C, const int ldc);
-//
-//void cblas_xerbla(int p, const char *rout, const char *form, ...);
-//
-//#ifdef __cplusplus
-//}
-//#endif
-//#endif

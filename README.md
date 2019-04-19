@@ -48,9 +48,10 @@ The Scaladoc above will hopefully improve with time. Some useful links are as fo
 Wikipedia Website:
 - https://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms
 
-BLAS Website:
+Netlib Website:
 - http://www.netlib.org/blas/#_documentation
 - http://www.netlib.org/blas/#_blas_routines
+- http://www.netlib.org/lapack/lapack-3.1.1/html/
 
 Apple Website:
 - https://developer.apple.com/documentation/accelerate/blas?language=objc
