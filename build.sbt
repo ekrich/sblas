@@ -42,19 +42,20 @@ lazy val commonSettings = Seq(
 //  nativeMode := "release"
 )
 
-lazy val sblas = project
+lazy val root = project
   .in(file("."))
   .settings(
+    name := "sblas-root",
     publish / skip := true,
     doc / aggregate := false,
-    doc := (blas / Compile / doc).value,
+    doc := (sblas / Compile / doc).value,
     packageDoc / aggregate := false,
-    packageDoc := (blas / Compile / packageDoc).value
+    packageDoc := (sblas / Compile / packageDoc).value
   )
-  .aggregate(blas)
+  .aggregate(sblas)
 
-lazy val blas = project
-  .in(file("blas"))
+lazy val sblas = project
+  .in(file("sblas"))
   .settings(
     commonSettings
   )
