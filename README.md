@@ -40,7 +40,7 @@ There may be other options that supply BLAS for your platform as well. In genera
 are needing `libcblas` to be available on the system.
 
 ## Usage and Help
-[![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.3_2.11.svg)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.3_2.11)
+[![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.3_2.11.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.3_2.11)
 [![Join chat https://gitter.im/ekrich/sblas](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ekrich/sblas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 The Scaladoc above will hopefully improve with time. Some useful links are as follows which are also in the LICENSE.md file:
