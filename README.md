@@ -15,7 +15,7 @@ converted to [LLVM IR](http://llvm.org/). Finally LLVM code is optimized
 and compiled by [Clang](http://clang.llvm.org/) to produce a native executable.
 
 ## Getting started
-[![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.3_2.11)
+[![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_native0.3_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.3_2.11)
 
 Follow the [Getting Started](https://scala-native.readthedocs.io/en/latest/user/setup.html)
 instructions for Scala Native if you are not already setup.
