@@ -1,7 +1,7 @@
-# SBLAS - Scala Native BLAS
+# sblas - Scala Native BLAS
 [![Build Status](https://travis-ci.org/ekrich/sblas.svg?branch=master)](https://travis-ci.org/ekrich/sblas)
 
-This library implements BLAS (Basic Linear Algebra Subsystems) in the form
+This library implements BLAS (Basic Linear Algebra Subprograms) in the form
 of CBLAS for the Scala Native platform. Scala Native is a unique platform that
 marries the high level language of Scala but compiles to native code with a
 lightweight managed runtime which includes a state of the art garbage collector.
@@ -17,10 +17,8 @@ and compiled by [Clang](http://clang.llvm.org/) to produce a native executable.
 ## Getting started
 [![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_native0.3_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.3_2.11)
 
-Follow the [Getting Started](https://scala-native.readthedocs.io/en/latest/user/setup.html)
-instructions for Scala Native if you are not already setup.
+If you are already familiar with Scala Native you can jump right in by adding the following dependency in your `sbt` build file.
 
-Add the following dependency in your `sbt` build file.
 ```scala
 libraryDependencies += "org.ekrich" %%% "sblas" % "x.y.z"
 ```
@@ -28,22 +26,41 @@ libraryDependencies += "org.ekrich" %%% "sblas" % "x.y.z"
 To use in `sbt`, replace `x.y.z` with the version from Maven Central badge above.
 All available versions can be seen at the [Maven Repository](https://mvnrepository.com/artifact/org.ekrich/sblas).
 
-For Linux/Ubuntu you need to install [ATLAS](http://math-atlas.sourceforge.net/) for CBLAS
+Otherwise follow the [Getting Started](https://scala-native.readthedocs.io/en/latest/user/setup.html)
+instructions for Scala Native if you are not already setup.
+
+Additional libraries that need to be installed on you system are as follows:
+
+* Linux/Ubuntu you need to install [ATLAS](http://math-atlas.sourceforge.net/) for CBLAS
 support.
 
 ```
 $ sudo apt-get install libatlas-base-dev
 ```
-For macOS, CBLAS is pre-installed as part of the [Accelerate Framework](https://developer.apple.com/documentation/accelerate).
 
-There may be other options that supply BLAS for your platform as well. In general we
-are needing `libcblas` to be available on the system.
+* macOS has CBLAS pre-installed as part of the [Accelerate Framework](https://developer.apple.com/documentation/accelerate).
+
+* Other OSes need to have `libcblas` available on the system.
 
 ## Usage and Help
 [![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.3_2.11.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.3_2.11)
 [![Join chat https://gitter.im/ekrich/sblas](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ekrich/sblas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-The Scaladoc above will hopefully improve with time. Some useful links are as follows which are also in the LICENSE.md file:
+Reference the link above for Scaladoc. The documentation is a little sparse but hopefully will improve with time.
+
+After `sbt` is installed and any other Scala Native prerequisites are met you can use the following Gitter G8 template instructions to get a fully functional Scala Native application with a couple of BLAS examples in the body of the main program.
+
+```
+$ sbt new ekrich/sblas.g8
+$ cd <directory entered after the prompt>
+$ sbt run
+```
+
+In addition, look at the `v0.1.1` [sblas unit tests](https://github.com/ekrich/sblas/blob/v0.1.1/sblas/src/test/scala/org/ekrich/blas/snic/BlasSuite.scala) for other examples of usage.
+
+## BLAS References and External Documentation
+
+Some useful links are as follows which are also in the LICENSE.md file as some of the Scaladoc was sourced from these references:
 
 Wikipedia Website:
 - https://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms
