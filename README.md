@@ -10,7 +10,7 @@ performance C language libraries like CBLAS.
 
 Scala Native uses the Scala compiler to produce
 [NIR](https://scala-native.readthedocs.io/en/latest/contrib/nir.html)
-(Native Intermediate Representation)] that is optimized and then
+(Native Intermediate Representation) that is optimized and then
 converted to [LLVM IR](http://llvm.org/). Finally LLVM code is optimized
 and compiled by [Clang](http://clang.llvm.org/) to produce a native executable.
 
