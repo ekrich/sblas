@@ -1,5 +1,5 @@
 lazy val prevVersion = "0.1.1"
-lazy val nextVersion = "0.1.1"
+lazy val nextVersion = "0.2.0"
 
 lazy val scala211 = "2.11.12"
 
@@ -34,12 +34,14 @@ def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
 }
 
 lazy val commonSettings = Seq(
-  libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.7" % Test,
-  testFrameworks += new TestFramework("utest.runner.Framework"),
+  libraryDependencies += "com.github.lolgab" %%% "minitest" % "2.5.0-5f3852e" % Test,
+  testFrameworks += new TestFramework("minitest.runner.Framework"),
   scalaVersion := scala211,
   logLevel := Level.Info, // Info, Debug
-  nativeLinkStubs := true
-//  nativeMode := "release"
+  nativeLinkStubs := true,
+//  nativeMode := "release",
+  // mima settings
+  mimaPreviousArtifacts := Set("org.ekrich" %%% "sblas" % prevVersion),
 )
 
 lazy val root = project

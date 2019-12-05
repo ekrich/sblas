@@ -14,8 +14,9 @@
  */
 package org.ekrich.blas.snic
 
-import scala.scalanative.native._
-import scala.scalanative.native.complex.{CDoubleComplex, CFloatComplex}
+import scala.scalanative.unsafe.{extern, link}
+import scala.scalanative.unsafe.{CDouble, CFloat, CInt, CSize, CString, CVarArg, Ptr}
+import scala.scalanative.libc.complex.{CDoubleComplex, CFloatComplex}
 
 /**
  * Used for Level 2 and 3 BLAS
@@ -1678,5 +1679,5 @@ object blas {
   def cblas_xerbla(p: CInt,
                    rout: CString,
                    form: CString,
-                   varArgs: CVararg*): Unit = extern
+                   varArgs: CVarArg*): Unit = extern
 }
