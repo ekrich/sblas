@@ -15,7 +15,7 @@ converted to [LLVM IR](http://llvm.org/). Finally LLVM code is optimized
 and compiled by [Clang](http://clang.llvm.org/) to produce a native executable.
 
 ## Getting started
-[![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_native0.3_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.3_2.11)
+[![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_native0.4.0-M2_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.4.0-M2_2.11)
 
 If you are already familiar with Scala Native you can jump right in by adding the following dependency in your `sbt` build file.
 
@@ -43,7 +43,7 @@ $ sudo apt-get install libatlas-base-dev
 * Other OSes need to have `libcblas` available on the system.
 
 ## Usage and Help
-[![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.3_2.11.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.3_2.11)
+[![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.4.0-M2_2.11.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.4.0-M2_2.11)
 [![Join chat https://gitter.im/ekrich/sblas](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ekrich/sblas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Reference the link above for Scaladoc. The documentation is a little sparse but hopefully will improve with time.
@@ -56,7 +56,7 @@ $ cd <directory entered after the prompt>
 $ sbt run
 ```
 
-In addition, look at the `v0.1.1` [sblas unit tests](https://github.com/ekrich/sblas/blob/v0.1.1/sblas/src/test/scala/org/ekrich/blas/snic/BlasSuite.scala) for other examples of usage.
+In addition, look at the [sblas unit tests](https://github.com/ekrich/sblas/blob/v0.2.0/sblas/src/test/scala/org/ekrich/blas/unsafe/BlasSuite.scala) for other examples of usage.
 
 ## BLAS References and External Documentation
 
@@ -83,3 +83,4 @@ IBM Website:
 ## Versions
 
 Release [0.1.1](https://github.com/ekrich/sblas/releases/tag/v0.1.1) - (2019-05-01)<br/>
+Release [0.2.0](https://github.com/ekrich/sblas/releases/tag/v0.2.0) - (2019-12-05)<br/>
