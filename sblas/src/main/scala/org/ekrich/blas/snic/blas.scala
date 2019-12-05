@@ -14,8 +14,8 @@
  */
 package org.ekrich.blas.snic
 
-import scala.scalanative.unsafe.{extern, link}
-import scala.scalanative.unsafe.{CDouble, CFloat, CInt, CSize, CString, CVarArg, Ptr}
+import scala.scalanative.unsafe.{extern, link, Ptr}
+import scala.scalanative.unsafe.{CDouble, CFloat, CInt, CSize, CString, CVarArg}
 import scala.scalanative.libc.complex.{CDoubleComplex, CFloatComplex}
 
 /**
