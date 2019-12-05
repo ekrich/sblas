@@ -41,7 +41,7 @@ lazy val commonSettings = Seq(
   nativeLinkStubs := true,
 //  nativeMode := "release",
   // mima settings
-  mimaPreviousArtifacts := Set("org.ekrich" %%% "sblas" % prevVersion),
+  mimaPreviousArtifacts := Set("org.ekrich" %%% "sblas" % prevVersion)
 )
 
 lazy val root = project
