@@ -12,7 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ekrich.blas.snic
+package org.ekrich.blas
+package unsafe
 
 import scala.scalanative.unsafe.{extern, link, Ptr}
 import scala.scalanative.unsafe.{CDouble, CFloat, CInt, CSize, CString, CVarArg}

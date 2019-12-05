@@ -1,12 +1,14 @@
-package org.ekrich.blas.snic
+package org.ekrich.blas
+package unsafe
 
-import org.ekrich.blas.snic.blas._
 import minitest._
 
 import scala.collection.mutable.ListBuffer
 import scala.scalanative.libc.complex.{CDoubleComplex, CFloatComplex}
 import scala.scalanative.libc.complexOps._
 import scala.scalanative.unsafe.{CDouble, CFloat, Ptr, Zone, alloc}
+
+import org.ekrich.blas.unsafe.blas._
 
 object BlasSuite extends SimpleTestSuite {
   val N     = 3
