@@ -51,7 +51,7 @@ Reference the link above for Scaladoc. The documentation is a little sparse but 
 After `sbt` is installed and any other Scala Native prerequisites are met you can use the following Gitter G8 template instructions to get a fully functional Scala Native application with a couple of BLAS examples in the body of the main program.
 
 ```
-$ sbt new ekrich/sblas.g8
+$ sbt --supershell=false new ekrich/sblas.g8
 $ cd <directory entered after the prompt>
 $ sbt run
 ```
