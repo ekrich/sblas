@@ -6,7 +6,7 @@ scala:
 matrix:
   include:
     - os: linux
-      dist: trusty
+      dist: xenial
 
     - os: osx
 
@@ -22,12 +22,10 @@ jobs:
       script: ./scripts/checkfmts.sh
     # - env: TEST="test"
     - env: TEST="linux"
-      before_install: ./scripts/travis-os-setup.sh
       script: sbt test doc
     - env: TEST="osx"
       os: osx
       osx_image: xcode9.3
-      before_install: ./scripts/travis-os-setup.sh
       script: sbt test doc
     - stage: release
       script: sbt ci-release
@@ -49,3 +47,4 @@ before_cache:
 
 before_install:
   - git fetch --tags
+  - ./scripts/travis-os-setup.sh
