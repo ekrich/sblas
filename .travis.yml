@@ -3,6 +3,14 @@ language: scala
 scala:
   - 2.11.12
 
+jdk:
+  - openjdk8
+
+os:
+  - linux
+
+dist: xenial
+
 stages:
   - name: test
   - name: release
@@ -14,13 +22,11 @@ jobs:
     - env: TEST="scalafmt"
       script: ./scripts/checkfmts.sh
     - env: TEST="linux"
-      os: linux
-      dist: xenial
       script: sbt test doc
     - env: TEST="osx"
       os: osx
-      osx_image: xcode9.3
-      script: sbt test doc
+      osx_image: xcode9.3 # for jdk8
+      script: sbt test # no doc needed
     - stage: release
       script: sbt ci-release
 
