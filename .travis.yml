@@ -1,7 +1,7 @@
 language: scala
 
 scala:
-  - "2.11.12"
+  - 2.11.12
 
 matrix:
   include:
@@ -20,7 +20,6 @@ jobs:
     # stage="test" if no stage is specified
     - env: TEST="scalafmt"
       script: ./scripts/checkfmts.sh
-    # - env: TEST="test"
     - env: TEST="linux"
       script: sbt test doc
     - env: TEST="osx"

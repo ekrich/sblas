@@ -10,5 +10,7 @@
 set -euo pipefail
 
 java -version
-if [ -n "${CLANG_FORMAT_PATH:-}" ]; then scripts/clangfmt --test; fi
+if [ -n "${CLANG_FORMAT_PATH:-}" ]; then
+  scripts/clangfmt --test
+fi
 scripts/scalafmt --test
