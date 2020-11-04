@@ -3,13 +3,6 @@ language: scala
 scala:
   - 2.11.12
 
-matrix:
-  include:
-    - os: linux
-      dist: xenial
-
-    - os: osx
-
 stages:
   - name: test
   - name: release
@@ -21,6 +14,8 @@ jobs:
     - env: TEST="scalafmt"
       script: ./scripts/checkfmts.sh
     - env: TEST="linux"
+      os: linux
+      dist: xenial
       script: sbt test doc
     - env: TEST="osx"
       os: osx
