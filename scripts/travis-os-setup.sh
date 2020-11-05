@@ -7,7 +7,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-    brew install re2
+    # Nothing needed
 else
     # Per https://github.com/scala-native/scala-native/pull/1240/
     sudo apt-get update
