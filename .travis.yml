@@ -1,16 +1,12 @@
-sudo: required
-
 language: scala
 
 scala:
-  - "2.11.12"
+  - 2.11.12
 
-matrix:
-  include:
-    - os: linux
-      dist: trusty
+os:
+  - linux
 
-    - os: osx
+dist: xenial
 
 stages:
   - name: test
@@ -22,15 +18,12 @@ jobs:
     # stage="test" if no stage is specified
     - env: TEST="scalafmt"
       script: ./scripts/checkfmts.sh
-    # - env: TEST="test"
     - env: TEST="linux"
-      before_install: ./scripts/travis-os-setup.sh
       script: sbt test doc
     - env: TEST="osx"
       os: osx
-      osx_image: xcode9.3
-      before_install: ./scripts/travis-os-setup.sh
-      script: sbt test doc
+      osx_image: xcode9.3 # for jdk8
+      script: sbt test # no doc needed
     - stage: release
       script: sbt ci-release
 
@@ -51,3 +44,4 @@ before_cache:
 
 before_install:
   - git fetch --tags
+  - ./scripts/travis-os-setup.sh
