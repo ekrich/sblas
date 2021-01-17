@@ -3,7 +3,15 @@ lazy val nextVersion = "0.2.0"
 
 lazy val scala211 = "2.11.12"
 
-scalaVersion := scala211
+val scala211 = "2.11.12"
+val scala212 = "2.12.13"
+val scala213 = "2.13.4"
+val scala300 = "3.0.0-M3"
+
+val versionsNative = Seq(scala212, scala211, scala213)
+
+ThisBuild / scalaVersion := scala213
+ThisBuild / crossScalaVersions := versionsNative
 
 inThisBuild(
   List(
@@ -28,18 +36,19 @@ inThisBuild(
 
 // stable snapshot is not great for publish local
 def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
-  val tag = out.ref.dropV.value
+  val tag = out.ref.dropPrefix
   if (out.isCleanAfterTag) tag
   else nextVersion + "-SNAPSHOT"
 }
 
 lazy val commonSettings = Seq(
-  libraryDependencies += "com.github.lolgab" %%% "minitest" % "2.5.0-5f3852e" % Test,
-  testFrameworks += new TestFramework("minitest.runner.Framework"),
-  scalaVersion := scala211,
   logLevel := Level.Info, // Info, Debug
   nativeLinkStubs := true,
-//  nativeMode := "release",
+  addCompilerPlugin(
+    "org.scala-native" % "junit-plugin" % nativeVersion cross CrossVersion.full
+  ),
+  libraryDependencies += "org.scala-native" %%% "junit-runtime" % nativeVersion,
+  testOptions += Tests.Argument(TestFrameworks.JUnit, "-a", "-s", "-v"),
   // mima settings
   mimaPreviousArtifacts := Set("org.ekrich" %%% "sblas" % prevVersion)
 )
