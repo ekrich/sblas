@@ -1,7 +1,5 @@
-lazy val prevVersion = "0.1.1"
-lazy val nextVersion = "0.2.0"
-
-lazy val scala211 = "2.11.12"
+val prevVersion = "0.1.1"
+val nextVersion = "0.2.0"
 
 val scala211 = "2.11.12"
 val scala212 = "2.12.13"
