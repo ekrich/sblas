@@ -11,7 +11,7 @@ import org.ekrich.blas.unsafe.blas._
 import org.junit.Test
 import org.junit.Assert._
 
-class BlasSuite {
+class BlasTest {
   val N     = 3
   val alpha = 0
   val incX  = 1
