@@ -1,5 +1,6 @@
-val prevVersion = "0.1.1"
-val nextVersion = "0.2.0"
+// sblas build
+val prevVersion = "0.2.0"
+val nextVersion = "0.3.0"
 
 val scala211 = "2.11.12"
 val scala212 = "2.12.13"
@@ -8,7 +9,7 @@ val scala300 = "3.0.0-M3"
 
 val versionsNative = Seq(scala212, scala211, scala213)
 
-ThisBuild / scalaVersion := scala213
+ThisBuild / scalaVersion := scala211
 ThisBuild / crossScalaVersions := versionsNative
 
 inThisBuild(
