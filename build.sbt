@@ -9,7 +9,7 @@ val scala300 = "3.0.0"
 
 val versionsNative = Seq(scala212, scala211, scala213)
 
-ThisBuild / scalaVersion := scala211
+ThisBuild / scalaVersion := scala213
 ThisBuild / crossScalaVersions := versionsNative
 
 inThisBuild(
