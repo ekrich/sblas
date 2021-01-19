@@ -1,7 +1,10 @@
 language: scala
 
 scala:
-  - 2.11.12
+  - 2.13.4
+
+jdk:
+  - openjdk8
 
 os:
   - linux
@@ -22,7 +25,7 @@ jobs:
       script: sbt test doc
     - env: TEST="osx"
       os: osx
-      osx_image: xcode9.3 # for jdk8
+      osx_image: xcode9.4 # default macOS 10.13
       script: sbt test # no doc needed
     - stage: release
       script: sbt ci-release
