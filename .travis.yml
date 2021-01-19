@@ -3,11 +3,11 @@ language: scala
 scala:
   - 2.13.4
 
-os:
-  - linux
-
 jdk:
   - openjdk11
+
+os:
+  - linux
 
 dist: bionic
 
