@@ -55,8 +55,8 @@ import blasEnums._
 @link("cblas")
 @extern
 object blas {
-  /* This may vary between platforms. CBLAS_INDEX in C */
-  type CblasIndex = CSize // size_t
+  /* CBLAS_INDEX in C - int */
+  type CblasIndex = CInt
 
   /*
    * ===========================================================================
