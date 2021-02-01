@@ -1,4 +1,4 @@
-name: Scala CI
+name: CI
 
 on:
   pull_request:
@@ -17,6 +17,6 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libcblas
+        sudo apt-get install -y libatlas-base-dev
     - name: Run tests
-      run: sbt test
+      run: sbt +test
