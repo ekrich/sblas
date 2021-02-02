@@ -1,4 +1,5 @@
-/** Copyright 2017-2019 Eric K Richardson
+/**
+ * Copyright 2017-2019 Eric K Richardson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +51,6 @@ import blasEnums._
 
 /**
  * Scala Native extern C interface to CBLAS Version 3.8.0
- *
  */
 @link("cblas")
 @extern

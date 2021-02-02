@@ -31,8 +31,8 @@ class BlasTest {
     ptr
   }
 
-  def FloatComplexArray(elems: (Float, Float)*)(
-      implicit z: Zone): Ptr[CFloatComplex] = {
+  def FloatComplexArray(elems: (Float, Float)*)(implicit
+      z: Zone): Ptr[CFloatComplex] = {
     val size = elems.size
     val ptr  = alloc[CFloatComplex](size)
     var i    = 0
@@ -56,8 +56,8 @@ class BlasTest {
     println(lb.mkString("{", ", ", "}"))
   }
 
-  def DoubleComplexArray(elems: (Double, Double)*)(
-      implicit z: Zone): Ptr[CDoubleComplex] = {
+  def DoubleComplexArray(elems: (Double, Double)*)(implicit
+      z: Zone): Ptr[CDoubleComplex] = {
     val size = elems.size
     val ptr  = alloc[CDoubleComplex](size)
     var i    = 0
