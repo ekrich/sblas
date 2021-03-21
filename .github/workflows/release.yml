@@ -11,8 +11,6 @@ jobs:
         with:
           fetch-depth: 0
       - uses: olafurpg/setup-scala@v10
-        with:
-          java-version: openjdk@1.8
       - name: Install Dependencies
         run: |
           sudo apt-get update
