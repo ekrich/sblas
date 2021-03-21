@@ -1,5 +1,6 @@
 # sblas - Scala Native BLAS
-[![Build Status](https://travis-ci.org/ekrich/sblas.svg?branch=master)](https://travis-ci.com/ekrich/sblas)
+
+![CI](https://github.com/ekrich/sblas/workflows/CI/badge.svg)
 
 This library implements BLAS (Basic Linear Algebra Subprograms) in the form
 of CBLAS for the Scala Native platform. Scala Native is a unique platform that
