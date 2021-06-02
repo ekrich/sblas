@@ -7,13 +7,24 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-18.04, macos-10.14]
+    runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
-    - uses: olafurpg/setup-scala@v10
-    - name: Install Dependencies
+    - name: Checkout current branch (full)
+      uses: actions/checkout@v2
+    - name: Setup Java and Scala
+      uses: olafurpg/setup-scala@v10
+    - name: Setup (Linux)
+      if: matrix.os == 'ubuntu-18.04'
       run: |
-        sudo apt-get update
-        sudo apt-get install -y libatlas-base-dev
+          sudo apt-get update
+          sudo apt-get install -y libatlas-base-dev
+    - name: Setup (OS X)
+      if: matrix.os == 'macos-10.14'
+      run: |
+          brew install llvm
     - name: Run tests
       run: sbt +test
