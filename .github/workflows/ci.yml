@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [ master main]
+    branches: [ main]
 
 jobs:
   build:
@@ -22,9 +22,5 @@ jobs:
       run: |
           sudo apt-get update
           sudo apt-get install -y libatlas-base-dev
-    - name: Setup (OS X)
-      if: matrix.os == 'macos-10.14'
-      run: |
-          brew install llvm
     - name: Run tests
       run: sbt +test
