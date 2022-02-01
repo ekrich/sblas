@@ -8,3 +8,10 @@
 
 # vscode
 /.vscode/
+
+# IntelliJ
+/.idea/
+
+# scripts generated
+/scripts/.coursier
+/scripts/.scalafmt*
