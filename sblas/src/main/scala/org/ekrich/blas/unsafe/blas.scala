@@ -55,7 +55,7 @@ import blasEnums._
 @link("cblas")
 @extern
 object blas {
-  /* CBLAS_INDEX in C - int */
+  /* CBLAS_INDEX */
   type CblasIndex = CInt
 
   /*
@@ -117,7 +117,7 @@ object blas {
   /**
    * Dot product of two single-precision complex vectors.
    *
-   * @param dotu - The result vector.
+   * @param dotu The result vector.
    */
   def cblas_cdotu_sub(N: CInt,
                       X: Ptr[CFloatComplex],
@@ -130,7 +130,7 @@ object blas {
    * Dot product of the complex conjugate of a single-precision
    * complex vector with a second single-precision complex vector.
    *
-   * @param dotc - The result vector. Computes conjg(X) * Y.
+   * @param dotc The result vector. Computes conjg(X) * Y.
    */
   def cblas_cdotc_sub(N: CInt,
                       X: Ptr[CFloatComplex],
@@ -142,7 +142,7 @@ object blas {
   /**
    * Dot product of two double-precision complex vectors.
    *
-   * @param dotu - The result vector.
+   * @param dotu The result vector.
    */
   def cblas_zdotu_sub(N: CInt,
                       X: Ptr[CDoubleComplex],
@@ -155,7 +155,7 @@ object blas {
    * Dot product of the complex conjugate of a double-precision
    * complex vector with a second double-precision complex vector.
    *
-   * @param dotc - The result vector. Computes conjg(X) * Y.
+   * @param dotc The result vector. Computes conjg(X) * Y.
    */
   def cblas_zdotc_sub(N: CInt,
                       X: Ptr[CDoubleComplex],
@@ -400,16 +400,19 @@ object blas {
    * @param d2 Scaling factor D2.
    * @param b1 Scaling factor B1.
    * @param b2 Scaling factor B2.
-   * @param P  A 5-element vector:
-   *           P[0] Flag value that defines the form of matrix H.
-   *           -2.0: matrix H contains the identity matrix.
-   *           -1.0: matrix H is identical to matrix SH (defined by the remaining values in the vector).
-   *            0.0: H[1,2] and H[2,1] are obtained from matrix SH. The remaining values are both 1.0.
-   *            1.0: H[1,1] and H[2,2] are obtained from matrix SH. H[1,2] is 1.0. H[2,1] is -1.0.
-   *           P[1] Contains SH[1,1].
-   *           P[2] Contains SH[2,1].
-   *           P[3] Contains SH[1,2].
-   *           P[4] Contains SH[2,2].
+   * @param P
+   *   {{{
+   *   A 5-element vector:
+   *    P[0] Flag value that defines the form of matrix H.
+   *   -2.0: matrix H contains the identity matrix.
+   *   -1.0: matrix H is identical to matrix SH (defined by the remaining values in the vector).
+   *    0.0: H[1,2] and H[2,1] are obtained from matrix SH. The remaining values are both 1.0.
+   *    1.0: H[1,1] and H[2,2] are obtained from matrix SH. H[1,2] is 1.0. H[2,1] is -1.0.
+   *    P[1] Contains SH[1,1].
+   *    P[2] Contains SH[2,1].
+   *    P[3] Contains SH[1,2].
+   *    P[4] Contains SH[2,2].
+   *   }}}
    */
   def cblas_srotmg(d1: Ptr[CFloat],
                    d2: Ptr[CFloat],
