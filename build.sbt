@@ -11,6 +11,7 @@ val versionsNative = Seq(scala211, scala212, scala213, scala3)
 
 ThisBuild / scalaVersion := scala213
 ThisBuild / crossScalaVersions := versionsNative
+ThisBuild / versionScheme := Some("early-semver")
 
 inThisBuild(
   List(
