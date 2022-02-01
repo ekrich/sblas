@@ -19,7 +19,8 @@ inThisBuild(
     organization := "org.ekrich",
     homepage := Some(url("https://github.com/ekrich/sblas")),
     licenses := List(
-      "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+      "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")
+    ),
     developers := List(
       Developer(
         id = "ekrich",
@@ -32,7 +33,8 @@ inThisBuild(
     dynver := sbtdynver.DynVer
       .getGitDescribeOutput(new java.util.Date)
       .mkVersion(versionFmt, "")
-  ))
+  )
+)
 
 // stable snapshot is not great for publish local
 def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
