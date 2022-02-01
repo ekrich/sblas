@@ -1,16 +1,17 @@
 // sblas build
-val prevVersion = "0.2.0"
-val nextVersion = "0.3.0"
+val prevVersion = "0.3.0"
+val nextVersion = "0.4.0"
 
 val scala211 = "2.11.12"
 val scala212 = "2.12.15"
 val scala213 = "2.13.8"
-val scala300 = "3.0.0"
+val scala3 = "3.1.1"
 
-val versionsNative = Seq(scala212, scala211, scala213)
+val versionsNative = Seq(scala211, scala212, scala213, scala3)
 
 ThisBuild / scalaVersion := scala213
 ThisBuild / crossScalaVersions := versionsNative
+ThisBuild / versionScheme := Some("early-semver")
 
 inThisBuild(
   List(
@@ -18,7 +19,8 @@ inThisBuild(
     organization := "org.ekrich",
     homepage := Some(url("https://github.com/ekrich/sblas")),
     licenses := List(
-      "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+      "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")
+    ),
     developers := List(
       Developer(
         id = "ekrich",
@@ -31,7 +33,8 @@ inThisBuild(
     dynver := sbtdynver.DynVer
       .getGitDescribeOutput(new java.util.Date)
       .mkVersion(versionFmt, "")
-  ))
+  )
+)
 
 // stable snapshot is not great for publish local
 def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
