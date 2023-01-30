@@ -2,12 +2,11 @@
 val prevVersion = "0.3.0"
 val nextVersion = "0.4.0"
 
-val scala211 = "2.11.12"
 val scala212 = "2.12.17"
 val scala213 = "2.13.10"
 val scala3 = "3.2.1"
 
-val versionsNative = Seq(scala211, scala212, scala213, scala3)
+val versionsNative = Seq(scala212, scala213, scala3)
 
 ThisBuild / scalaVersion := scala213
 ThisBuild / crossScalaVersions := versionsNative
@@ -45,7 +44,7 @@ def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
 
 lazy val commonSettings = Seq(
   logLevel := Level.Info, // Info, Debug
-  nativeLinkStubs := true,
+  scalacOptions ++= List("-unchecked", "-deprecation", "-feature"),
   addCompilerPlugin(
     "org.scala-native" % "junit-plugin" % nativeVersion cross CrossVersion.full
   ),
