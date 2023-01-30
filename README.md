@@ -16,7 +16,7 @@ converted to [LLVM IR](http://llvm.org/). Finally LLVM code is optimized
 and compiled by [Clang](http://clang.llvm.org/) to produce a native executable.
 
 ## Getting started
-[![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_native0.4_2.13.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.4_2.13)
+[![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_native0.4_3.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.4_3)
 
 If you are already familiar with Scala Native you can jump right in by adding the following dependency in your `sbt` build file.
 
@@ -45,18 +45,19 @@ $ sudo apt-get install libatlas-base-dev
 
 ## Scala Build Versions
 
-| Scala Version          | Native (0.4.0)        | Native (0.4.3+) |
-| ---------------------- | :-------------------: | :------------: |
-| 2.11.x                 |          ✅           |       ✅       |
-| 2.12.x                 |          ✅           |       ✅       |
-| 2.13.x                 |          ✅           |       ✅       |
-| 3.x.x                  |                       |       ✅       |
+| Scala Version          | Native (0.4.0)        | Native (0.4.3+) | Native (0.4.10+) |
+| ---------------------- | :-------------------: | :-------------: | :--------------: |
+| 2.11.x                 |          ✅           |        ✅       |                   |
+| 2.12.x                 |          ✅           |        ✅       |         ✅        |
+| 2.13.x                 |          ✅           |        ✅       |         ✅        |
+| 3.x.x                  |                       |        ✅       |         ✅        |
 
 Use version sblas `0.3.0` for Scala Native `0.4.0`.
-Use version sblas `0.4.0` for Scala Native `0.4.3` with Scala 3 support.
+Use version sblas `0.4.0` for Scala Native `0.4.3+` with Scala 3 support.
+Use version sblas `0.5.0` for Scala Native `0.4.10+`.
 
 ## Usage and Help
-[![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.4_2.11.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.4_2.11)
+[![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.4_3.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.4_3)
 [![Join chat https://gitter.im/ekrich/sblas](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ekrich/sblas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Reference the link above for Scaladoc. The documentation is a little sparse but hopefully will improve with time.
@@ -95,6 +96,7 @@ IBM Website:
 
 ## Versions
 
+Release [0.5.0](https://github.com/ekrich/sblas/releases/tag/v0.5.0) - (2023-01-29)<br/>
 Release [0.4.0](https://github.com/ekrich/sblas/releases/tag/v0.4.0) - (2022-02-01)<br/>
 Release [0.3.0](https://github.com/ekrich/sblas/releases/tag/v0.3.0) - (2021-03-20)<br/>
 Release [0.2.0](https://github.com/ekrich/sblas/releases/tag/v0.2.0) - (2019-12-05)<br/>

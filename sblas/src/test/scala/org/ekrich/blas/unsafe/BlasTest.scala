@@ -13,7 +13,7 @@ import org.junit.Assert._
 
 class BlasTest {
   val N = 3
-  val alpha = 0
+  val alpha = 0.0f
   val incX = 1
   val incY = 1
 
