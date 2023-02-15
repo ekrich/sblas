@@ -10,6 +10,7 @@ import org.ekrich.blas.unsafe.blas._
 
 import org.junit.Test
 import org.junit.Assert._
+import org.ekrich.blas.api.Blas
 
 class BlasTest {
   val N = 3
@@ -188,6 +189,12 @@ class BlasTest {
       val res = cblas_dnrm2(N, X, incX)
       assertEquals(res, 3.0, 0.0)
     }
+  }
+
+  @Test def test_blas_dnrm2(): Unit = {
+    val x = Array[Double](1, 2, -2)
+    val res = Blas.dnrm2(x)
+    assertEquals(res, 3.0, 0.0)
   }
 
   @Test def test_cblas_dasum(): Unit = {
