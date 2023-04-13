@@ -45,10 +45,6 @@ def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
 lazy val commonSettings = Seq(
   logLevel := Level.Info, // Info, Debug
   scalacOptions ++= List("-unchecked", "-deprecation", "-feature"),
-  addCompilerPlugin(
-    "org.scala-native" % "junit-plugin" % nativeVersion cross CrossVersion.full
-  ),
-  libraryDependencies += "org.scala-native" %%% "junit-runtime" % nativeVersion,
   testOptions += Tests.Argument(TestFrameworks.JUnit, "-a", "-s", "-v"),
   // mima settings
   mimaPreviousArtifacts := Set("org.ekrich" %%% "sblas" % prevVersion)
@@ -71,4 +67,4 @@ lazy val sblas = project
   .settings(
     commonSettings
   )
-  .enablePlugins(ScalaNativePlugin)
+  .enablePlugins(ScalaNativePlugin, ScalaNativeJUnitPlugin)
