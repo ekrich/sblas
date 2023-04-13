@@ -1449,22 +1449,39 @@ object blas {
    */
 
   /** Multiplies two matrices (single-precision)
-    *
-    * @param Order Specifies row-major (C) or column-major (Fortran) data ordering
-    * @param TransA Specifies whether to transpose matrix A
-    * @param TransB Specifies whether to transpose matrix B
-    * @param M Number of rows in matrices A and C
-    * @param N Number of columns in matrices B and C
-    * @param K Number of columns in matrix A; number of rows in matrix B
-    * @param alpha Scaling factor for the product of matrices A and B
-    * @param A Matrix A
-    * @param lda The size of the first dimension of matrix A; if you are passing a matrix A[m][n], the value should be m
-    * @param B Matrix B
-    * @param ldb The size of the first dimension of matrix B; if you are passing a matrix B[m][n], the value should be m
-    * @param beta Scaling factor for matrix C
-    * @param C Matrix C
-    * @param ldc The size of the first dimension of matrix C; if you are passing a matrix C[m][n], the value should be m
-    */
+   *
+   *  @param Order
+   *    Specifies row-major (C) or column-major (Fortran) data ordering
+   *  @param TransA
+   *    Specifies whether to transpose matrix A
+   *  @param TransB
+   *    Specifies whether to transpose matrix B
+   *  @param M
+   *    Number of rows in matrices A and C
+   *  @param N
+   *    Number of columns in matrices B and C
+   *  @param K
+   *    Number of columns in matrix A; number of rows in matrix B
+   *  @param alpha
+   *    Scaling factor for the product of matrices A and B
+   *  @param A
+   *    Matrix A
+   *  @param lda
+   *    The size of the first dimension of matrix A; if you are passing a matrix
+   *    A[m][n], the value should be m
+   *  @param B
+   *    Matrix B
+   *  @param ldb
+   *    The size of the first dimension of matrix B; if you are passing a matrix
+   *    B[m][n], the value should be m
+   *  @param beta
+   *    Scaling factor for matrix C
+   *  @param C
+   *    Matrix C
+   *  @param ldc
+   *    The size of the first dimension of matrix C; if you are passing a matrix
+   *    C[m][n], the value should be m
+   */
   def cblas_sgemm(
       Order: CBLAS_ORDER,
       TransA: CBLAS_TRANSPOSE,

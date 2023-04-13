@@ -72,6 +72,19 @@ $ sbt run
 
 In addition, look at the [sblas unit tests](https://github.com/ekrich/sblas/blob/main/sblas/src/test/scala/org/ekrich/blas/unsafe/BlasTest.scala) for other examples of usage.
 
+## Using scalafmt
+
+If you are using scalafmt and you would like to wrap arrays in your code such as the
+following:
+
+```scala
+val A = Array(
+  0.11f, 0.12f, 0.13f,
+  0.21f, 0.22f, 0.23f)
+```
+Add `newlines.source = keep` to your `.scalafmt.conf` file. This will keep your rows and
+columns from wrapping.
+
 ## BLAS References and External Documentation
 
 Some useful links are as follows which are also in the LICENSE.md file as some of the Scaladoc was sourced from these references:
