@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+# uncomment to debug
 # set -x
 
 HERE="`dirname $0`"
-VERSION="3.5.8"
+VERSION=$(sed -nre "s#\s*version[^0-9]+([0-9.]+)#\1#p" $HERE/../.scalafmt.conf)
 COURSIER="$HERE/.coursier"
 SCALAFMT="$HERE/.scalafmt-$VERSION"
 
