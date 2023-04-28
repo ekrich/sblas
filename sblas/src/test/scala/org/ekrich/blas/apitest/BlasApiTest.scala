@@ -46,20 +46,20 @@ class BlasApiTest {
       1031f, 1032f)
 
     val ldc = 2
-    // format: off
+
     val C = Array(
       0.00f, 0.00f,
       0.00f, 0.00f)
 
     /* Compute C = A B */
 
-    cblas_sgemm (
+    cblas_sgemm(
       CblasRowMajor,
       CblasNoTrans, CblasNoTrans, 2, 2, 3,
       1.0f, A.at(0), lda, B.at(0), ldb, 0.0f, C.at(0), ldc)
 
-    printf ("[ %g, %g\n", C(0), C(1))
-    printf ("  %g, %g ]\n", C(2), C(3))
+    printf("[ %g, %g\n", C(0), C(1))
+    printf("  %g, %g ]\n", C(2), C(3))
     assertArrayEquals(Array(367.760f, 368.120f, 674.060f, 674.720f), C, 0.0f)
   }
 }
