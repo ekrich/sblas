@@ -2,7 +2,7 @@
 resolvers += Resolver.sonatypeRepo("snapshots")
 
 // includes sbt-dynver sbt-pgp sbt-sonatype sbt-git
-addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.5.11")
+addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.5.12")
 addSbtPlugin("com.typesafe" % "sbt-mima-plugin" % "1.1.2")
 
 // Scala Native support
