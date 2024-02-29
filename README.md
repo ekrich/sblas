@@ -15,6 +15,20 @@ Scala Native uses the Scala compiler to produce
 converted to [LLVM IR](http://llvm.org/). Finally LLVM code is optimized
 and compiled by [Clang](http://clang.llvm.org/) to produce a native executable.
 
+## New for 0.5.0
+
+A higher level API has been started but only for one function `dnrm2`. This API
+allows the developer to pass Scala `Array`s, which are Garbage Collection (GC)
+managed, directly to a function to be read or for a result. If the input to the
+function is a matrix then the `Array` is in row major order like it would be
+in C. Each row in the matrix is read from the array before the next row.
+
+This API results in a zero overhead call to the CBLAS API because no data is
+copied. It should perform as fast as C after the arrays are initialized. For those
+wanting to know; this uses an experimental API that allows the caller to get a
+pointer to the first element in the array (after the array object header). The
+data is housed in the array so the API can just work on the raw data in the array.
+
 ## Getting started
 [![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_native0.4_3.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.4_3)
 
@@ -45,7 +59,7 @@ $ sudo apt-get install libatlas-base-dev
 
 ## Scala Build Versions
 
-| Scala Version          | Native (0.4.0)        | Native (0.4.3+) | Native (0.4.10+) |
+| Scala Version          | Native (0.4.0)        | Native (0.4.3+) | Native (0.5.0+) |
 | ---------------------- | :-------------------: | :-------------: | :--------------: |
 | 2.11.x                 |          ✅           |        ✅       |                   |
 | 2.12.x                 |          ✅           |        ✅       |         ✅        |
@@ -55,6 +69,7 @@ $ sudo apt-get install libatlas-base-dev
 Use version sblas `0.3.0` for Scala Native `0.4.0`.
 Use version sblas `0.4.0` for Scala Native `0.4.3+` with Scala 3 support.
 Use version sblas `0.5.0` for Scala Native `0.4.10+`.
+Use version sblas `0.6.0` for Scala Native `0.5.0+`.
 
 ## Usage and Help
 [![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.4_3.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.4_3)
@@ -71,6 +86,19 @@ $ sbt run
 ```
 
 In addition, look at the [sblas unit tests](https://github.com/ekrich/sblas/blob/main/sblas/src/test/scala/org/ekrich/blas/unsafe/BlasTest.scala) for other examples of usage.
+
+## Using scalafmt
+
+If you are using scalafmt and you would like to wrap arrays in your code such as the
+following:
+
+```scala
+val A = Array(
+  0.11f, 0.12f, 0.13f,
+  0.21f, 0.22f, 0.23f)
+```
+Add `newlines.source = keep` to your `.scalafmt.conf` file. This will keep your rows and
+columns from wrapping.
 
 ## BLAS References and External Documentation
 
@@ -96,6 +124,7 @@ IBM Website:
 
 ## Versions
 
+Release [0.6.0](https://github.com/ekrich/sblas/releases/tag/v0.6.0) - (2024-02-29)<br/>
 Release [0.5.0](https://github.com/ekrich/sblas/releases/tag/v0.5.0) - (2023-01-29)<br/>
 Release [0.4.0](https://github.com/ekrich/sblas/releases/tag/v0.4.0) - (2022-02-01)<br/>
 Release [0.3.0](https://github.com/ekrich/sblas/releases/tag/v0.3.0) - (2021-03-20)<br/>

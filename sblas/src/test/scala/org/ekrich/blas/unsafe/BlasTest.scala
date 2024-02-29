@@ -10,6 +10,7 @@ import org.ekrich.blas.unsafe.blas._
 
 import org.junit.Test
 import org.junit.Assert._
+import org.ekrich.blas.api.Blas
 
 class BlasTest {
   val N = 3
@@ -101,35 +102,35 @@ class BlasTest {
     DoubleComplexArray((0.0, 1.0), (1.0, 0.0), (0.0, 1.0))
 
   @Test def test_cblas_sdsdot(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val res = cblas_sdsdot(N, alpha, X, incX, Y, incY)
       assertEquals(res, 3.0, 0.0)
     }
   }
 
   @Test def test_cblas_dsdot(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val res = cblas_dsdot(N, X, incX, Y, incY)
       assertEquals(res, 3.0, 0.0)
     }
   }
 
   @Test def test_cblas_sdot(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val res = cblas_sdot(N, X, incX, Y, incY)
       assertEquals(res, 3.0, 0.0)
     }
   }
 
   @Test def test_cblas_ddot(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val res = cblas_ddot(N, Xd, incX, Yd, incY)
       assertEquals(res, 3.0, 0.0)
     }
   }
 
   @Test def test_cblas_cdotu_sub(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val dotu = dotufc
       cblas_cdotu_sub(N, Xfc, incX, Yfc, incY, dotu)
       // printFloatComplex(dotu, 1)
@@ -139,7 +140,7 @@ class BlasTest {
   }
 
   @Test def test_cblas_cdotc_sub(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val dotc = dotufc
       cblas_cdotc_sub(N, Xfc, incX, Yfc, incY, dotc)
       // printFloatComplex(dotc, 1)
@@ -149,7 +150,7 @@ class BlasTest {
   }
 
   @Test def test_cblas_zdotu_sub(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val dotu = dotudc
       cblas_zdotu_sub(N, Xdc, incX, Ydc, incY, dotu)
       assertEquals(dotu._1, -1.0, 0.0)
@@ -158,7 +159,7 @@ class BlasTest {
   }
 
   @Test def test_cblas_zdotc_sub(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val dotc = dotudc
       cblas_zdotc_sub(N, Xdc, incX, Ydc, incY, dotc)
       assertEquals(dotc._1, 3.0, 0.0)
@@ -167,7 +168,7 @@ class BlasTest {
   }
 
   @Test def test_cblas_snrm2(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val X = FloatArray(1, 2, -2)
       val res = cblas_snrm2(N, X, incX)
       assertEquals(res, 3.0, 0.0)
@@ -175,7 +176,7 @@ class BlasTest {
   }
 
   @Test def test_cblas_sasum(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val X = FloatArray(1, 2, -2)
       val res = cblas_sasum(N, X, incX)
       assertEquals(res, 5.0, 0.0)
@@ -183,7 +184,7 @@ class BlasTest {
   }
 
   @Test def test_cblas_dnrm2(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val X = DoubleArray(1, 2, -2)
       val res = cblas_dnrm2(N, X, incX)
       assertEquals(res, 3.0, 0.0)
@@ -191,7 +192,7 @@ class BlasTest {
   }
 
   @Test def test_cblas_dasum(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val X = DoubleArray(1, 2, -2)
       val res = cblas_dasum(N, X, incX)
       assertEquals(res, 5.0, 0.0)
@@ -199,7 +200,7 @@ class BlasTest {
   }
 
   @Test def test_cblas_scnrm2(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val X = FloatComplexArray((1, 0), (0, -2), (2, 0))
       val res = cblas_scnrm2(N, X, incX)
       assertEquals(res, 3.0, 0.0)
@@ -207,7 +208,7 @@ class BlasTest {
   }
 
   @Test def test_cblas_scasum(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val X = FloatComplexArray((1, 0), (0, -2), (2, 0))
       val res = cblas_scasum(N, X, incX)
       assertEquals(res, 5.0, 0.0)
@@ -215,7 +216,7 @@ class BlasTest {
   }
 
   @Test def test_cblas_dznrm2(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val X = DoubleComplexArray((1, 0), (0, -2), (2, 0))
       val res = cblas_dznrm2(N, X, incX)
       assertEquals(res, 3.0, 0.0)
@@ -223,7 +224,7 @@ class BlasTest {
   }
 
   @Test def test_cblas_dzasum(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val X = DoubleComplexArray((1, 0), (1, -2), (2, 0))
       val res = cblas_dzasum(N, X, incX)
       assertEquals(res, 6.0, 0.0)
@@ -231,21 +232,21 @@ class BlasTest {
   }
 
   @Test def test_cblas_isamax(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val res = cblas_isamax(N, X, incX)
       assertEquals(res, 2)
     }
   }
 
   @Test def test_cblas_idamax(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val res = cblas_idamax(N, Xd, incX)
       assertEquals(res, 2)
     }
   }
 
   @Test def test_cblas_icamax(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val X = FloatComplexArray((1.0f, 0.0f), (1.0f, 1.0f), (3.0f, -2.0f))
       val res = cblas_icamax(N, X, incX)
       assertEquals(res, 2)
@@ -253,7 +254,7 @@ class BlasTest {
   }
 
   @Test def test_cblas_izamax(): Unit = {
-    Zone { implicit z =>
+    Zone.acquire { implicit z =>
       val X = DoubleComplexArray((1.0, 2.0), (2.0, 2.0), (3.0, 0.0))
       val res = cblas_izamax(N, X, incX)
       assertEquals(res, 1)

@@ -1,17 +1,16 @@
-/**
- * Copyright 2017-2019 Eric K Richardson
+/** Copyright 2017-2019 Eric K Richardson
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ *  use this file except in compliance with the License. You may obtain a copy
+ *  of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ *  License for the specific language governing permissions and limitations
+ *  under the License.
  */
 package org.ekrich.blas
 package unsafe
@@ -20,8 +19,7 @@ import scala.scalanative.unsafe.{extern, link, Ptr}
 import scala.scalanative.unsafe.{CDouble, CFloat, CInt, CSize, CString, CVarArg}
 import scala.scalanative.libc.complex.{CDoubleComplex, CFloatComplex}
 
-/**
- * Used for Level 2 and 3 BLAS
+/** Used for Level 2 and 3 BLAS
  */
 object blasEnums {
   // enums
@@ -49,8 +47,7 @@ object blasEnums {
 
 import blasEnums._
 
-/**
- * Scala Native extern C interface to CBLAS Version 3.8.0
+/** Scala Native extern C interface to CBLAS Version 3.8.0
  */
 @link("cblas")
 @extern
@@ -64,24 +61,23 @@ object blas {
    * ===========================================================================
    */
 
-  /**
-   * Dot product of two single-precision vectors plus an initial
-   * single-precision value.
+  /** Dot product of two single-precision vectors plus an initial
+   *  single-precision value.
    *
-   * @param N
-   *   The number of elements in the vectors.
-   * @param alpha
-   *   The initial value to add to the dot product.
-   * @param X
-   *   Vector X.
-   * @param incX
-   *   Stride within X. For example, if incX is 7, every 7th element is used.
-   * @param Y
-   *   Vector Y.
-   * @param incY
-   *   Stride within Y. For example, if incY is 7, every 7th element is used.
-   * @return
-   *   See description above.
+   *  @param N
+   *    The number of elements in the vectors.
+   *  @param alpha
+   *    The initial value to add to the dot product.
+   *  @param X
+   *    Vector X.
+   *  @param incX
+   *    Stride within X. For example, if incX is 7, every 7th element is used.
+   *  @param Y
+   *    Vector Y.
+   *  @param incY
+   *    Stride within Y. For example, if incY is 7, every 7th element is used.
+   *  @return
+   *    See description above.
    */
   def cblas_sdsdot(
       N: CInt,
@@ -92,8 +88,7 @@ object blas {
       incY: CInt
   ): CFloat = extern
 
-  /**
-   * Double-precision dot product of a pair of single-precision vectors.
+  /** Double-precision dot product of a pair of single-precision vectors.
    */
   def cblas_dsdot(
       N: CInt,
@@ -103,8 +98,7 @@ object blas {
       incY: CInt
   ): CDouble = extern
 
-  /**
-   * Dot product of two vectors (single-precision).
+  /** Dot product of two vectors (single-precision).
    */
   def cblas_sdot(
       N: CInt,
@@ -114,8 +108,7 @@ object blas {
       incY: CInt
   ): CFloat = extern
 
-  /**
-   * Dot product of two vectors (double-precision).
+  /** Dot product of two vectors (double-precision).
    */
   def cblas_ddot(
       N: CInt,
@@ -129,11 +122,10 @@ object blas {
    * Functions having prefixes Z and C only
    */
 
-  /**
-   * Dot product of two single-precision complex vectors.
+  /** Dot product of two single-precision complex vectors.
    *
-   * @param dotu
-   *   The result vector.
+   *  @param dotu
+   *    The result vector.
    */
   def cblas_cdotu_sub(
       N: CInt,
@@ -144,12 +136,11 @@ object blas {
       dotu: Ptr[CFloatComplex]
   ): Unit = extern
 
-  /**
-   * Dot product of the complex conjugate of a single-precision complex vector
-   * with a second single-precision complex vector.
+  /** Dot product of the complex conjugate of a single-precision complex vector
+   *  with a second single-precision complex vector.
    *
-   * @param dotc
-   *   The result vector. Computes conjg(X) * Y.
+   *  @param dotc
+   *    The result vector. Computes conjg(X) * Y.
    */
   def cblas_cdotc_sub(
       N: CInt,
@@ -160,11 +151,10 @@ object blas {
       dotc: Ptr[CFloatComplex]
   ): Unit = extern
 
-  /**
-   * Dot product of two double-precision complex vectors.
+  /** Dot product of two double-precision complex vectors.
    *
-   * @param dotu
-   *   The result vector.
+   *  @param dotu
+   *    The result vector.
    */
   def cblas_zdotu_sub(
       N: CInt,
@@ -175,12 +165,11 @@ object blas {
       dotu: Ptr[CDoubleComplex]
   ): Unit = extern
 
-  /**
-   * Dot product of the complex conjugate of a double-precision complex vector
-   * with a second double-precision complex vector.
+  /** Dot product of the complex conjugate of a double-precision complex vector
+   *  with a second double-precision complex vector.
    *
-   * @param dotc
-   *   The result vector. Computes conjg(X) * Y.
+   *  @param dotc
+   *    The result vector. Computes conjg(X) * Y.
    */
   def cblas_zdotc_sub(
       N: CInt,
@@ -195,46 +184,38 @@ object blas {
    * Functions having prefixes S D SC DZ
    */
 
-  /**
-   * L2 norm (Euclidian length) of a vector (single-precision).
+  /** L2 norm (Euclidian length) of a vector (single-precision).
    */
   def cblas_snrm2(N: CInt, X: Ptr[CFloat], incX: CInt): CFloat = extern
 
-  /**
-   * Sum of the absolute values of elements in a vector (single-precision).
+  /** Sum of the absolute values of elements in a vector (single-precision).
    */
   def cblas_sasum(N: CInt, X: Ptr[CFloat], incX: CInt): CFloat = extern
 
-  /**
-   * L2 norm (Euclidian length) of a vector (double-precision).
+  /** L2 norm (Euclidian length) of a vector (double-precision).
    */
   def cblas_dnrm2(N: CInt, X: Ptr[CDouble], incX: CInt): CDouble = extern
 
-  /**
-   * Sum of the absolute values of elements in a vector (double-precision).
+  /** Sum of the absolute values of elements in a vector (double-precision).
    */
   def cblas_dasum(N: CInt, X: Ptr[CDouble], incX: CInt): CDouble = extern
 
-  /**
-   * Unitary norm of a vector (single-precision complex).
+  /** Unitary norm of a vector (single-precision complex).
    */
   def cblas_scnrm2(N: CInt, X: Ptr[CFloatComplex], incX: CInt): CFloat = extern
 
-  /**
-   * Sum of the absolute values of real and imaginary parts of elements in a
-   * vector (single-precision complex).
+  /** Sum of the absolute values of real and imaginary parts of elements in a
+   *  vector (single-precision complex).
    */
   def cblas_scasum(N: CInt, X: Ptr[CFloatComplex], incX: CInt): CFloat = extern
 
-  /**
-   * Unitary norm of a vector (double-precision complex).
+  /** Unitary norm of a vector (double-precision complex).
    */
   def cblas_dznrm2(N: CInt, X: Ptr[CDoubleComplex], incX: CInt): CDouble =
     extern
 
-  /**
-   * Sum of the absolute values of real and imaginary parts of elements in a
-   * vector (double-precision complex).
+  /** Sum of the absolute values of real and imaginary parts of elements in a
+   *  vector (double-precision complex).
    */
   def cblas_dzasum(N: CInt, X: Ptr[CDoubleComplex], incX: CInt): CDouble =
     extern
@@ -243,32 +224,28 @@ object blas {
    * Functions having standard 4 prefixes (S D C Z)
    */
 
-  /**
-   * @return
-   *   Index of the element with the largest absolute value in a vector
-   *   (single-precision).
+  /** @return
+   *    Index of the element with the largest absolute value in a vector
+   *    (single-precision).
    */
   def cblas_isamax(N: CInt, X: Ptr[CFloat], incX: CInt): CblasIndex = extern
 
-  /**
-   * @return
-   *   Index of the element with the largest absolute value in a vector
-   *   (double-precision).
+  /** @return
+   *    Index of the element with the largest absolute value in a vector
+   *    (double-precision).
    */
   def cblas_idamax(N: CInt, X: Ptr[CDouble], incX: CInt): CblasIndex = extern
 
-  /**
-   * @return
-   *   Index of the element with the largest absolute value in a vector
-   *   (single-precision complex).
+  /** @return
+   *    Index of the element with the largest absolute value in a vector
+   *    (single-precision complex).
    */
   def cblas_icamax(N: CInt, X: Ptr[CFloatComplex], incX: CInt): CblasIndex =
     extern
 
-  /**
-   * @return
-   *   Index of the element with the largest absolute value in a vector
-   *   (double-precision complex).
+  /** @return
+   *    Index of the element with the largest absolute value in a vector
+   *    (double-precision complex).
    */
   def cblas_izamax(N: CInt, X: Ptr[CDoubleComplex], incX: CInt): CblasIndex =
     extern
@@ -283,24 +260,23 @@ object blas {
    * Routines with standard 4 prefixes (s, d, c, z)
    */
 
-  /**
-   * Exchanges the elements of two vectors (single precision).
+  /** Exchanges the elements of two vectors (single precision).
    *
-   * Parameters for the following functions:
+   *  Parameters for the following functions:
    *
-   * @param N
-   *   The number of elements in the vectors.
-   * @param X
-   *   Vector X.
-   * @param incX
-   *   Stride within X. For example, if incX is 7, every 7th element is used.
-   * @param Y
-   *   Vector Y.
-   * @param incY
-   *   Stride within Y. For example, if incY is 7, every 7th element is used.
+   *  @param N
+   *    The number of elements in the vectors.
+   *  @param X
+   *    Vector X.
+   *  @param incX
+   *    Stride within X. For example, if incX is 7, every 7th element is used.
+   *  @param Y
+   *    Vector Y.
+   *  @param incY
+   *    Stride within Y. For example, if incY is 7, every 7th element is used.
    *
-   * @return
-   *   See description above.
+   *  @return
+   *    See description above.
    */
   def cblas_sswap(
       N: CInt,
@@ -310,8 +286,7 @@ object blas {
       incY: CInt
   ): Unit = extern
 
-  /**
-   * Copies a vector to another vector (single-precision).
+  /** Copies a vector to another vector (single-precision).
    */
   def cblas_scopy(
       N: CInt,
@@ -321,11 +296,10 @@ object blas {
       incY: CInt
   ): Unit = extern
 
-  /**
-   * A constant times a vector plus a vector (single-precision).
+  /** A constant times a vector plus a vector (single-precision).
    *
-   * @param alpha
-   *   The initial value to add to the dot product.
+   *  @param alpha
+   *    The initial value to add to the dot product.
    */
   def cblas_saxpy(
       N: CInt,
@@ -336,8 +310,7 @@ object blas {
       incY: CInt
   ): Unit = extern
 
-  /**
-   * Exchanges the elements of two vectors (double precision).
+  /** Exchanges the elements of two vectors (double precision).
    */
   def cblas_dswap(
       N: CInt,
@@ -347,8 +320,7 @@ object blas {
       incY: CInt
   ): Unit = extern
 
-  /**
-   * Copies a vector to another vector (double-precision).
+  /** Copies a vector to another vector (double-precision).
    */
   def cblas_dcopy(
       N: CInt,
@@ -358,8 +330,7 @@ object blas {
       incY: CInt
   ): Unit = extern
 
-  /**
-   * Computes a constant times a vector plus a vector (double-precision).
+  /** Computes a constant times a vector plus a vector (double-precision).
    */
   def cblas_daxpy(
       N: CInt,
@@ -370,8 +341,7 @@ object blas {
       incY: CInt
   ): Unit = extern
 
-  /**
-   * Exchanges the elements of two vectors (single-precision complex).
+  /** Exchanges the elements of two vectors (single-precision complex).
    */
   def cblas_cswap(
       N: CInt,
@@ -381,8 +351,7 @@ object blas {
       incY: CInt
   ): Unit = extern
 
-  /**
-   * Copies a vector to another vector (single-precision complex).
+  /** Copies a vector to another vector (single-precision complex).
    */
   def cblas_ccopy(
       N: CInt,
@@ -392,8 +361,7 @@ object blas {
       incY: CInt
   ): Unit = extern
 
-  /**
-   * A constant times a vector plus a vector (single-precision complex).
+  /** A constant times a vector plus a vector (single-precision complex).
    */
   def cblas_caxpy(
       N: CInt,
@@ -404,8 +372,7 @@ object blas {
       incY: CInt
   ): Unit = extern
 
-  /**
-   * Exchanges the elements of two vectors (double-precision complex).
+  /** Exchanges the elements of two vectors (double-precision complex).
    */
   def cblas_zswap(
       N: CInt,
@@ -415,8 +382,7 @@ object blas {
       incY: CInt
   ): Unit = extern
 
-  /**
-   * Copies a vector to another vector (double-precision complex).
+  /** Copies a vector to another vector (double-precision complex).
    */
   def cblas_zcopy(
       N: CInt,
@@ -426,8 +392,7 @@ object blas {
       incY: CInt
   ): Unit = extern
 
-  /**
-   * A constant times a vector plus a vector (double-precision complex).
+  /** A constant times a vector plus a vector (double-precision complex).
    */
   def cblas_zaxpy(
       N: CInt,
@@ -442,17 +407,16 @@ object blas {
    * Routines with S and D prefix only
    */
 
-  /**
-   * Constructs a Givens rotation matrix.
+  /** Constructs a Givens rotation matrix.
    *
-   * @param a
-   *   Single-precision value a. Overwritten on return with result r.
-   * @param b
-   *   Single-precision value b. Overwritten on return with result z (zero).
-   * @param c
-   *   Unused on entry. Overwritten on return with the value cos(θ).
-   * @param s
-   *   Unused on entry. Overwritten on return with the value sin(θ).
+   *  @param a
+   *    Single-precision value a. Overwritten on return with result r.
+   *  @param b
+   *    Single-precision value b. Overwritten on return with result z (zero).
+   *  @param c
+   *    Unused on entry. Overwritten on return with the value cos(θ).
+   *  @param s
+   *    Unused on entry. Overwritten on return with the value sin(θ).
    */
   def cblas_srotg(
       a: Ptr[CFloat],
@@ -461,19 +425,18 @@ object blas {
       s: Ptr[CFloat]
   ): Unit = extern
 
-  /**
-   * Generates a modified Givens rotation matrix.
+  /** Generates a modified Givens rotation matrix.
    *
-   * @param d1
-   *   Scaling factor D1.
-   * @param d2
-   *   Scaling factor D2.
-   * @param b1
-   *   Scaling factor B1.
-   * @param b2
-   *   Scaling factor B2.
-   * @param P
-   *   {{{
+   *  @param d1
+   *    Scaling factor D1.
+   *  @param d2
+   *    Scaling factor D2.
+   *  @param b1
+   *    Scaling factor B1.
+   *  @param b2
+   *    Scaling factor B2.
+   *  @param P
+   *    {{{
    *   A 5-element vector:
    *    P[0] Flag value that defines the form of matrix H.
    *   -2.0: matrix H contains the identity matrix.
@@ -484,7 +447,7 @@ object blas {
    *    P[2] Contains SH[2,1].
    *    P[3] Contains SH[1,2].
    *    P[4] Contains SH[2,2].
-   *   }}}
+   *    }}}
    */
   def cblas_srotmg(
       d1: Ptr[CFloat],
@@ -494,8 +457,7 @@ object blas {
       P: Ptr[CFloat]
   ): Unit = extern
 
-  /**
-   * Applies a Givens rotation matrix to a pair of vectors.
+  /** Applies a Givens rotation matrix to a pair of vectors.
    */
   def cblas_srot(
       N: CInt,
@@ -507,8 +469,7 @@ object blas {
       s: CFloat
   ): Unit = extern
 
-  /**
-   * Applies a modified Givens transformation (single precision).
+  /** Applies a modified Givens transformation (single precision).
    */
   def cblas_srotm(
       N: CInt,
@@ -519,8 +480,7 @@ object blas {
       P: Ptr[CFloat]
   ): Unit = extern
 
-  /**
-   * Constructs a Givens rotation matrix.
+  /** Constructs a Givens rotation matrix.
    */
   def cblas_drotg(
       a: Ptr[CDouble],
@@ -529,8 +489,7 @@ object blas {
       s: Ptr[CDouble]
   ): Unit = extern
 
-  /**
-   * Generates a modified Givens rotation matrix.
+  /** Generates a modified Givens rotation matrix.
    */
   def cblas_drotmg(
       d1: Ptr[CDouble],
@@ -540,8 +499,7 @@ object blas {
       P: Ptr[CDouble]
   ): Unit = extern
 
-  /**
-   * Applies a Givens rotation matrix to a pair of vectors.
+  /** Applies a Givens rotation matrix to a pair of vectors.
    */
   def cblas_drot(
       N: CInt,
@@ -553,8 +511,7 @@ object blas {
       s: CDouble
   ): Unit = extern
 
-  /**
-   * Applies a modified Givens transformation (single precision).
+  /** Applies a modified Givens transformation (single precision).
    */
   def cblas_drotm(
       N: CInt,
@@ -569,21 +526,18 @@ object blas {
    * Routines with S D C Z CS and ZD prefixes
    */
 
-  /**
-   * Multiplies each element of a vector by a constant (single-precision).
+  /** Multiplies each element of a vector by a constant (single-precision).
    */
   def cblas_sscal(N: CInt, alpha: CFloat, X: Ptr[CFloat], incX: CInt): Unit =
     extern
 
-  /**
-   * Multiplies each element of a vector by a constant (double-precision).
+  /** Multiplies each element of a vector by a constant (double-precision).
    */
   def cblas_dscal(N: CInt, alpha: CDouble, X: Ptr[CDouble], incX: CInt): Unit =
     extern
 
-  /**
-   * Multiplies each element of a vector by a constant (single-precision
-   * complex).
+  /** Multiplies each element of a vector by a constant (single-precision
+   *  complex).
    */
   def cblas_cscal(
       N: CInt,
@@ -592,9 +546,8 @@ object blas {
       incX: CInt
   ): Unit = extern
 
-  /**
-   * Multiplies each element of a vector by a constant (double-precision
-   * complex).
+  /** Multiplies each element of a vector by a constant (double-precision
+   *  complex).
    */
   def cblas_zscal(
       N: CInt,
@@ -603,9 +556,8 @@ object blas {
       incX: CInt
   ): Unit = extern
 
-  /**
-   * Multiplies each element of a vector by a constant (single-precision
-   * complex).
+  /** Multiplies each element of a vector by a constant (single-precision
+   *  complex).
    */
   def cblas_csscal(
       N: CInt,
@@ -614,9 +566,8 @@ object blas {
       incX: CInt
   ): Unit = extern
 
-  /**
-   * Multiplies each element of a vector by a constant (double-precision
-   * complex).
+  /** Multiplies each element of a vector by a constant (double-precision
+   *  complex).
    */
   def cblas_zdscal(
       N: CInt,
@@ -1497,6 +1448,40 @@ object blas {
    * Routines with standard 4 prefixes (S, D, C, Z)
    */
 
+  /** Multiplies two matrices (single-precision)
+   *
+   *  @param Order
+   *    Specifies row-major (C) or column-major (Fortran) data ordering
+   *  @param TransA
+   *    Specifies whether to transpose matrix A
+   *  @param TransB
+   *    Specifies whether to transpose matrix B
+   *  @param M
+   *    Number of rows in matrices A and C
+   *  @param N
+   *    Number of columns in matrices B and C
+   *  @param K
+   *    Number of columns in matrix A; number of rows in matrix B
+   *  @param alpha
+   *    Scaling factor for the product of matrices A and B
+   *  @param A
+   *    Matrix A
+   *  @param lda
+   *    The size of the first dimension of matrix A; if you are passing a matrix
+   *    A[m][n], the value should be m
+   *  @param B
+   *    Matrix B
+   *  @param ldb
+   *    The size of the first dimension of matrix B; if you are passing a matrix
+   *    B[m][n], the value should be m
+   *  @param beta
+   *    Scaling factor for matrix C
+   *  @param C
+   *    Matrix C
+   *  @param ldc
+   *    The size of the first dimension of matrix C; if you are passing a matrix
+   *    C[m][n], the value should be m
+   */
   def cblas_sgemm(
       Order: CBLAS_ORDER,
       TransA: CBLAS_TRANSPOSE,
@@ -1965,10 +1950,9 @@ object blas {
       ldc: CInt
   ): Unit = extern
 
-  /**
-   * The error handler for the LAPACK routines. It is called by an LAPACK
-   * routine if an input parameter has an invalid value. A message is printed
-   * and execution stops.
+  /** The error handler for the LAPACK routines. It is called by an LAPACK
+   *  routine if an input parameter has an invalid value. A message is printed
+   *  and execution stops.
    */
   def cblas_xerbla(
       p: CInt,

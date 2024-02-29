@@ -3,7 +3,8 @@
 /.metals/
 /project/**/metals.sbt
 
-# Build Server Protocol, used by sbt
+# sbt / bsp
+target/
 /.bsp/
 
 # vscode
