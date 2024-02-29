@@ -15,7 +15,7 @@ Scala Native uses the Scala compiler to produce
 converted to [LLVM IR](http://llvm.org/). Finally LLVM code is optimized
 and compiled by [Clang](http://clang.llvm.org/) to produce a native executable.
 
-## New for 0.5.0
+## New for Scala Native 0.5.0
 
 A higher level API has been started but only for one function `dnrm2`. This API
 allows the developer to pass Scala `Array`s, which are Garbage Collection (GC)
