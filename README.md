@@ -30,7 +30,7 @@ pointer to the first element in the array (after the array object header). The
 data is housed in the array so the API can just work on the raw data in the array.
 
 ## Getting started
-[![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_native0.4_3.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.4_3)
+[![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_native0.5.0-RC1_3.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.5.0-RC1_3)
 
 If you are already familiar with Scala Native you can jump right in by adding the following dependency in your `sbt` build file.
 
@@ -72,7 +72,7 @@ Use version sblas `0.5.0` for Scala Native `0.4.10+`.
 Use version sblas `0.6.0` for Scala Native `0.5.0+`.
 
 ## Usage and Help
-[![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.4_3.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.4_3)
+[![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.5.0-RC1_3.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.5.0-RC1_3)
 [![Join chat https://gitter.im/ekrich/sblas](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ekrich/sblas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Reference the link above for Scaladoc. The documentation is a little sparse but hopefully will improve with time.
