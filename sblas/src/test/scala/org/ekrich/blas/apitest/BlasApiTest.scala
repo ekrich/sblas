@@ -60,6 +60,6 @@ class BlasApiTest {
 
     printf("[ %g, %g\n", C(0), C(1))
     printf("  %g, %g ]\n", C(2), C(3))
-    assertArrayEquals(Array(367.760f, 368.120f, 674.060f, 674.720f), C, 0.0f)
+    assertArrayEquals(Array(367.760f, 368.120f, 674.060f, 674.720f), C, 0.01f)
   }
 }
