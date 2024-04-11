@@ -1,6 +1,6 @@
 // sblas build
-val prevVersion = "0.3.0"
-val nextVersion = "0.4.0"
+val prevVersion = "0.7.0"
+val nextVersion = "0.7.1"
 
 val scala212 = "2.12.19"
 val scala213 = "2.13.13"
