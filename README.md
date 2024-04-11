@@ -15,7 +15,7 @@ Scala Native uses the Scala compiler to produce
 converted to [LLVM IR](http://llvm.org/). Finally LLVM code is optimized
 and compiled by [Clang](http://clang.llvm.org/) to produce a native executable.
 
-## New for Scala Native 0.5.0
+## New for Scala Native 0.5.0+
 
 A higher level API has been started but only for one function `dnrm2`. This API
 allows the developer to pass Scala `Array`s, which are Garbage Collection (GC)
@@ -30,7 +30,7 @@ pointer to the first element in the array (after the array object header). The
 data is housed in the array so the API can just work on the raw data in the array.
 
 ## Getting started
-[![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_native0.5.0-RC1_3.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.5.0-RC1_3)
+[![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_native0.5_3.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.5_3)
 
 If you are already familiar with Scala Native you can jump right in by adding the following dependency in your `sbt` build file.
 
@@ -69,10 +69,12 @@ $ sudo apt-get install libatlas-base-dev
 Use version sblas `0.3.0` for Scala Native `0.4.0`.
 Use version sblas `0.4.0` for Scala Native `0.4.3+` with Scala 3 support.
 Use version sblas `0.5.0` for Scala Native `0.4.10+`.
-Use version sblas `0.6.0` for Scala Native `0.5.0+`.
+Use version sblas `0.6.0` for Scala Native `0.5.0-RC2`.
+Use version sblas `0.7.x` for Scala Native `0.5.0+`.
+
 
 ## Usage and Help
-[![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.5.0-RC1_3.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.5.0-RC1_3)
+[![scaladoc](https://www.javadoc.io/badge/org.ekrich/sblas_native0.5_3.svg?label=scaladoc)](https://www.javadoc.io/doc/org.ekrich/sblas_native0.5_3)
 [![Join chat https://gitter.im/ekrich/sblas](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ekrich/sblas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Reference the link above for Scaladoc. The documentation is a little sparse but hopefully will improve with time.
@@ -124,6 +126,7 @@ IBM Website:
 
 ## Versions
 
+Release [0.7.0](https://github.com/ekrich/sblas/releases/tag/v0.7.0) - (2024-04-11)<br/>
 Release [0.6.0](https://github.com/ekrich/sblas/releases/tag/v0.6.0) - (2024-02-29)<br/>
 Release [0.5.0](https://github.com/ekrich/sblas/releases/tag/v0.5.0) - (2023-01-29)<br/>
 Release [0.4.0](https://github.com/ekrich/sblas/releases/tag/v0.4.0) - (2022-02-01)<br/>
