@@ -36,27 +36,31 @@ class BlasApiTest {
 
     val A = Array(
       0.11f, 0.12f, 0.13f,
-      0.21f, 0.22f, 0.23f)
+      0.21f, 0.22f, 0.23f
+    )
 
     val ldb = 2
 
     val B = Array(
       1011f, 1012f,
       1021f, 1022f,
-      1031f, 1032f)
+      1031f, 1032f
+    )
 
     val ldc = 2
 
     val C = Array(
       0.00f, 0.00f,
-      0.00f, 0.00f)
+      0.00f, 0.00f
+    )
 
     /* Compute C = A B */
 
     cblas_sgemm(
       CblasRowMajor,
       CblasNoTrans, CblasNoTrans, 2, 2, 3,
-      1.0f, A.at(0), lda, B.at(0), ldb, 0.0f, C.at(0), ldc)
+      1.0f, A.at(0), lda, B.at(0), ldb, 0.0f, C.at(0), ldc
+    )
 
     printf("[ %g, %g\n", C(0), C(1))
     printf("  %g, %g ]\n", C(2), C(3))
