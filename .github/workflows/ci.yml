@@ -11,17 +11,18 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04, macos-13]
-        java: [ '11', '17' ]
+        java: [ '17', '21' ]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout current branch (full)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
+      uses: actions/setup-java@v4
+      with:
           distribution: 'adopt'
-          java-version: '${{ matrix.java }}'
+          java-version: ${{ matrix.java }}
           cache: 'sbt'
+      - uses: sbt/setup-sbt@v1
       - name: Setup (Linux)
         if: startsWith(matrix.os, 'ubuntu')
         run: |
