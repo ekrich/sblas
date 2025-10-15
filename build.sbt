@@ -4,7 +4,7 @@ val nextVersion = "0.7.1"
 
 val scala212 = "2.12.20"
 val scala213 = "2.13.17"
-val scala3 = "3.3.6"
+val scala3 = "3.3.7"
 
 val versionsNative = Seq(scala212, scala213, scala3)
 
