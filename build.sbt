@@ -2,7 +2,7 @@
 val prevVersion = "0.7.0"
 val nextVersion = "0.7.1"
 
-val scala212 = "2.12.20"
+val scala212 = "2.12.21"
 val scala213 = "2.13.18"
 val scala3 = "3.3.7"
 
