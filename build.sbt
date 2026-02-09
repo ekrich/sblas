@@ -29,9 +29,10 @@ inThisBuild(
       )
     ),
     version := dynverGitDescribeOutput.value.mkVersion(versionFmt, ""),
-    dynver := sbtdynver.DynVer
-      .getGitDescribeOutput(new java.util.Date)
-      .mkVersion(versionFmt, "")
+    dynver :=
+      sbtdynver.DynVer
+        .getGitDescribeOutput(new java.util.Date)
+        .mkVersion(versionFmt, "")
   )
 )
 
