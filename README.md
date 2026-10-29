@@ -32,10 +32,10 @@ data is housed in the array so the API can just work on the raw data in the arra
 ## Getting started
 [![Maven Central](https://img.shields.io/maven-central/v/org.ekrich/sblas_native0.5_3.svg)](https://maven-badges.herokuapp.com/maven-central/org.ekrich/sblas_native0.5_3)
 
-If you are already familiar with Scala Native you can jump right in by adding the following dependency in your `sbt` build file.
+If you are already familiar with Scala Native you can jump right in by adding the following dependency in your `sbt` build file. Use `%%%` for `sbt` 1.x.
 
 ```scala
-libraryDependencies += "org.ekrich" %%% "sblas" % "x.y.z"
+libraryDependencies += "org.ekrich" %% "sblas" % "x.y.z"
 ```
 
 To use in `sbt`, replace `x.y.z` with the version from Maven Central badge above.
@@ -46,31 +46,32 @@ instructions for Scala Native if you are not already setup.
 
 Additional libraries that need to be installed on you system are as follows:
 
-* Linux/Ubuntu you need to install [ATLAS](http://math-atlas.sourceforge.net/) for CBLAS
+* Linux/Ubuntu needs [OpenBLAS](https://www.openblas.net/) for CBLAS
 support.
 
 ```
-$ sudo apt-get install libatlas-base-dev
+$ sudo apt-get install libopenblas-dev
 ```
 
 * macOS has CBLAS pre-installed as part of the [Accelerate Framework](https://developer.apple.com/documentation/accelerate).
 
-* Other OSes need to have `libcblas` available on the system.
+* Other OSes need to have `libopenblas` available on the system or adapt the build for your platform / CBLAS implementation.
 
 ## Scala Build Versions
 
 | Scala Version          | Native (0.4.0)        | Native (0.4.3+) | Native (0.5.0+) |
 | ---------------------- | :-------------------: | :-------------: | :--------------: |
 | 2.11.x                 |          ✅           |        ✅       |                   |
-| 2.12.x                 |          ✅           |        ✅       |         ✅        |
+| 2.12.x                 |          ✅           |        ✅       |                   |
 | 2.13.x                 |          ✅           |        ✅       |         ✅        |
 | 3.x.x                  |                       |        ✅       |         ✅        |
 
-Use version sblas `0.3.0` for Scala Native `0.4.0`.
-Use version sblas `0.4.0` for Scala Native `0.4.3+` with Scala 3 support.
-Use version sblas `0.5.0` for Scala Native `0.4.10+`.
-Use version sblas `0.6.0` for Scala Native `0.5.0-RC2`.
-Use version sblas `0.7.x` for Scala Native `0.5.0+`.
+Use version `0.3.0` for Scala Native `0.4.0`.
+Use version `0.4.0` for Scala Native `0.4.3+` with Scala 3 support.
+Use version `0.5.0` for Scala Native `0.4.10+`.
+Use version `0.6.0` for Scala Native `0.5.0-RC2`.
+Use version `0.7.0` for Scala Native `0.5.0+`.
+Use version `0.8.x` for OpenBlas on Linux, drops Scala `2.12.x`.
 
 
 ## Usage and Help
@@ -126,6 +127,7 @@ IBM Website:
 
 ## Versions
 
+Release [0.8.0](https://github.com/ekrich/sblas/releases/tag/v0.8.0) - (2026-10-29)<br/>
 Release [0.7.0](https://github.com/ekrich/sblas/releases/tag/v0.7.0) - (2024-04-11)<br/>
 Release [0.6.0](https://github.com/ekrich/sblas/releases/tag/v0.6.0) - (2024-02-29)<br/>
 Release [0.5.0](https://github.com/ekrich/sblas/releases/tag/v0.5.0) - (2023-01-29)<br/>

@@ -48,8 +48,9 @@ object blasEnums {
 import blasEnums._
 
 /** Scala Native extern C interface to CBLAS Version 3.8.0
+ *
+ *  Note: Pass the linking flag for your platform library.
  */
-@link("cblas")
 @extern
 object blas {
   /* CBLAS_INDEX */
