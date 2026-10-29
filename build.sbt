@@ -66,6 +66,12 @@ lazy val root = project
 lazy val sblas = project
   .in(file("sblas"))
   .settings(
-    commonSettings
+    commonSettings,
+    nativeConfig ~= { nc =>
+      import scala.util.Properties
+      // cblas for macOS accelerate and potentially others
+      val linkingFlags = if (Properties.isLinux) "-lopenblas" else "-lcblas"
+      nc.withLinkingOptions(nc.linkingOptions :+ linkingFlags)
+    }
   )
   .enablePlugins(ScalaNativePlugin, ScalaNativeJUnitPlugin)
