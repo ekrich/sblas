@@ -1,5 +1,5 @@
-// to test snapshots
-resolvers ++= Resolver.sonatypeOssRepos("snapshots")
+// To test snapshots
+resolvers += Resolver.sonatypeCentralSnapshots
 
 // includes sbt-dynver sbt-pgp sbt-sonatype sbt-git
 addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.12.1")

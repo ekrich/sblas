@@ -1,7 +1,4 @@
 // sblas build
-val prevVersion = "0.7.0"
-val nextVersion = "0.7.1"
-
 val scala213 = "2.13.18"
 val scala3 = "3.9.0"
 
@@ -10,21 +7,22 @@ val versionsNative = Seq(scala213, scala3)
 ThisBuild / scalaVersion := scala3
 ThisBuild / crossScalaVersions := versionsNative
 ThisBuild / versionScheme := Some("early-semver")
+ThisBuild / mimaReportSignatureProblems := true
 
 inThisBuild(
   List(
     description := "BLAS interface for Scala Native",
     organization := "org.ekrich",
-    homepage := Some(url("https://github.com/ekrich/sblas")),
+    homepage := Some(uri("https://github.com/ekrich/sblas")),
     licenses := List(
-      "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")
+      "Apache-2.0" -> uri("http://www.apache.org/licenses/LICENSE-2.0")
     ),
     developers := List(
       Developer(
         id = "ekrich",
         name = "Eric K Richardson",
         email = "ekrichardson@gmail.com",
-        url = url("http://github.ekrich.org/")
+        url = uri("http://github.ekrich.org/")
       )
     ),
     version := dynverGitDescribeOutput.value.mkVersion(versionFmt, ""),
@@ -39,7 +37,7 @@ inThisBuild(
 def versionFmt(out: sbtdynver.GitDescribeOutput): String = {
   val tag = out.ref.dropPrefix
   if (out.isCleanAfterTag) tag
-  else nextVersion + "-SNAPSHOT"
+  else s"$tag-${out.commitSuffix.distance}-${out.commitSuffix.sha}-SNAPSHOT"
 }
 
 lazy val commonSettings = Seq(
@@ -47,7 +45,15 @@ lazy val commonSettings = Seq(
   scalacOptions ++= List("-unchecked", "-deprecation", "-feature"),
   testOptions += Tests.Argument(TestFrameworks.JUnit, "-a", "-s", "-v"),
   // mima settings
-  mimaPreviousArtifacts := Set("org.ekrich" %%% "sblas" % prevVersion)
+  mimaFailOnNoPrevious := false,
+  mimaPreviousArtifacts := {
+    sbtdynver.DynVer
+      .getGitDescribeOutput(new java.util.Date)
+      .map { out =>
+        organization.value %% moduleName.value % out.ref.dropPrefix
+      }
+      .toSet
+  }
 )
 
 lazy val root = project

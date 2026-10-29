@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout current branch (full)
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # tags for mima
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
@@ -30,3 +32,5 @@ jobs:
             sudo apt-get install -y libatlas-base-dev
       - name: Run tests
         run: sbt +test
+      - name: Check binary compatibility (MiMa)
+        run: sbt sblas/mimaReportBinaryIssues
