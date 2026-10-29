@@ -2,13 +2,12 @@
 val prevVersion = "0.7.0"
 val nextVersion = "0.7.1"
 
-val scala212 = "2.12.21"
 val scala213 = "2.13.18"
 val scala3 = "3.9.0"
 
-val versionsNative = Seq(scala212, scala213, scala3)
+val versionsNative = Seq(scala213, scala3)
 
-ThisBuild / scalaVersion := scala213
+ThisBuild / scalaVersion := scala3
 ThisBuild / crossScalaVersions := versionsNative
 ThisBuild / versionScheme := Some("early-semver")
 
