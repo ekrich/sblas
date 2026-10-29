@@ -5,7 +5,7 @@ on:
     tags: ["*"]
 jobs:
   publish:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -17,10 +17,6 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
           cache: 'sbt'
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libatlas-base-dev
       - run: sbt ci-release
         env:
           PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
