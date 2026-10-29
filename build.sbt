@@ -74,8 +74,8 @@ lazy val sblas = project
     commonSettings,
     nativeConfig ~= { nc =>
       import scala.util.Properties
-      // cblas for macOS accelerate and potentially others
-      val linkingFlags = if (Properties.isLinux) "-lopenblas" else "-lcblas"
+      // cblas via Accelerate on macOS, openblas everywhere else
+      val linkingFlags = if (Properties.isMac) "-lcblas" else "-lopenblas"
       nc.withLinkingOptions(nc.linkingOptions :+ linkingFlags)
     }
   )
