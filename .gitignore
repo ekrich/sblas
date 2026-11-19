@@ -16,3 +16,4 @@ target/
 # scripts generated
 /scripts/.coursier
 /scripts/.scalafmt*
+/scripts/.scala-cli*
