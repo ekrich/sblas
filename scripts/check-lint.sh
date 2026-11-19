@@ -13,4 +13,4 @@ java -version
 if [ -n "${CLANG_FORMAT_PATH:-}" ]; then
   scripts/clangfmt --test
 fi
-scripts/scalafmt --test
+scripts/scalafmt --check
